@@ -24,10 +24,12 @@ namespace ShoppingWebApi.Controllers
             var products = from p in _context.Product
                            select new ProductDTO()
                            {
+                               Id = p.Id,
                                Name = p.Name,
                                Description = p.Description,
                                Price = p.Price,
-                               IsInStock = p.Quantity != 0
+                               IsInStock = p.Quantity != 0,
+                               Category = p.Category
                            };
 
             return products;
@@ -43,10 +45,12 @@ namespace ShoppingWebApi.Controllers
                           where p.Id == id
                           select new ProductDTO()
                           {
+                              Id = p.Id,
                               Name = p.Name,
                               Description = p.Description,
                               Price = p.Price,
-                              IsInStock = p.Quantity != 0
+                              IsInStock = p.Quantity != 0,
+                              Category = p.Category
                           };
 
             if (product == null)

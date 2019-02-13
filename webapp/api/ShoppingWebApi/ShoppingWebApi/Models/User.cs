@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShoppingWebApi.Models
 {
-    [Table("User_Account")]
+    [Table("Users")]
     public class User
     {
 

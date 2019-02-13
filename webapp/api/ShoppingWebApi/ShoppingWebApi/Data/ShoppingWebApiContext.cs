@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ShoppingWebApi.Models;
 
 namespace ShoppingWebApi.Models
 {
@@ -12,5 +13,9 @@ namespace ShoppingWebApi.Models
         public DbSet<ShoppingWebApi.Models.User> User { get; set; }
 
         public DbSet<ShoppingWebApi.Models.Product> Product { get; set; }
+
+        public DbSet<ShoppingWebApi.Models.Cart> Cart { get; set; }
+
+        public DbSet<ShoppingWebApi.Models.Order> Order { get; set; }
     }
 }
