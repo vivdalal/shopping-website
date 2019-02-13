@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using ShoppingWebSiteUI.Models;
 
@@ -7,8 +8,11 @@ namespace ShoppingWebSiteUI.API
 {
     public class APICallService
     {
+        private APICallClient _client;
+
         public APICallService()
         {
+            _client = new APICallClient("https://weapidemo.azurewebsites.net");
         }
         /// <summary>
         /// Gets all products.
@@ -16,20 +20,23 @@ namespace ShoppingWebSiteUI.API
         /// <returns>The all products.</returns>
         public async Task<IEnumerable<ProductDTO>> GetAllProducts()
         {
-            var client = new APICallClient("https://weapidemo.azurewebsites.net"); //Add the Azure endpoint here
             Console.WriteLine("Fetching all products");// Read product list:
-            var products = await client.GetProductsAsync();
+            var products = await _client.GetProductsAsync();
             return products;
  
         }
 
         public async Task<IEnumerable<ProductDTO>> GetCartItemss()
         {
-            var client = new APICallClient("https://weapidemo.azurewebsites.net"); //Add the Azure endpoint here
             Console.WriteLine("Fetching all items from Cart");// Read product list:
-            var products = await client.GetProductsAsync();
+            var products = await _client.GetProductsAsync();
             return products;
 
+        }
+
+        public async Task<HttpStatusCode> DoLogin(string username, string password)
+        {
+            return await _client.PerformLogin(username, password);
         }
 
     }

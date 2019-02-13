@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -27,6 +28,13 @@ namespace ShoppingWebSiteUI.API
         {
             client = new HttpClient();
             client.BaseAddress = new Uri(new Uri(_hostUri), "api/products/" + action);
+            return client;
+        }
+
+        public HttpClient CreatePathActionClient(string path, string action)
+        {
+            client = new HttpClient();
+            client.BaseAddress = new Uri(new Uri(_hostUri), path + "/" + action);
             return client;
         }
 
@@ -110,6 +118,27 @@ namespace ShoppingWebSiteUI.API
                     throw new Exception("Something went wrong while validating user credentials");
                 }
                
+            }
+        }
+
+        public async Task<HttpStatusCode> PerformLogin(string username, string password)
+        {
+            using (var client = CreatePathActionClient("api/user", "login"))
+            {
+                try
+                {
+                    var content = JsonConvert.SerializeObject(new { username, password });
+                    HttpContent body = new StringContent(content, System.Text.Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PostAsync(client.BaseAddress, body);
+
+                    return response.StatusCode;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new Exception("Something went wrong while validating user credentials");
+                }
             }
         }
 
