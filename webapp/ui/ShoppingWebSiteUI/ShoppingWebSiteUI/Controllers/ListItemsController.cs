@@ -25,7 +25,9 @@ namespace ShoppingWebSiteUI.Controllers
             //Get the product catalogue from the API
             APICallService aPICallService = new APICallService();
 
-            //var sessionData = HttpContext.Session.GetString("keyname");
+            ViewBag["Products"] = aPICallService.GetAllProducts().Result;
+
+            var sessionData = HttpContext.Session.GetString("keyname");
             return View("ListItems", aPICallService.GetAllProducts().Result);
         }
 
@@ -36,6 +38,12 @@ namespace ShoppingWebSiteUI.Controllers
             APICallService aPICallService = new APICallService();
 
             //var sessionData = HttpContext.Session.GetString("keyname");
+            //Updating the Cart
+            //Creating new Cart element as of now. Need to discuss how to have the same cart throughout all service calls
+
+
+
+            //Returning the same view
             return View("ListItems", aPICallService.GetAllProducts().Result);
         }
     }
