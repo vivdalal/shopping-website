@@ -15,6 +15,7 @@
     <Folder Include="Views\Cart\" />
     <Folder Include="wwwroot\images\" />
     <Folder Include="Views\ListItems\" />
+    <Folder Include="API\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\ListItems.json" />

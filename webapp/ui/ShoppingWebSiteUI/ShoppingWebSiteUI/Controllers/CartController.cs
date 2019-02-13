@@ -19,8 +19,10 @@ namespace ShoppingWebSiteUI.Controllers
 
         // The resulting output will be a JSON string: {"p":"Hello","q":"World"}
         [Route("ShoppingCart")]
-        public IActionResult onPost(String words)
+        public IActionResult onPost(CartDTO cart)
         { 
+
+
             return View("MyShoppingCart");
         }
 
