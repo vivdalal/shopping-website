@@ -30,7 +30,7 @@ namespace ShoppingWebApi.Controllers
                            Username = u.Username
                        };
 
-            if (user == null)
+            if (user.Count() == 0)
             {
                 return NotFound();
             }

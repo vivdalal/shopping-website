@@ -30,6 +30,9 @@ namespace ShoppingWebApi
 
             services.AddDbContext<ShoppingWebApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ShoppingWebApiContext")));
+
+            // Add session
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +44,7 @@ namespace ShoppingWebApi
             }
 
             app.UseMvc();
+            app.UseSession();
         }
     }
 }

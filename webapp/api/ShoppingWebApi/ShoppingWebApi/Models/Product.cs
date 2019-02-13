@@ -6,7 +6,6 @@ namespace ShoppingWebApi.Models
     [Table("Products")]
     public class Product
     {
-
         public int Id { get; set; }
 
         [Required]
@@ -15,8 +14,10 @@ namespace ShoppingWebApi.Models
         public string Description { get; set; }
 
         [Required]
-        public float Price { get; set; }
+        public double Price { get; set; }
 
         public int Quantity { get; set; }
+
+        public string Category { get; set; }
     }
 }
