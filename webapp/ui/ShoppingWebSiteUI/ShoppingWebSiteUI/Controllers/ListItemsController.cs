@@ -27,7 +27,7 @@ namespace ShoppingWebSiteUI.Controllers
 
             ViewBag["Products"] = aPICallService.GetAllProducts().Result;
 
-            var sessionData = HttpContext.Session.GetString("keyname");
+            //var sessionData = HttpContext.Session.GetString("keyname");
             return View("ListItems", aPICallService.GetAllProducts().Result);
         }
 

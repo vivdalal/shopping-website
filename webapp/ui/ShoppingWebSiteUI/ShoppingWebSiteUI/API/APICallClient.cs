@@ -121,13 +121,13 @@ namespace ShoppingWebSiteUI.API
             }
         }
 
-        public async Task<HttpStatusCode> PerformLogin(string username, string password)
+        public async Task<HttpStatusCode> PerformLogin(User user)
         {
-            using (var client = CreatePathActionClient("api/user", "login"))
+            using (var client = CreatePathActionClient("api", "Authenticator"))
             {
                 try
                 {
-                    var content = JsonConvert.SerializeObject(new { username, password });
+                    var content = JsonConvert.SerializeObject(user);
                     HttpContent body = new StringContent(content, System.Text.Encoding.UTF8, "application/json");
 
                     HttpResponseMessage response = await client.PostAsync(client.BaseAddress, body);

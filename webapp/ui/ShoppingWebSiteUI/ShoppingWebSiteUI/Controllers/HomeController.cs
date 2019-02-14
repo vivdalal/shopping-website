@@ -28,16 +28,25 @@ namespace ShoppingWebSiteUI.Controllers
             return Redirect("/ListItems");
         }
 
-        public IActionResult Login(string username, string password)
+        [Route("Login")]
+        public IActionResult LoginUser()
         {
-            HttpStatusCode result = _apiCallService.DoLogin(username, password).Result;
+            User user = new User();
+            return View("Login", user);
+        }
+
+        [HttpPost]
+        [Route("Login")]
+        public IActionResult Login(User user)
+        {
+            HttpStatusCode result = _apiCallService.DoLogin(user).Result;
 
             if (result != HttpStatusCode.OK)
             {
-                return View();
+                return View("Login", User);
             }
 
-            HttpContext.Session.SetString("username", username);
+            HttpContext.Session.SetString("username", user.Username);
             return Redirect("/ListItems");
         }
 

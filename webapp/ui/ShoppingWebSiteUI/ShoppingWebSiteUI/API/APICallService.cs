@@ -12,7 +12,7 @@ namespace ShoppingWebSiteUI.API
 
         public APICallService()
         {
-            _client = new APICallClient("https://weapidemo.azurewebsites.net");
+            _client = new APICallClient("http://localhost:5000");
         }
         /// <summary>
         /// Gets all products.
@@ -26,6 +26,10 @@ namespace ShoppingWebSiteUI.API
  
         }
 
+        /// <summary>
+        /// Gets the cart itemss.
+        /// </summary>
+        /// <returns>The cart itemss.</returns>
         public async Task<IEnumerable<ProductDTO>> GetCartItemss()
         {
             Console.WriteLine("Fetching all items from Cart");// Read product list:
@@ -34,9 +38,15 @@ namespace ShoppingWebSiteUI.API
 
         }
 
-        public async Task<HttpStatusCode> DoLogin(string username, string password)
+        /// <summary>
+        /// Dos the login.
+        /// </summary>
+        /// <returns>The login.</returns>
+        /// <param name="username">Username.</param>
+        /// <param name="password">Password.</param>
+        public async Task<HttpStatusCode> DoLogin(User user)
         {
-            return await _client.PerformLogin(username, password);
+            return await _client.PerformLogin(user);
         }
 
     }

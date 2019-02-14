@@ -16,6 +16,7 @@
     <Folder Include="wwwroot\images\" />
     <Folder Include="Views\ListItems\" />
     <Folder Include="API\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Views\ListItems.json" />
