@@ -68,6 +68,21 @@ namespace ShoppingWebSiteUI.Controllers
         }
 
         /// <summary>
+        /// Login the specified user.
+        /// </summary>
+        /// <returns>The login.</returns>
+        /// <param name="user">User.</param>
+        [HttpGet]
+        [Route("Logout")]
+        public IActionResult Logout()
+        {
+            //Setting the username in the session to null
+            HttpContext.Session.SetString("username", null);
+            //Take the user to login screen
+            return View("Login", User);
+        }
+
+        /// <summary>
         /// Error this instance.
         /// </summary>
         /// <returns>The error.</returns>

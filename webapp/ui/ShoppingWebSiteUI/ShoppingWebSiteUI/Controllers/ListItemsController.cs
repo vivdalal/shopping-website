@@ -29,8 +29,44 @@ namespace ShoppingWebSiteUI.Controllers
             //Get the product catalogue from the API
             APICallService aPICallService = new APICallService();
 
-            ViewBag["Products"] = aPICallService.GetAllProducts().Result;
+            //ViewBag["Products"] = aPICallService.GetAllProducts().Result;
+            List<ProductDTO> products = new List<ProductDTO>()
+            {
+                new ProductDTO("White Shirt", "White colored shirt", 30, true),
+                new ProductDTO("Blue Shirt", "White colored shirt", 40, true),
+                new ProductDTO("Green Shirt", "White colored shirt", 50, true),
+                new ProductDTO("Pink Shirt", "White colored shirt", 60, true),
+                new ProductDTO("Red Shirt", "White colored shirt", 70, true),
+                new ProductDTO("Orange Shirt", "White colored shirt", 80, true),
+                new ProductDTO("Yellow Shirt", "White colored shirt", 90, true),
+                new ProductDTO("Black Shirt", "White colored shirt", 90, true),
+                new ProductDTO("White Trouser", "White colored shirt", 30, true),
+                new ProductDTO("Blue Trouser", "White colored shirt", 40, true),
+                new ProductDTO("Green Trouser", "White colored shirt", 50, true),
+                new ProductDTO("Pink Trouser", "White colored shirt", 60, true),
+                new ProductDTO("Red Trouser", "White colored shirt", 70, true),
+                new ProductDTO("Orange Trouser", "White colored shirt", 80, true),
+                new ProductDTO("Yellow Trouser", "White colored shirt", 90, true),
+                new ProductDTO("Black Trouser", "White colored shirt", 90, true),
+                new ProductDTO("White Socks", "White colored shirt", 30, true),
+                new ProductDTO("Blue Socks", "White colored shirt", 40, true),
+                new ProductDTO("Green Socks", "White colored shirt", 50, true),
+                new ProductDTO("Pink Socks", "White colored shirt", 60, true),
+                new ProductDTO("Red Socks", "White colored shirt", 70, true),
+                new ProductDTO("Orange Socks", "White colored shirt", 80, true),
+                new ProductDTO("Yellow Socks", "White colored shirt", 90, true),
+                new ProductDTO("Black Socks", "White colored shirt", 90, true),
+                new ProductDTO("White Shoes", "White colored shirt", 30, true),
+                new ProductDTO("Blue Shoes", "White colored shirt", 40, true),
+                new ProductDTO("Green Shoes", "White colored shirt", 50, true),
+                new ProductDTO("Pink Shoes", "White colored shirt", 60, true),
+                new ProductDTO("Red Shoes", "White colored shirt", 70, true),
+                new ProductDTO("Orange Shoes", "White colored shirt", 80, true),
+                new ProductDTO("Yellow Shoes", "White colored shirt", 90, true),
+                new ProductDTO("Black Shoes", "White colored shirt", 90, true),
 
+            };
+            ViewBag.Products = products;
             //var sessionData = HttpContext.Session.GetString("keyname");
             return View("ListItems");
         }
