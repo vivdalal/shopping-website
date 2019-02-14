@@ -19,6 +19,10 @@ namespace ShoppingWebSiteUI.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Ons the get.
+        /// </summary>
+        /// <returns>The get.</returns>
         [Route("ListItems")]
         public IActionResult onGet()
         {
@@ -28,8 +32,9 @@ namespace ShoppingWebSiteUI.Controllers
             ViewBag["Products"] = aPICallService.GetAllProducts().Result;
 
             //var sessionData = HttpContext.Session.GetString("keyname");
-            return View("ListItems", aPICallService.GetAllProducts().Result);
+            return View("ListItems");
         }
+
 
         [Route("AddToCart")]
         public IActionResult onPost(ProductDTO product)

@@ -11,11 +11,19 @@ namespace ShoppingWebSiteUI.Controllers
     {
         private APICallService _apiCallService;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:ShoppingWebSiteUI.Controllers.HomeController"/> class.
+        /// </summary>
+        /// <param name="apiCallService">API call service.</param>
         public HomeController(APICallService apiCallService)
         {
             _apiCallService = apiCallService;
         }
 
+        /// <summary>
+        /// Index this instance.
+        /// </summary>
+        /// <returns>The index.</returns>
         public IActionResult Index()
         {
             var loggedInUser = HttpContext.Session.GetString("username");
@@ -28,6 +36,10 @@ namespace ShoppingWebSiteUI.Controllers
             return Redirect("/ListItems");
         }
 
+        /// <summary>
+        /// Logins the user.
+        /// </summary>
+        /// <returns>The user.</returns>
         [Route("Login")]
         public IActionResult LoginUser()
         {
@@ -35,6 +47,11 @@ namespace ShoppingWebSiteUI.Controllers
             return View("Login", user);
         }
 
+        /// <summary>
+        /// Login the specified user.
+        /// </summary>
+        /// <returns>The login.</returns>
+        /// <param name="user">User.</param>
         [HttpPost]
         [Route("Login")]
         public IActionResult Login(User user)
@@ -50,6 +67,10 @@ namespace ShoppingWebSiteUI.Controllers
             return Redirect("/ListItems");
         }
 
+        /// <summary>
+        /// Error this instance.
+        /// </summary>
+        /// <returns>The error.</returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
