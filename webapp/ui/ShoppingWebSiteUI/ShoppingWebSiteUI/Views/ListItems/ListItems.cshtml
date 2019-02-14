@@ -3,6 +3,7 @@
 *@
 @{
 }
+@using System.Data.Linq
 
 <html>
 <head>
@@ -136,10 +137,11 @@
     <div class="container mt-5">
         <div class="row">
             @{int i = -1;}
-            @foreach (var item in @ViewBag.Products)
+            @foreach (var item in @ViewBag.Products.Where(i => i.Category == "All"))
             {
                 i++;
-                @if(i > 3){
+                @if (i > 3)
+                {
                     break;
                 }
 
@@ -181,9 +183,10 @@
             @foreach (var item in @ViewBag.Products)
             {
                 j++;
-                @if(j < 4){
+                @if (j < 4)
+                {
                     continue;
-                }  
+                }
 
                 @if (j > 7)
                 {
@@ -226,9 +229,11 @@
                         <div class="underline-green"></div>
                     </div>
                     @{int k = -1;}
-                    @foreach (var item in @ViewBag.Products){
+                    @foreach (var item in @ViewBag.Products)
+                    {
                         k++;
-                        @if (k < 7){
+                        @if (k < 7)
+                        {
                             continue;
                         }
                         @if (k > 11)
@@ -236,25 +241,25 @@
                             break;
                         }
 
-                    <div class="media mt-5">
-                        <img src="images/starsblue.png" class="img-fluid mr-3" alt="media-img" />
-                        <div class="media-body mt-2">
-                            <h5>@item.Name</h5>
-                            <h6>$@item.Price</h6>
-                            <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
+                        <div class="media mt-5">
+                            <img src="images/starsblue.png" class="img-fluid mr-3" alt="media-img" />
+                            <div class="media-body mt-2">
+                                <h5>@item.Name</h5>
+                                <h6>$@item.Price</h6>
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
                                 </div>
-                                <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                                <button class="btn btn-success" onclick="updateCart(event)">
+                                    <i class="fa fa-cart-plus" aria-hidden="true">
+                                        Add to Cart
+                                    </i>
+                                </button>
                             </div>
-                            <button class="btn btn-success" onclick="updateCart(event)">
-                                <i class="fa fa-cart-plus" aria-hidden="true">
-                                    Add to Cart
-                                </i>
-                            </button>
                         </div>
-                    </div>
-                     }
+                    }
                 </div>
 
                 <div class="col-md-4">
@@ -265,9 +270,11 @@
                         <div class="underline-green"></div>
                     </div>
                     @{int p = -1;}
-                    @foreach (var item in @ViewBag.Products){
+                    @foreach (var item in @ViewBag.Products)
+                    {
                         p++;
-                        @if (p < 11){
+                        @if (p < 11)
+                        {
                             continue;
                         }
                         @if (p > 15)
@@ -275,27 +282,27 @@
                             break;
                         }
 
-                    <div class="media mt-5">
-                        <img src="images/starsblue.png" class="img-fluid mr-3" alt="media-img" />
-                        <div class="media-body mt-2">
-                            <h5>@item.Name</h5>
-                            <h6>$@item.Price</h6>
-                            <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
+                        <div class="media mt-5">
+                            <img src="images/starsblue.png" class="img-fluid mr-3" alt="media-img" />
+                            <div class="media-body mt-2">
+                                <h5>@item.Name</h5>
+                                <h6>$@item.Price</h6>
+                                <div class="input-group input-group-sm mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
                                 </div>
-                                <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                                <button class="btn btn-success" onclick="updateCart(event)">
+                                    <i class="fa fa-cart-plus" aria-hidden="true">
+                                        Add to Cart
+                                    </i>
+                                </button>
                             </div>
-                            <button class="btn btn-success" onclick="updateCart(event)">
-                                <i class="fa fa-cart-plus" aria-hidden="true">
-                                    Add to Cart
-                                </i>
-                            </button>
                         </div>
-                    </div>
-                     }
+                    }
                 </div>
-                
+
                 <div class="col-md-4">
                     <div class="row">
                         <h4>Recently Viewed Products</h4>
@@ -304,9 +311,11 @@
                         <div class="underline-green"></div>
                     </div>
                     @{int q = -1;}
-                    @foreach (var item in @ViewBag.Products){
+                    @foreach (var item in @ViewBag.Products)
+                    {
                         q++;
-                        @if (q < 15){
+                        @if (q < 15)
+                        {
                             continue;
                         }
                         @if (q > 19)
@@ -314,19 +323,19 @@
                             break;
                         }
 
-                    <div class="media mt-5">
-                        <img src="images/starsblue.png" class="img-fluid mr-3" alt="media-img" />
-                        <div class="media-body mt-2">
-                            <h5>@item.Name</h5>
-                            <h6>$@item.Price</h6>
-                            <button class="btn btn-success" onclick="updateCart(event)">
-                                <i class="fa fa-cart-plus" aria-hidden="true">
-                                    Add to Cart
-                                </i>
-                            </button>
+                        <div class="media mt-5">
+                            <img src="images/starsblue.png" class="img-fluid mr-3" alt="media-img" />
+                            <div class="media-body mt-2">
+                                <h5>@item.Name</h5>
+                                <h6>$@item.Price</h6>
+                                <button class="btn btn-success" onclick="updateCart(event)">
+                                    <i class="fa fa-cart-plus" aria-hidden="true">
+                                        Add to Cart
+                                    </i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                     }
+                    }
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ function updateCart(event) {
     let productId = $(event.target).parent().attr('data-id');
     let quantity = $(event.target).sibling('input').val();
 
-    $.ajax({
+    $.ajax('/cart', {
         method: 'post',
         contentType: 'application/json',
         data: JSON.stringify({
