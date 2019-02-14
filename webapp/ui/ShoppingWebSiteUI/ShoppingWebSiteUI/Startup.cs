@@ -57,6 +57,7 @@ namespace ShoppingWebSiteUI
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
+            app.UseMiddleware<Middleware.AuthenticationMiddleware>();
 
             app.UseMvc(routes =>
             {

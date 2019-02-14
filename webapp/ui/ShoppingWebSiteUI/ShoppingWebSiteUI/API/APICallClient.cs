@@ -17,30 +17,16 @@ namespace ShoppingWebSiteUI.API
             _hostUri = hostUri;
         }
 
-        HttpClient client;
-
-        public HttpClient CreateClient()
+        public HttpClient CreateClient(string path, string action)
         {
-            client = new HttpClient();
-            client.BaseAddress = new Uri(new Uri(_hostUri), "api/products/"); return client;
-        }
-        public HttpClient CreateActionClient(string action)
-        {
-            client = new HttpClient();
-            client.BaseAddress = new Uri(new Uri(_hostUri), "api/products/" + action);
-            return client;
-        }
-
-        public HttpClient CreatePathActionClient(string path, string action)
-        {
-            client = new HttpClient();
+            var client = new HttpClient();
             client.BaseAddress = new Uri(new Uri(_hostUri), path + "/" + action);
             return client;
         }
 
         public async Task<IEnumerable<ProductDTO>> GetProductsAsync()
         {
-            using (var client = CreateClient())
+            using (var client = CreateClient("api", "products"))
             {
                 HttpResponseMessage response;
                 response = client.GetAsync(client.BaseAddress).Result;
@@ -61,13 +47,10 @@ namespace ShoppingWebSiteUI.API
             }
 
         }
-
-
-
-
+        
         public System.Net.HttpStatusCode AddProductToCart(ProductDTO student)
         {
-            using (var client = CreateActionClient("Post01"))
+            using (var client = CreateClient("api", "cart"))
             {
                 HttpResponseMessage response = null;
                 try
@@ -86,45 +69,9 @@ namespace ShoppingWebSiteUI.API
 
         }
 
- 
-        public async Task<UserDTO> ValidateUserCredentials(UserDTO userDTO)
-        {
-            using (var client = CreateActionClient("validate"))
-            {
-                HttpResponseMessage response = null;
-                try
-                {
-                    //response = client.PostAsJsonAsync(client.BaseAddress, company).Result;
-                    var output = JsonConvert.SerializeObject(userDTO);
-                    HttpContent contentPost = new StringContent(output, System.Text.Encoding.UTF8, "application/json");
-                    response = client.PostAsync(client.BaseAddress, contentPost).Result;
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        var avail = await response.Content.ReadAsStringAsync()
-                            .ContinueWith<UserDTO>(postTask =>
-                            {
-                                return JsonConvert.DeserializeObject<UserDTO>(postTask.Result);
-                            });
-                        return avail;
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    throw new Exception("Something went wrong while validating user credentials");
-                }
-               
-            }
-        }
-
         public async Task<HttpStatusCode> PerformLogin(User user)
         {
-            using (var client = CreatePathActionClient("api", "Authenticator"))
+            using (var client = CreateClient("api", "login"))
             {
                 try
                 {
