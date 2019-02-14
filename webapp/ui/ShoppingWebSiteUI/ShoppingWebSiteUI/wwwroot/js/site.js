@@ -3,10 +3,16 @@
 
 // Write your JavaScript code.
 function updateCart(event) {
+    let productId = $(event.target).parent().attr('data-id');
+    let quantity = $(event.target).sibling('input').val();
+
     $.ajax({
         method: 'post',
         contentType: 'application/json',
-        data: JSON.stringify({}),
+        data: JSON.stringify({
+            productId: productId,
+            quantity: quantity,
+        }),
         success: function() {
             window.alert('Added to cart');    
         },
