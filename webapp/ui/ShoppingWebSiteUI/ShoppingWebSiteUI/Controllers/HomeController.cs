@@ -1,23 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using ShoppingWebSiteUI.Models;
+using ShoppingWebSiteUI.API;
+using System.Net;
 
 namespace ShoppingWebSiteUI.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private APICallService _apiCallService;
+
+        public HomeController(APICallService apiCallService)
         {
-            return View();
+            _apiCallService = apiCallService;
         }
 
-        public IActionResult Privacy()
+        public IActionResult Index()
         {
-            return View();
+            var loggedInUser = HttpContext.Session.GetString("username");
+
+            if (loggedInUser == null)
+            {
+                return View();
+            }
+
+            return Redirect("/ListItems");
+        }
+
+        public IActionResult Login(string username, string password)
+        {
+            HttpStatusCode result = _apiCallService.DoLogin(username, password).Result;
+
+            if (result != HttpStatusCode.OK)
+            {
+                return View();
+            }
+
+            HttpContext.Session.SetString("username", username);
+            return Redirect("/ListItems");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
