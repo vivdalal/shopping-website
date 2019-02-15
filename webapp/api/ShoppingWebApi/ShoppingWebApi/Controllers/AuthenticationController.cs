@@ -17,18 +17,19 @@ namespace ShoppingWebApi.Controllers
             _context = context;
         }        
 
-        [Route("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public ActionResult Authenticate(string username, string password)
+        [Route("login")]
+        [HttpPost]
+        public ActionResult Authenticate([FromBody] User user)
         {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.Password))
             {
                 return BadRequest();
             }
 
-            if (UserExists(username, password))
+            if (UserExists(user))
             {
                 return Ok();
             }
@@ -39,12 +40,11 @@ namespace ShoppingWebApi.Controllers
         /// <summary>
         /// Validates the username and password combination
         /// </summary>
-        /// <param name="username">The username of the user</param>
-        /// <param name="password">The password of the user</param>
+        /// <param name="user">The credentials of the user</param>
         /// <returns>true if the combination is valid, false otherwise</returns>
-        private bool UserExists(string username, string password)
+        private bool UserExists(User user)
         {
-            return _context.User.Any(e => (e.Username == username && e.Password == password));
+            return _context.User.Any(e => (e.Username == user.Username && e.Password == user.Password));
         }
     }
 }
