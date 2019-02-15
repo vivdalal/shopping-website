@@ -65,7 +65,7 @@
 <div class="container mt-5">
     <div class="row">
         @{int i = -1;}
-        @foreach (var item in @ViewBag.Products.Where(i => i.Category == "All"))
+        @foreach (var item in ((List<ProductDTO>) @ViewBag.Products).Where(item => item.Category == "All"))
         {
             i++;
             @if (i > 3)

@@ -54,7 +54,7 @@ namespace ShoppingWebSiteUI
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+            app.UseStaticFiles("/static");
             app.UseCookiePolicy();
             app.UseSession();
             app.UseMiddleware<Middleware.AuthenticationMiddleware>();
