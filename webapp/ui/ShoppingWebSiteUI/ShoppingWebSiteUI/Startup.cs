@@ -63,7 +63,7 @@ namespace ShoppingWebSiteUI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Atuh}/{action=Login}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
