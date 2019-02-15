@@ -2,6 +2,8 @@
     ViewData["Title"] = "Products";
 }
 
+@using System.Linq
+
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -9,19 +11,22 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="images/starsblue.png" class="d-block w-100" alt="First Slide">
+            <img src="images/shirts_banner.jpg" class="d-block w-100" alt="First Slide">
             <div class="carousel-caption d-none d-md-block">
-                <h1>Sample header</h1>
-                <p>Sample description</p>
-                <button class="btn btn-info btn-lg">Shop Now</button>
+                <h1 style="color: black;">Shirts</h1>
+                <p style="color: black;">Winter Collection</p>
+                <div class="first">
+                    <button class="btn btn-info btn-lg" onclick=goToDiv('#shirts')>Shop Now</button>
+                </div>
+
             </div>
         </div>
         <div class="carousel-item">
-            <img src="images/starsblue.png" class="d-block w-100" alt="Second Slide">
+            <img src="images/bottoms-banner.png" class="d-block w-100" alt="Second Slide">
             <div class="carousel-caption d-none d-md-block">
-                <h1>Sample header</h1>
-                <p>Sample description</p>
-                <button class="btn btn-info btn-lg">Shop Now</button>
+                <h1 style="color: black;">Bottoms</h1>
+                <p style="color: black;">Uber Cool Styles</p>
+                <button class="btn btn-info btn-lg" onclick=goToDiv('#trousers')>Shop Now</button>
             </div>
         </div>
     </div>
@@ -42,7 +47,7 @@
                 <h4>FREE SHIPPING</h4>
                 <p>on order over $30</p>
             </div>
-            <div class="col-md-4 " m-right">
+            <div class="col-md-4  m-right">
                 <h4>CALL US ANYTIME</h4>
                 <p>111-111-1111</p>
             </div>
@@ -54,28 +59,21 @@
     </div>
 </div>
 
-<div class="container-fluid bg-light-gray">
+<div class="container-fluid" id="shirts">
     <div class="container pt-5">
         <div class="row">
-            <h3>All Clothing</h3>
+            <h3>Shirts</h3>
         </div>
         <div class="underline"></div>
     </div>
 </div>
 <div class="container mt-5">
     <div class="row">
-        @{int i = -1;}
-        @foreach (var item in @ViewBag.Products.Where(i => i.Category == "All"))
+       @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Category == "Shirts"))
         {
-            i++;
-            @if (i > 3)
-            {
-                break;
-            }
-
             <div class="col-md-3">
                 <div class="card">
-                    <img src="images/starsblue.png" class="card-img-top" />
+                    <img src="images/16.jpeg" class="card-img-top" />
                     <div class="card-body">
                         <h5>@item.Name</h5>
                         <h5>$@item.Price</h5>
@@ -97,7 +95,7 @@
     </div>
 </div>
 
-<div class="container mt-5">
+<div class="container mt-5" id="trousers">
     <div class="row">
         <h3>Trousers</h3>
     </div>
@@ -107,25 +105,12 @@
 </div>
 <div class="container mt-5 pb-5">
     <div class="row">
-        @{int j = -1;}
-        @foreach (var item in @ViewBag.Products)
-        {
-            j++;
-            @if (j < 4)
-            {
-                continue;
-            }
-
-            @if (j > 7)
-            {
-                break;
-            }
+        @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Category == "Trousers")){
 
             <div class="col-md-3">
                 <div class="card">
-                    <img src="images/starsblue.png" class="card-img-top" />
+                    <img src="images/@item.ImageURL" class="card-img-top" />
                     <div class="card-body">
-                        <h5>@j</h5>
                         <h5>@item.Name</h5>
                         <h5>$@item.Price</h5>
                         <div class="input-group input-group-sm mb-3">
@@ -134,7 +119,45 @@
                             </div>
                             <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
                         </div>
-                        <button class="btn btn-danger" onclick="updateCart(event)">
+                        <button class="btn btn-danger" onclick='updateCart(event)'>
+                            <i class="fa fa-cart-plus" aria-hidden="true">
+                                Add to Cart
+                            </i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+    }
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <h3>Socks</h3>
+    </div>
+    <div class="row">
+        <div class="underline"></div>
+    </div>
+</div>
+<div class="container mt-5 pb-5">
+    <div class="row">
+
+        @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Category == "Socks"))
+        {
+
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="images/@item.ImageURL" class="card-img-top" />
+                    <div class="card-body">
+                        <h5>@item.Name</h5>
+                        <h5>$@item.Price</h5>
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                        </div>
+                        <button class="btn btn-danger" onclick='updateCart(event)'>
                             <i class="fa fa-cart-plus" aria-hidden="true">
                                 Add to Cart
                             </i>
@@ -145,6 +168,45 @@
         }
     </div>
 </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <h3>Shoes</h3>
+    </div>
+    <div class="row">
+        <div class="underline"></div>
+    </div>
+</div>
+<div class="container mt-5 pb-5">
+    <div class="row">
+
+        @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Category == "Shoes"))
+        {
+
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="images/@item.ImageURL" class="card-img-top" />
+                    <div class="card-body">
+                        <h5>@item.Name</h5>
+                        <h5>$@item.Price</h5>
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                        </div>
+                        <button class="btn btn-danger" onclick='updateCart(event)'>
+                            <i class="fa fa-cart-plus" aria-hidden="true">
+                                Add to Cart
+                            </i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
 
 <div class="container-fluid pt-5 pb-5">
     <div class="container">
@@ -156,21 +218,10 @@
                 <div class="row">
                     <div class="underline-green"></div>
                 </div>
-                @{int k = -1;}
-                @foreach (var item in @ViewBag.Products)
-                {
-                    k++;
-                    @if (k < 7)
-                    {
-                        continue;
-                    }
-                    @if (k > 11)
-                    {
-                        break;
-                    }
 
+                @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Id > 10 && _.Id < 15)){
                     <div class="media mt-5">
-                        <img src="images/starsblue.png" class="img-fluid mr-3" alt="media-img" />
+                        <img src="images/@item.ImageURL" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
                             <h5>@item.Name</h5>
                             <h6>$@item.Price</h6>
@@ -180,7 +231,37 @@
                                 </div>
                                 <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
                             </div>
-                            <button class="btn btn-success" onclick="updateCart(event)">
+                            <button class="btn btn-success" onclick='updateCart(event)'>
+                                <i class="fa fa-cart-plus" aria-hidden="true">
+                                    Add to Cart
+                                </i>
+                            </button>
+                        </div>
+                    </div>
+               }
+            </div>
+
+            <div class="col-md-4">
+                <div class="row">
+                    <h4>Recently Viewed Products</h4>
+                </div>
+                <div class="row">
+                    <div class="underline-green"></div>
+                </div>
+
+                @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Id < 5)){
+                    <div class="media mt-5">
+                        <img src = "images/@item.ImageURL" class="img-fluid mr-3" alt="media-img" />
+                        <div class="media-body mt-2">
+                            <h5>@item.Name</h5>
+                            <h6>$@item.Price</h6>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
+                                </div>
+                                <input type = "text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                            </div>
+                            <button class="btn btn-success" onclick='updateCart(event)'>
                                 <i class="fa fa-cart-plus" aria-hidden="true">
                                     Add to Cart
                                 </i>
@@ -192,71 +273,19 @@
 
             <div class="col-md-4">
                 <div class="row">
-                    <h4>Recently Viewed Products</h4>
+                    <h4>Designer Products</h4>
                 </div>
                 <div class="row">
                     <div class="underline-green"></div>
                 </div>
-                @{int p = -1;}
-                @foreach (var item in @ViewBag.Products)
-                {
-                    p++;
-                    @if (p < 11)
-                    {
-                        continue;
-                    }
-                    @if (p > 15)
-                    {
-                        break;
-                    }
 
+                @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Id > 5 &&  _.Id < 10)){
                     <div class="media mt-5">
-                        <img src="images/starsblue.png" class="img-fluid mr-3" alt="media-img" />
+                        <img src="images/@item.ImageURL" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
                             <h5>@item.Name</h5>
                             <h6>$@item.Price</h6>
-                            <div class="input-group input-group-sm mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
-                                </div>
-                                <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
-                            </div>
-                            <button class="btn btn-success" onclick="updateCart(event)">
-                                <i class="fa fa-cart-plus" aria-hidden="true">
-                                    Add to Cart
-                                </i>
-                            </button>
-                        </div>
-                    </div>
-                }
-            </div>
-
-            <div class="col-md-4">
-                <div class="row">
-                    <h4>Recently Viewed Products</h4>
-                </div>
-                <div class="row">
-                    <div class="underline-green"></div>
-                </div>
-                @{int q = -1;}
-                @foreach (var item in @ViewBag.Products)
-                {
-                    q++;
-                    @if (q < 15)
-                    {
-                        continue;
-                    }
-                    @if (q > 19)
-                    {
-                        break;
-                    }
-
-                    <div class="media mt-5">
-                        <img src="images/starsblue.png" class="img-fluid mr-3" alt="media-img" />
-                        <div class="media-body mt-2">
-                            <h5>@item.Name</h5>
-                            <h6>$@item.Price</h6>
-                            <button class="btn btn-success" onclick="updateCart(event)">
+                            <button class="btn btn-success" onclick='updateCart(event)'>
                                 <i class="fa fa-cart-plus" aria-hidden="true">
                                     Add to Cart
                                 </i>
@@ -269,77 +298,6 @@
     </div>
 </div>
 
-<div class="container-fluid bg-light-gray  pb-5">
-    <div class="container">
-        <div class="row">
-            <h4>FEATURED</h4>
-        </div>
-        <div class="row">
-            <div class="underline"></div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/starsblue.png" class="card-img-top" alt="image" />
-                    <div class="card-body">
-                        <h4>Black Shirt</h4>
-                        <h6>$20</h6>
-                        <button class="btn btn-danger">
-                            <i class="fa fa-cart-plus" aria-hidden="true">
-                                Add to Cart
-                            </i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/starsblue.png" class="card-img-top" alt="image" />
-                    <div class="card-body">
-                        <h4>Blue Shirt</h4>
-                        <h6>$20</h6>
-                        <button class="btn btn-danger">
-                            <i class="fa fa-cart-plus" aria-hidden="true">
-                                Add to Cart
-                            </i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/starsblue.png" class="card-img-top" alt="image" />
-                    <div class="card-body">
-                        <h4>Green Shirt</h4>
-                        <h6>$20</h6>
-                        <button class="btn btn-danger">
-                            <i class="fa fa-cart-plus" aria-hidden="true">
-                                Add to Cart
-                            </i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/starsblue.png" class="card-img-top" alt="image" />
-                    <div class="card-body">
-                        <h4>Red Shirt</h4>
-                        <h6>$20</h6>
-                        <button class="btn btn-danger">
-                            <i class="fa fa-cart-plus" aria-hidden="true">
-                                Add to Cart
-                            </i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="container mt-5">
     <div class="row">
@@ -466,3 +424,9 @@
         </div>
     </div>
 </div>
+
+<script>
+     function goToDiv(toScroll) {
+         window.location.href = toScroll;
+     }
+</script>
