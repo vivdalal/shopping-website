@@ -54,7 +54,7 @@ namespace ShoppingWebSiteUI
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles("/static");
+            app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
             app.UseMiddleware<Middleware.AuthenticationMiddleware>();
@@ -63,7 +63,7 @@ namespace ShoppingWebSiteUI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Atuh}/{action=Login}/{id?}");
             });
         }
     }

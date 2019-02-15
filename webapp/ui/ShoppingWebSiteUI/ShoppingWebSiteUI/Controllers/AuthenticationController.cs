@@ -47,7 +47,7 @@ namespace ShoppingWebSiteUI.Controllers
         /// <param name="user">User.</param>
         [HttpPost]
         [Route("Login")]
-        public IActionResult Login([FromBody] User user)
+        public IActionResult Login([FromForm] User user)
         {
             HttpStatusCode result = _apiCallService.DoLogin(user).Result;
 
