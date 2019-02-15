@@ -73,7 +73,7 @@
         {
             <div class="col-md-3">
                 <div class="card">
-                    <img src="images/16.jpeg" class="card-img-top" />
+                    <img src="images/@item.ImageUrl" class="card-img-top" />
                     <div class="card-body">
                         <h5>@item.Name</h5>
                         <h5>$@item.Price</h5>
@@ -109,7 +109,7 @@
 
             <div class="col-md-3">
                 <div class="card">
-                    <img src="images/@item.ImageURL" class="card-img-top" />
+                    <img src="images/@item.ImageUrl" class="card-img-top" />
                     <div class="card-body">
                         <h5>@item.Name</h5>
                         <h5>$@item.Price</h5>
@@ -147,7 +147,7 @@
 
             <div class="col-md-3">
                 <div class="card">
-                    <img src="images/@item.ImageURL" class="card-img-top" />
+                    <img src="images/@item.ImageUrl" class="card-img-top" />
                     <div class="card-body">
                         <h5>@item.Name</h5>
                         <h5>$@item.Price</h5>
@@ -185,7 +185,7 @@
 
             <div class="col-md-3">
                 <div class="card">
-                    <img src="images/@item.ImageURL" class="card-img-top" />
+                    <img src="images/@item.ImageUrl" class="card-img-top" />
                     <div class="card-body">
                         <h5>@item.Name</h5>
                         <h5>$@item.Price</h5>
@@ -221,7 +221,7 @@
 
                 @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Id > 10 && _.Id < 15)){
                     <div class="media mt-5">
-                        <img src="images/@item.ImageURL" class="img-fluid mr-3" alt="media-img" />
+                        <img src="images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
                             <h5>@item.Name</h5>
                             <h6>$@item.Price</h6>
@@ -251,7 +251,7 @@
 
                 @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Id < 5)){
                     <div class="media mt-5">
-                        <img src = "images/@item.ImageURL" class="img-fluid mr-3" alt="media-img" />
+                        <img src = "images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
                             <h5>@item.Name</h5>
                             <h6>$@item.Price</h6>
@@ -281,7 +281,7 @@
 
                 @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Id > 5 &&  _.Id < 10)){
                     <div class="media mt-5">
-                        <img src="images/@item.ImageURL" class="img-fluid mr-3" alt="media-img" />
+                        <img src="images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
                             <h5>@item.Name</h5>
                             <h6>$@item.Price</h6>

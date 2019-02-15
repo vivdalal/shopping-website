@@ -29,7 +29,8 @@ namespace ShoppingWebApi.Controllers
                                Description = p.Description,
                                Price = p.Price,
                                IsInStock = p.Quantity != 0,
-                               Category = p.Category
+                               Category = p.Category,
+                               ImageUrl = p.ImageUrl
                            };
 
             return products;
@@ -50,7 +51,8 @@ namespace ShoppingWebApi.Controllers
                               Description = p.Description,
                               Price = p.Price,
                               IsInStock = p.Quantity != 0,
-                              Category = p.Category
+                              Category = p.Category,
+                              ImageUrl = p.ImageUrl
                           };
 
             if (product == null)
