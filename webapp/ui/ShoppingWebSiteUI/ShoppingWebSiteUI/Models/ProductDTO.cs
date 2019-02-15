@@ -18,6 +18,6 @@
         public float Price { get; set; }
         public bool IsInStock { get; set; }
         public string Category { get; set; }
-        public string ImageURL { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
