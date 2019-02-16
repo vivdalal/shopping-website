@@ -4,48 +4,51 @@
 
 @using System.Linq
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h2 style="margin-bottom: 30px; margin-top:80px;">
-                My Shopping Cart
-            </h2>
-        </div>
-        <div class="col-md-12">
-            <div align="right" style="margin-bottom: 30px;">
-                <a href="/ListItems" class="btn">Back to Shopping</a>
-                <a href="/Success" class="btn btn-success">Checkout</a>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <table class="table table-bordered text-center">
-                <thead>
-                    <tr>
-                        <td>Image</td>
-                        <td>Name</td>
-                        <td>Price</td>
-                        <td>Quantity</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in ((List<Cart>)@ViewBag.CartItems))
-                    {
-                        <tr>
-                            <td width="80"><img src="images/@item.Product.ImageUrl" height="60"</td>
-                            <td style="vertical-align: middle;">@item.Product.Name</td>
-                            <td style="vertical-align: middle;">@item.Product.Price</td>
-                            <td
-                            <td style="vertical-align: middle;" width="80">@item.Quantity</td>
-                        </tr>
-                    }
 
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-12">
-            <div align="right" style="margin-bottom: 30px;">
-                <a href="/ListItems" class="btn">Back to Shopping</a>
-                <a href="/Success" class="btn btn-success">Checkout</a>
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 style="margin-bottom: 30px; margin-top:80px;">
+                    My Shopping Cart
+                </h2>
+            </div>
+            <div class="col-md-12">
+                <div align="right" style="margin-bottom: 30px;">
+                    <a href="/ListItems" class="btn">Back to Shopping</a>
+                    <a href="/Success" class="btn btn-success">Checkout</a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <td>Image</td>
+                            <td>Name</td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ((List<Cart>)@ViewBag.CartItems))
+                        {
+                            <tr>
+                                <td width="80"><img src="images/@item.Product.ImageUrl" height="60"</td>
+                                <td style="vertical-align: middle;">@item.Product.Name</td>
+                                <td style="vertical-align: middle;">@item.Product.Price</td>
+                                <td
+                                <td style="vertical-align: middle;" width="80">@item.Quantity</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <div align="right" style="margin-bottom: 30px;">
+                    <a href="/ListItems" class="btn">Back to Shopping</a>
+                    <a href="/Success" class="btn btn-success">Checkout</a>
+                </div>
             </div>
         </div>
     </div>
