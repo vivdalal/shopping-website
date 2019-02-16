@@ -63,6 +63,7 @@ namespace ShoppingWebSiteUI.API
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    throw new Exception("Something went wrong while validating user credentials");
                 }
                 return response.StatusCode;
             }
