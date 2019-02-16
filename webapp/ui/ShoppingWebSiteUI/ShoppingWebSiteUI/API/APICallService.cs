@@ -38,9 +38,22 @@ namespace ShoppingWebSiteUI.API
 
         }
 
+        /// <summary>
+        /// Adds to cart.
+        /// </summary>
+        /// <returns>The to cart.</returns>
+        /// <param name="cart">Cart.</param>
         public async Task<HttpStatusCode> AddToCart(CartDTO cart)
         {
-            return _client.AddProductToCart(cart);
+            try
+            {
+                return await _client.AddProductToCart(cart);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
         }
 
         /// <summary>

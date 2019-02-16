@@ -44,17 +44,32 @@ namespace ShoppingWebSiteUI.Controllers
 
 
         [Route("AddToCart")]
+        [HttpPost]
         public IActionResult onPost(AddToCartDTO addToCart)
         {
-            //Get the product catalogue from the API
-            CartDTO cart = new CartDTO();
-            cart.Id = int.Parse(addToCart.ProductId);
-            cart.Quantity = int.Parse(addToCart.Quantity);
-            HttpStatusCode status = _aPICallService.AddToCart(cart).Result;
+            try
+            {
+                //Get the product catalogue from the API
+                CartDTO cart = new CartDTO();
+                cart.Id = int.Parse(addToCart.ProductId);
+                cart.Quantity = int.Parse(addToCart.Quantity);
+                HttpStatusCode status = _aPICallService.AddToCart(cart).Result;
+                if (status == HttpStatusCode.OK)
+                {
+                    return StatusCode(200);
+                }
+                else
+                {
+                    return StatusCode(404);
+                }
+
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return StatusCode(500);
+            }
 
 
-            //Returning the same view
-            return View("ListItems");
         }
     }
 }
