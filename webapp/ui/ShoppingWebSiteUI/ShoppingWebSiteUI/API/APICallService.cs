@@ -12,13 +12,13 @@ namespace ShoppingWebSiteUI.API
 
         public APICallService()
         {
-            _client = new APICallClient("https://weapidemo.azurewebsites.net");
+            _client = new APICallClient("http://localhost:5000");
         }
         /// <summary>
         /// Gets all products.
         /// </summary>
         /// <returns>The all products.</returns>
-        public async Task<IEnumerable<ProductDTO>> GetAllProducts()
+        public async Task<IEnumerable<Product>> GetAllProducts()
         {
             Console.WriteLine("Fetching all products");// Read product list:
             var products = await _client.GetProductsAsync();
@@ -26,17 +26,59 @@ namespace ShoppingWebSiteUI.API
  
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetCartItemss()
+        /// <summary>
+        /// Gets the cart itemss.
+        /// </summary>
+        /// <returns>The cart itemss.</returns>
+        public async Task<IEnumerable<Cart>> GetCartItems(string username)
         {
             Console.WriteLine("Fetching all items from Cart");// Read product list:
-            var products = await _client.GetProductsAsync();
-            return products;
+            var cartItems = await _client.GetCartItemsAsync(username);
+            return cartItems;
 
         }
 
-        public async Task<HttpStatusCode> DoLogin(string username, string password)
+        /// <summary>
+        /// Adds to cart.
+        /// </summary>
+        /// <returns>The to cart.</returns>
+        /// <param name="cart">Cart.</param>
+        public async Task<HttpStatusCode> AddToCart(CartItem cartItem)
         {
-            return await _client.PerformLogin(username, password);
+            try
+            {
+                return await _client.AddProductToCart(cartItem);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        /// <summary>
+        /// Does the login.
+        /// </summary>
+        /// <returns>The login.</returns>
+        /// <param name="user">The user instance.</param>
+        public async Task<HttpStatusCode> DoLogin(User user)
+        {
+            return await _client.PerformLogin(user);
+        }
+
+        /// <summary>
+        /// Dos the login.
+        /// </summary>
+        /// <returns>The status code of registration.</returns>
+        /// <param name="user">The user to be registered.</param>
+        public async Task<HttpStatusCode> DoRegister(User user)
+        {
+            return await _client.RegisterUser(user);
+        }
+
+        public async Task<HttpStatusCode> DeleteCartItems(string username)
+        {
+            return await _client.DeleteCartItems(username);
         }
 
     }

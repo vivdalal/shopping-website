@@ -1,0 +1,44 @@
+﻿@model ShoppingWebSiteUI.Models.User
+@{
+    ViewData["Title"] = "Login Page";
+}
+
+<div class="login-page-container">
+    <span class="caption-text">
+        You Shop! We Deliver!
+    </span>
+    <div class="inner-container">
+        <form method="post" action="/Auth/Login">
+            <div class="form-group">
+                <label for="usernameField">Email or Username</label>
+                <input type="text" class="form-control" id="usernameField" name="username" aria-describedby="emailHelp" placeholder="Enter email or username">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="passwordField">Password</label>
+                <input type="password" class="form-control" id="passwordField" name="password" placeholder="Enter password">
+                @if (ViewBag.ShouldShowError)
+                {
+                    <small class="form-text text-danger">Invalid credentials.</small>
+                }
+            </div>
+            <button type="submit" class="btn btn-primary login-button">Log In</button>
+            <div class="form-group" style="margin-top: 5em;">
+                <small class="form-text text-left">Click <a href="/auth/register">here</a> if you do not have an account.</small>
+            </div>
+        </form>
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

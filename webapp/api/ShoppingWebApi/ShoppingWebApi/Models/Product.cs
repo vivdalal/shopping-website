@@ -19,5 +19,7 @@ namespace ShoppingWebApi.Models
         public int Quantity { get; set; }
 
         public string Category { get; set; }
+
+        public string ImageUrl { get; set; }
     }
 }

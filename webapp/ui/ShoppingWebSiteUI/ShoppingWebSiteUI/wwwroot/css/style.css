@@ -14,3 +14,55 @@
 .card-body {text-align: center;}
 
 .blog .media img{max-width: 200px; height: auto;}
+
+.login-page-container {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-image: url("/images/starsblue.png");
+}
+
+.inner-container {
+    background-color: #fff;
+    height: 400px;
+    margin: auto;
+    flex-direction: column;
+    padding: 40px;
+    border-radius: 4px;
+}
+
+.inner-container .login-button {
+    float: right;
+    margin-top: 10px;
+}
+
+.caption-text {
+    font-size: 32px;
+    color: #ddd;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-top: 105px;
+    margin-left: -156px;
+}
+
+.register-caption-text {
+    font-size: 24px;
+    color: #ddd;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin-top: 100px;
+    margin-left: -194px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}

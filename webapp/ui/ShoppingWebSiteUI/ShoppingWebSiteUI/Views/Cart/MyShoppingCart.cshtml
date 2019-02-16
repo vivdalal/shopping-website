@@ -1,71 +1,55 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "My Shopping Cart";
 }
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width">
+@using System.Linq
 
-        <title>My Shopping Cart</title>
 
-        <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> 
-        <link href="css/site.css" rel="stylesheet">
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2 style="margin-bottom: 30px; margin-top:80px;">
-                        My Shopping Cart
-                    </h2>
+<div class="wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 style="margin-bottom: 30px; margin-top:80px;">
+                    My Shopping Cart
+                </h2>
+            </div>
+            <div class="col-md-12">
+                <div align="right" style="margin-bottom: 30px;">
+                    <a href="/ListItems" class="btn">Back to Shopping</a>
+                    <a href="/Success" class="btn btn-success">Checkout</a>
                 </div>
-                <div class="col-md-12">
-                    <div align="right" style="margin-bottom: 30px;">
-                        <a href="#" class="btn">Back to Shopping</a>
-                        <a href="#" class="btn btn-success">Checkout</a>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <table class="table table-bordered text-center">
-                        <thead>
+            </div>
+            <div class="col-md-12">
+                <table class="table table-bordered text-center">
+                    <thead>
+                        <tr>
+                            <td>Image</td>
+                            <td>Name</td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ((List<Cart>)@ViewBag.CartItems))
+                        {
                             <tr>
-                                <td>Image</td>
-                                <td>Name</td>
-                                <td>Price</td>
-                                <td>Quantity</td>
+                                <td width="80"><img src="images/@item.Product.ImageUrl" height="60"</td>
+                                <td style="vertical-align: middle;">@item.Product.Name</td>
+                                <td style="vertical-align: middle;">@item.Product.Price</td>
+                                <td
+                                <td style="vertical-align: middle;" width="80">@item.Quantity</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @for (var x = 1; x < 10; x++)
-                {
-                    <tr>
-                        <td width="80"><img src="images/starsblue.png" height="60"</td>
-                        <td style="vertical-align: middle;">Name</td>
-                        <td style="vertical-align: middle;">Price</td>
-                        <td
-                        <td style="vertical-align: middle;" width="80">Quantity</td>
-                    </tr>
-    }
+                        }
 
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-12">
-                    <div align="right" style="margin-bottom: 30px;">
-                        <a href="#" class="btn">Back to Shopping</a>
-                        <a href="#" class="btn btn-success">Checkout</a>
-                    </div>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12">
+                <div align="right" style="margin-bottom: 30px;">
+                    <a href="/ListItems" class="btn">Back to Shopping</a>
+                    <a href="/Success" class="btn btn-success">Checkout</a>
                 </div>
             </div>
         </div>
-
-        <script src="lib/jquery/dist/jquery.min.js"></script>
-        <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    </body>
-</html>
+    </div>
+</div>
