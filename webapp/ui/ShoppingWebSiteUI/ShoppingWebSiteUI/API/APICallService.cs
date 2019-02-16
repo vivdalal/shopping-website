@@ -30,10 +30,10 @@ namespace ShoppingWebSiteUI.API
         /// Gets the cart itemss.
         /// </summary>
         /// <returns>The cart itemss.</returns>
-        public async Task<IEnumerable<Cart>> GetCartItems()
+        public async Task<IEnumerable<Cart>> GetCartItems(string username)
         {
             Console.WriteLine("Fetching all items from Cart");// Read product list:
-            var cartItems = await _client.GetCartItemsAsync("");
+            var cartItems = await _client.GetCartItemsAsync(username);
             return cartItems;
 
         }
@@ -74,6 +74,11 @@ namespace ShoppingWebSiteUI.API
         public async Task<HttpStatusCode> DoRegister(User user)
         {
             return await _client.RegisterUser(user);
+        }
+
+        public async Task<HttpStatusCode> DeleteCartItems(string username)
+        {
+            return await _client.DeleteCartItems(username);
         }
 
     }

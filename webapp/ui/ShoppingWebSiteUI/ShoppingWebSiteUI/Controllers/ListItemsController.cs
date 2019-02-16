@@ -37,6 +37,8 @@ namespace ShoppingWebSiteUI.Controllers
 
             //Will handle the HTTP status code error and push again.
             IEnumerable<Product> products = _aPICallService.GetAllProducts().Result;
+            string username = HttpContext.Session.GetString("username");
+            ViewBag.Username = username ?? "User";
             ViewBag.Products = products; 
             //var sessionData = HttpContext.Session.GetString("keyname");
             return View("ListItems");

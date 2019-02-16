@@ -23,9 +23,55 @@ namespace ShoppingWebApi.Controllers
         // GET: api/Cart
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<CartDTO>))]
         [HttpGet]
-        public IQueryable<CartDTO> GetCart()
+        public IQueryable<CartDTO> GetCart(String username)
         {
+
+            var userIds = from i in _context.User
+                          where username == i.Username
+                          select new UserDTO
+                          {
+                              Id = i.Id,
+                              Username = i.Username
+                          };
+
+            var user = userIds.First();
+
+
             var cartItems = from i in _context.Cart
+                            where i.UserId == user.Id
+                            select new CartDTO()
+                            {
+                                Id = i.Id,
+                                Quantity = i.Quantity,
+                                Price = i.Price,
+                                CreatedAt = i.CreatedAt,
+                                Product = new ProductDTO()
+                                {
+                                    Id = i.Product.Id,
+                                    Name = i.Product.Name,
+                                    Description = i.Product.Description,
+                                    Price = i.Product.Price,
+                                    IsInStock = i.Product.Quantity != 0,
+                                    Category = i.Product.Category,
+                                    ImageUrl = i.Product.ImageUrl
+                                }
+                            };
+            return cartItems;
+
+
+
+
+
+        }
+
+        // GET: api/Cart/5
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductDTO))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("{id}")]
+        public ActionResult<CartDTO> GetCart(int id)
+        {
+            var cartItem = from i in _context.Cart
+                           where i.Id == id
                            select new CartDTO()
                            {
                                Id = i.Id,
@@ -43,35 +89,6 @@ namespace ShoppingWebApi.Controllers
                                    ImageUrl = i.Product.ImageUrl
                                }
                            };
-
-            return cartItems;
-        }
-
-        // GET: api/Cart/5
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductDTO))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("{id}")]
-        public ActionResult<CartDTO> GetCart(int id)
-        {
-            var cartItem = from i in _context.Cart
-                          where i.Id == id
-                          select new CartDTO()
-                          {
-                              Id = i.Id,
-                              Quantity = i.Quantity,
-                              Price = i.Price,
-                              CreatedAt = i.CreatedAt,
-                              Product = new ProductDTO()
-                              {
-                                  Id = i.Product.Id,
-                                  Name = i.Product.Name,
-                                  Description = i.Product.Description,
-                                  Price = i.Product.Price,
-                                  IsInStock = i.Product.Quantity != 0,
-                                  Category = i.Product.Category,
-                                  ImageUrl = i.Product.ImageUrl
-                              }
-                          };
 
             if (cartItem == null)
             {
@@ -125,7 +142,7 @@ namespace ShoppingWebApi.Controllers
 
             if (product == null)
             {
-                return BadRequest(new { message = "Invalid product id"});
+                return BadRequest(new { message = "Invalid product id" });
             }
 
             User user = await _context.User.FirstOrDefaultAsync(u => u.Username == cartItem.Username);
@@ -150,17 +167,58 @@ namespace ShoppingWebApi.Controllers
         // DELETE: api/Carts/5
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Cart>> DeleteCart(int id)
+        [HttpDelete]
+        [Route("{username}")]
+        public async Task<ActionResult<Cart>> DeleteCart(string username)
         {
-            var cart = await _context.Cart.FindAsync(id);
-            if (cart == null)
+
+            var userIds = from i in _context.User
+                          where username == i.Username
+                          select new UserDTO
+                          {
+                              Id = i.Id,
+                              Username = i.Username
+                          };
+
+            var user = userIds.First();
+
+
+            var cartItems = from i in _context.Cart
+                            where i.UserId == user.Id
+                            select new CartDTO()
+                            {
+                                Id = i.Id,
+                                Quantity = i.Quantity,
+                                Price = i.Price,
+                                CreatedAt = i.CreatedAt,
+                                Product = new ProductDTO()
+                                {
+                                    Id = i.Product.Id,
+                                    Name = i.Product.Name,
+                                    Description = i.Product.Description,
+                                    Price = i.Product.Price,
+                                    IsInStock = i.Product.Quantity != 0,
+                                    Category = i.Product.Category,
+                                    ImageUrl = i.Product.ImageUrl
+                                }
+                            };
+
+            //Deleting all entries for the user
+            foreach (var c in cartItems)
             {
-                return NotFound();
+                var cart = await _context.Cart.FindAsync(c.Id);
+                if (cart == null)
+                {
+                    return NotFound();
+
+                }
+                _context.Cart.Remove(cart);
+                await _context.SaveChangesAsync();
+
             }
 
-            _context.Cart.Remove(cart);
-            await _context.SaveChangesAsync();
+
+
 
             return NoContent();
         }

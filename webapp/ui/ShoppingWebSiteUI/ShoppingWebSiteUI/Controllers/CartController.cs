@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -23,8 +24,11 @@ namespace ShoppingWebSiteUI.Controllers
         [Route("ShoppingCart")]
         public IActionResult onPost()
         {
-            //IEnumerable<CartDTO> cartItems = _aPICallService.GetCartItems();
-            IEnumerable<Cart> cartItems = new List<Cart>();
+            string username = HttpContext.Session.GetString("username");
+
+            IEnumerable<Cart> cartItems = _aPICallService.GetCartItems(username).Result;
+            //IEnumerable<Cart> cartItems = new List<Cart>();
+            ViewBag.Username = username ?? "";
             ViewBag.CartItems = cartItems;
             return View("MyShoppingCart");
         }
@@ -39,6 +43,45 @@ namespace ShoppingWebSiteUI.Controllers
 
         }
 
+
+        [Route("CheckCart")]
+        [HttpGet]
+        public IActionResult checkCart()
+        {
+            string username = HttpContext.Session.GetString("username");
+            IEnumerable<Cart> cartItems = _aPICallService.GetCartItems(username).Result;
+            if(cartItems != null && cartItems.Any())
+            {
+                return StatusCode(200);
+            }
+            else
+            {
+                return StatusCode(500);
+            }
+
+        }
+
+
+        [Route("Success")]
+        [HttpGet]
+        public IActionResult onSuccess()
+        {
+
+            //Deleting the cart items when the user hits the checkout button
+            string username = HttpContext.Session.GetString("username");
+            HttpStatusCode status = _aPICallService.DeleteCartItems(username).Result;
+            if(status == HttpStatusCode.OK)
+            {
+                return View("Success");
+            }
+            else
+            {
+                return StatusCode(500);
+            }
+
+
+
+        }
     }
 }
 

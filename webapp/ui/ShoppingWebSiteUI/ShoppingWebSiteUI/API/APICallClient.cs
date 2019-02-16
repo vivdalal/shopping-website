@@ -73,6 +73,31 @@ namespace ShoppingWebSiteUI.API
             }
         }
 
+        public async Task<HttpStatusCode> DeleteCartItems(string username)
+        {
+            using (var client = CreateClient("api", "cart"))
+            {
+                HttpResponseMessage response;
+                Uri uri = new Uri(client.BaseAddress.OriginalString + "/" + username);
+
+                response = client.DeleteAsync(uri).Result;
+                //var result = response.Content.ReadAsAsync<IEnumerable<Student>>().Result;
+                if (response.IsSuccessStatusCode)
+                {
+                     await response.Content.ReadAsStringAsync()
+                        .ContinueWith<IEnumerable<Cart>>(postTask =>
+                        {
+                            return JsonConvert.DeserializeObject<IEnumerable<Cart>>(postTask.Result);
+                        });
+                    return HttpStatusCode.OK;
+                }
+                else
+                {
+                    return HttpStatusCode.InternalServerError;
+                }
+            }
+        }
+
 
         public async Task<HttpStatusCode> AddProductToCart(CartItem cartItem)
         {

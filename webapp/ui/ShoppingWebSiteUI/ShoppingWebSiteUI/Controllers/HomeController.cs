@@ -13,7 +13,7 @@ namespace ShoppingWebSiteUI.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return Redirect("/ListItems");
+            return Redirect("/Auth/Login");
         }
     }
 }
