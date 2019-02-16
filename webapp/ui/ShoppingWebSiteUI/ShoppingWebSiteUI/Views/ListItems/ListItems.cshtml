@@ -117,9 +117,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                            <input type="number" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" min="1" value="1">
                         </div>
-                        <button class="btn btn-danger" onclick='updateCart(event)'>
+                        <button class="btn btn-danger" onclick='updateCart(this)'>
                             <i class="fa fa-cart-plus" aria-hidden="true">
                                 Add to Cart
                             </i>
@@ -155,9 +155,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                            <input type="number" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" min="1" value="1">
                         </div>
-                        <button class="btn btn-danger" onclick='updateCart(event)'>
+                        <button class="btn btn-danger" onclick='updateCart(this)'>
                             <i class="fa fa-cart-plus" aria-hidden="true">
                                 Add to Cart
                             </i>
@@ -193,9 +193,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                            <input type="number" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" min="1" value="1" />
                         </div>
-                        <button class="btn btn-danger" onclick='updateCart(event)'>
+                        <button class="btn btn-danger" onclick='updateCart(this)'>
                             <i class="fa fa-cart-plus" aria-hidden="true">
                                 Add to Cart
                             </i>
@@ -219,7 +219,7 @@
                     <div class="underline-green"></div>
                 </div>
 
-                @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Id > 10 && _.Id < 15)){
+                @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Shirts")){
                     <div class="media mt-5">
                         <img src="images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
@@ -229,9 +229,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
                                 </div>
-                                <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                                <input type="number" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" min="1" value="1">
                             </div>
-                            <button class="btn btn-success" onclick='updateCart(event)'>
+                            <button class="btn btn-success" onclick='updateCart(this)'>
                                 <i class="fa fa-cart-plus" aria-hidden="true">
                                     Add to Cart
                                 </i>
@@ -249,7 +249,7 @@
                     <div class="underline-green"></div>
                 </div>
 
-                @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Id < 5)){
+                @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Trousers")){
                     <div class="media mt-5">
                         <img src = "images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
@@ -259,9 +259,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
                                 </div>
-                                <input type = "text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                                <input type = "number" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" min="1" value="1">
                             </div>
-                            <button class="btn btn-success" onclick='updateCart(event)'>
+                            <button class="btn btn-success" onclick='updateCart(this)'>
                                 <i class="fa fa-cart-plus" aria-hidden="true">
                                     Add to Cart
                                 </i>
@@ -279,13 +279,19 @@
                     <div class="underline-green"></div>
                 </div>
 
-                @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Id > 5 &&  _.Id < 10)){
+                @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Socks")){
                     <div class="media mt-5">
                         <img src="images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
                             <h5>@item.Name</h5>
                             <h6>$@item.Price</h6>
-                            <button class="btn btn-success" onclick='updateCart(event)'>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" min="1" value="1">
+                            </div>
+                            <button class="btn btn-success" onclick='updateCart(this)'>
                                 <i class="fa fa-cart-plus" aria-hidden="true">
                                     Add to Cart
                                 </i>
@@ -367,59 +373,29 @@
     </div>
     <div class="container mt-5">
         <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/starsblue.png" class="card-img-top" alt="media" />
-                    <div class="card-body">
-                        <h4>Denim Shirt</h4>
-                        <h6>$25.00</h6>
-                        <button class="btn btn-danger">
-                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                            Add to Cart
-                        </button>
+            @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Shoes"))
+            {
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="images/@item.ImageUrl" class="card-img-top" />
+                        <div class="card-body">
+                            <h5>@item.Name</h5>
+                            <h5>$@item.Price</h5>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
+                                </div>
+                                <input type="number" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" min="1" value="1">
+                            </div>
+                            <button class="btn btn-danger" onclick='updateCart(this)'>
+                                <i class="fa fa-cart-plus" aria-hidden="true">
+                                    Add to Cart
+                                </i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/starsblue.png" class="card-img-top" alt="media" />
-                    <div class="card-body">
-                        <h4>Denim Shirt</h4>
-                        <h6>$25.00</h6>
-                        <button class="btn btn-danger">
-                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/starsblue.png" class="card-img-top" alt="media" />
-                    <div class="card-body">
-                        <h4>Denim Shirt</h4>
-                        <h6>$25.00</h6>
-                        <button class="btn btn-danger">
-                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="images/starsblue.png" class="card-img-top" alt="media" />
-                    <div class="card-body" >
-                        <h4>Denim Shirt</h4>
-                        <h6>$25.00</h6>
-                        <input type="number" min="0" max="100" />
-                        <button class="btn btn-danger">
-                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
+            }
 
         </div>
     </div>

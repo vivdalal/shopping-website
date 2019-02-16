@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,8 +21,11 @@ namespace ShoppingWebSiteUI.Controllers
         
         // The resulting output will be a JSON string: {"p":"Hello","q":"World"}
         [Route("ShoppingCart")]
-        public IActionResult onPost(Cart cart)
-        { 
+        public IActionResult onPost()
+        {
+            //IEnumerable<CartDTO> cartItems = _aPICallService.GetCartItems();
+            IEnumerable<Cart> cartItems = new List<Cart>();
+            ViewBag.CartItems = cartItems;
             return View("MyShoppingCart");
         }
 
