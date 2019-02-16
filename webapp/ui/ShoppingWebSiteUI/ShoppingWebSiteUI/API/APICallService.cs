@@ -40,7 +40,7 @@ namespace ShoppingWebSiteUI.API
 
         public async Task<HttpStatusCode> AddToCart(CartDTO cart)
         {
-            return _client.AddProductToCart(cart);
+            return await _client.AddProductToCart(cart);
         }
 
         /// <summary>
