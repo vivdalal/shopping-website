@@ -36,40 +36,11 @@ namespace ShoppingWebSiteUI.Controllers
             //Get the product catalogue from the API
 
             //Will handle the HTTP status code error and push again.
-            IEnumerable<ProductDTO> products = _aPICallService.GetAllProducts().Result;
+            IEnumerable<Product> products = _aPICallService.GetAllProducts().Result;
             ViewBag.Products = products; 
             //var sessionData = HttpContext.Session.GetString("keyname");
             return View("ListItems");
         }
 
-
-        [Route("AddToCart")]
-        [HttpPost]
-        public IActionResult onPost(AddToCartDTO addToCart)
-        {
-            try
-            {
-                //Get the product catalogue from the API
-                CartDTO cart = new CartDTO();
-                cart.Id = int.Parse(addToCart.ProductId);
-                cart.Quantity = int.Parse(addToCart.Quantity);
-                HttpStatusCode status = _aPICallService.AddToCart(cart).Result;
-                if (status == HttpStatusCode.OK)
-                {
-                    return StatusCode(200);
-                }
-                else
-                {
-                    return StatusCode(404);
-                }
-
-            }catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-                return StatusCode(500);
-            }
-
-
-        }
     }
 }

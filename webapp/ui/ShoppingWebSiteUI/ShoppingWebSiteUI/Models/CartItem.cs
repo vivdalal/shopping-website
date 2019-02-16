@@ -3,12 +3,13 @@ using Newtonsoft.Json;
 
 namespace ShoppingWebSiteUI.Models
 {
-    public class AddToCartDTO
+    public class CartItem
     {
         [JsonProperty(PropertyName = "productId")]
-        public string ProductId;
+        public int ProductId;
         [JsonProperty(PropertyName = "quantity")]
-        public string Quantity;
+        public int Quantity;
 
+        public string Username;
     }
 }

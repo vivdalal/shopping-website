@@ -18,7 +18,7 @@ namespace ShoppingWebSiteUI.API
         /// Gets all products.
         /// </summary>
         /// <returns>The all products.</returns>
-        public async Task<IEnumerable<ProductDTO>> GetAllProducts()
+        public async Task<IEnumerable<Product>> GetAllProducts()
         {
             Console.WriteLine("Fetching all products");// Read product list:
             var products = await _client.GetProductsAsync();
@@ -30,7 +30,7 @@ namespace ShoppingWebSiteUI.API
         /// Gets the cart itemss.
         /// </summary>
         /// <returns>The cart itemss.</returns>
-        public async Task<IEnumerable<ProductDTO>> GetCartItems()
+        public async Task<IEnumerable<Product>> GetCartItems()
         {
             Console.WriteLine("Fetching all items from Cart");// Read product list:
             var products = await _client.GetProductsAsync();
@@ -43,11 +43,11 @@ namespace ShoppingWebSiteUI.API
         /// </summary>
         /// <returns>The to cart.</returns>
         /// <param name="cart">Cart.</param>
-        public async Task<HttpStatusCode> AddToCart(CartDTO cart)
+        public async Task<HttpStatusCode> AddToCart(CartItem cartItem)
         {
             try
             {
-                return await _client.AddProductToCart(cart);
+                return await _client.AddProductToCart(cartItem);
             }
             catch (Exception e)
             {

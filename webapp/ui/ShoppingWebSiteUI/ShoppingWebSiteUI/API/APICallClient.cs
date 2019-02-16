@@ -24,7 +24,7 @@ namespace ShoppingWebSiteUI.API
             return client;
         }
 
-        public async Task<IEnumerable<ProductDTO>> GetProductsAsync()
+        public async Task<IEnumerable<Product>> GetProductsAsync()
         {
             using (var client = CreateClient("api", "products"))
             {
@@ -34,21 +34,21 @@ namespace ShoppingWebSiteUI.API
                 if (response.IsSuccessStatusCode)
                 {
                     var avail = await response.Content.ReadAsStringAsync()
-                        .ContinueWith<IEnumerable<ProductDTO>>(postTask =>
+                        .ContinueWith<IEnumerable<Product>>(postTask =>
                         {
-                            return JsonConvert.DeserializeObject<IEnumerable<ProductDTO>>(postTask.Result);
+                            return JsonConvert.DeserializeObject<IEnumerable<Product>>(postTask.Result);
                         });
                     return avail;
                 }
                 else
                 {
-                    return null;
+                    return new List<Product>();
                 }
             }
 
         }
         
-        public async Task<HttpStatusCode> AddProductToCart(CartDTO cart)
+        public async Task<HttpStatusCode> AddProductToCart(CartItem cartItem)
         {
             using (var client = CreateClient("api", "cart"))
             {
@@ -56,7 +56,7 @@ namespace ShoppingWebSiteUI.API
                 try
                 {
                     //response = client.PostAsJsonAsync(client.BaseAddress, company).Result;
-                    var output = JsonConvert.SerializeObject(cart);
+                    var output = JsonConvert.SerializeObject(cartItem);
                     HttpContent contentPost = new StringContent(output, System.Text.Encoding.UTF8, "application/json");
                     response = await client.PostAsync(client.BaseAddress, contentPost);
                 }

@@ -3,11 +3,8 @@ using System.Collections.Generic;
 
 namespace ShoppingWebSiteUI.Models
 {
-    public class CartDTO
+    public class Cart
     {
-
-
-
         public int Id { get; set; }
 
         public int Quantity { get; set; }
@@ -16,8 +13,9 @@ namespace ShoppingWebSiteUI.Models
 
         public byte[] CreatedAt { get; set; }
 
-        public IEnumerable<ProductDTO> Products { get; set; }
+        public int ProductID { get; set; }
 
+        public string Username { get; set; }
     }
 }
 

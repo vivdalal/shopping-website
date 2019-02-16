@@ -16,7 +16,7 @@ namespace ShoppingWebSiteUI.Middleware
         {
 
             if (
-                httpContext.Request.Path.Value == "/Cart"
+                httpContext.Request.Path.Value.ToLower().Equals("/cart")
                 && httpContext.Session.GetString("username") == null)
             {
                 httpContext.Response.Redirect("/Auth/Login");

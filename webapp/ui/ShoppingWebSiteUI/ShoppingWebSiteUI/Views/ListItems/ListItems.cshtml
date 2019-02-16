@@ -69,8 +69,8 @@
 </div>
 <div class="container mt-5">
     <div class="row">
-       @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Category == "Shirts"))
-        {
+       @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Shirts"))
+       {
             <div class="col-md-3">
                 <div class="card">
                     <img src="images/@item.ImageUrl" class="card-img-top" height="280"/>
@@ -81,9 +81,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
                             </div>
-                            <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
+                            <input type="number" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" min="1" value="1">
                         </div>
-                        <button class="btn btn-danger" onclick='updateCart(event)'>
+                        <button class="btn btn-danger" onclick='updateCart(this)'>
                             <i class="fa fa-cart-plus" aria-hidden="true">
                                 Add to Cart
                             </i>
@@ -105,7 +105,7 @@
 </div>
 <div class="container mt-5 pb-5">
     <div class="row">
-        @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Category == "Trousers")){
+        @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Trousers")){
 
             <div class="col-md-3">
                 <div class="card">
@@ -142,7 +142,7 @@
 <div class="container mt-5 pb-5">
     <div class="row">
 
-        @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Category == "Socks"))
+        @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Socks"))
         {
 
             <div class="col-md-3">
@@ -180,7 +180,7 @@
 <div class="container mt-5 pb-5">
     <div class="row">
 
-        @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Category == "Shoes"))
+        @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Shoes"))
         {
 
             <div class="col-md-3">
@@ -219,7 +219,7 @@
                     <div class="underline-green"></div>
                 </div>
 
-                @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Id > 10 && _.Id < 15)){
+                @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Id > 10 && _.Id < 15)){
                     <div class="media mt-5">
                         <img src="images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
@@ -249,7 +249,7 @@
                     <div class="underline-green"></div>
                 </div>
 
-                @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Id < 5)){
+                @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Id < 5)){
                     <div class="media mt-5">
                         <img src = "images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
@@ -279,7 +279,7 @@
                     <div class="underline-green"></div>
                 </div>
 
-                @foreach (var item in ((List<ProductDTO>)@ViewBag.Products).Where(_ => _.Id > 5 &&  _.Id < 10)){
+                @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Id > 5 &&  _.Id < 10)){
                     <div class="media mt-5">
                         <img src="images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
                         <div class="media-body mt-2">
