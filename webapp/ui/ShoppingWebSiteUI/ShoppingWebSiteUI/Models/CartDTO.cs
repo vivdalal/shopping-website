@@ -6,8 +6,6 @@ namespace ShoppingWebSiteUI.Models
     public class CartDTO
     {
 
-
-
         public int Id { get; set; }
 
         public int Quantity { get; set; }
@@ -16,7 +14,7 @@ namespace ShoppingWebSiteUI.Models
 
         public byte[] CreatedAt { get; set; }
 
-        public IEnumerable<ProductDTO> Products { get; set; }
+        public ProductDTO Product { get; set; }
 
     }
 }

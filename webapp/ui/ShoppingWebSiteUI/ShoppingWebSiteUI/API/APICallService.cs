@@ -30,11 +30,11 @@ namespace ShoppingWebSiteUI.API
         /// Gets the cart itemss.
         /// </summary>
         /// <returns>The cart itemss.</returns>
-        public async Task<IEnumerable<ProductDTO>> GetCartItems()
+        public async Task<IEnumerable<CartDTO>> GetCartItems()
         {
             Console.WriteLine("Fetching all items from Cart");// Read product list:
-            var products = await _client.GetProductsAsync();
-            return products;
+            var cartItems = await _client.GetCartItemsAsync();
+            return cartItems;
 
         }
 

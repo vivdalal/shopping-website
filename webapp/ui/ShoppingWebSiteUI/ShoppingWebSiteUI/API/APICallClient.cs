@@ -47,7 +47,32 @@ namespace ShoppingWebSiteUI.API
             }
 
         }
-        
+
+
+        public async Task<IEnumerable<CartDTO>> GetCartItemsAsync(string username)
+        {
+            using (var client = CreateClient("api", "cart"))
+            {
+                HttpResponseMessage response;
+                response = client.GetAsync(client.BaseAddress, username ).Result;
+                //var result = response.Content.ReadAsAsync<IEnumerable<Student>>().Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var avail = await response.Content.ReadAsStringAsync()
+                        .ContinueWith<IEnumerable<CartDTO>>(postTask =>
+                        {
+                            return JsonConvert.DeserializeObject<IEnumerable<CartDTO>>(postTask.Result);
+                        });
+                    return avail;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+
         public async Task<HttpStatusCode> AddProductToCart(CartDTO cart)
         {
             using (var client = CreateClient("api", "cart"))
