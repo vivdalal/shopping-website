@@ -60,3 +60,9 @@
     margin-top: 100px;
     margin-left: -194px;
 }
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
