@@ -71,7 +71,38 @@ namespace ShoppingWebSiteUI.API
 
         public async Task<HttpStatusCode> PerformLogin(User user)
         {
+            if (string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.Password))
+            {
+                return HttpStatusCode.BadRequest;
+            }
+
             using (var client = CreateClient("api", "login"))
+            {
+                try
+                {
+                    var content = JsonConvert.SerializeObject(user);
+                    HttpContent body = new StringContent(content, System.Text.Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await client.PostAsync(client.BaseAddress, body);
+
+                    return response.StatusCode;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new Exception("Something went wrong while validating user credentials");
+                }
+            }
+        }
+
+        public async Task<HttpStatusCode> RegisterUser(User user)
+        {
+            if (string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.Password))
+            {
+                return HttpStatusCode.BadRequest;
+            }
+
+            using (var client = CreateClient("api", "register"))
             {
                 try
                 {

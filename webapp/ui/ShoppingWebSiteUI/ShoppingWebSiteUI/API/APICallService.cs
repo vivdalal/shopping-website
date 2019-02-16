@@ -39,14 +39,23 @@ namespace ShoppingWebSiteUI.API
         }
 
         /// <summary>
-        /// Dos the login.
+        /// Does the login.
         /// </summary>
         /// <returns>The login.</returns>
-        /// <param name="username">Username.</param>
-        /// <param name="password">Password.</param>
+        /// <param name="user">The user instance.</param>
         public async Task<HttpStatusCode> DoLogin(User user)
         {
             return await _client.PerformLogin(user);
+        }
+
+        /// <summary>
+        /// Dos the login.
+        /// </summary>
+        /// <returns>The status code of registration.</returns>
+        /// <param name="user">The user to be registered.</param>
+        public async Task<HttpStatusCode> DoRegister(User user)
+        {
+            return await _client.RegisterUser(user);
         }
 
     }

@@ -22,9 +22,9 @@ namespace ShoppingWebSiteUI.Controllers
         }
 
         /// <summary>
-        /// Index this instance.
+        /// Get the login view
         /// </summary>
-        /// <returns>The index.</returns>
+        /// <returns>The Login view</returns>
         [HttpGet]
         [Route("Login")]
         public IActionResult Login()
@@ -38,6 +38,20 @@ namespace ShoppingWebSiteUI.Controllers
             }
 
             return Redirect("/ListItems");
+        }
+
+        /// <summary>
+        /// Get the Register view
+        /// </summary>
+        /// <returns>The Register form view</returns>
+        [HttpGet]
+        [Route("Register")]
+        public IActionResult Register()
+        {
+            ViewBag.ShouldShowError = false;
+            ViewBag.UserAlreadyExists = false;
+            HttpContext.Session.Remove("username");
+            return View("Register", new User());
         }
 
         /// <summary>
@@ -62,6 +76,35 @@ namespace ShoppingWebSiteUI.Controllers
         }
 
         /// <summary>
+        /// Registers the specified user.
+        /// </summary>
+        /// <returns>The login.</returns>
+        /// <param name="user">User.</param>
+        [HttpPost]
+        [Route("Register")]
+        public IActionResult Register([FromForm] User user)
+        {
+            HttpStatusCode result = _apiCallService.DoRegister(user).Result;
+            ViewBag.ShouldShowError = false;
+            ViewBag.UserAlreadyExists = false;
+
+            if (result == HttpStatusCode.Conflict)
+            {
+                ViewBag.UserAlreadyExists = true;
+                return View("Register", user);
+            }
+
+            if (result == HttpStatusCode.Created)
+            {
+                HttpContext.Session.SetString("username", user.Username);
+                return Redirect("/ListItems");                
+            }
+
+            ViewBag.ShouldShowError = true;
+            return View("Register", user);
+        }
+
+        /// <summary>
         /// Login the specified user.
         /// </summary>
         /// <returns>The login.</returns>
@@ -71,7 +114,7 @@ namespace ShoppingWebSiteUI.Controllers
         public IActionResult Logout()
         {
             //Setting the username in the session to null
-            HttpContext.Session.SetString("username", null);
+            HttpContext.Session.Remove("username");
             //Take the user to login screen
             ViewBag.ShouldShowError = false;
             return View("Login", new User());
