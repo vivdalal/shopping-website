@@ -6,6 +6,8 @@ namespace ShoppingWebSiteUI.Models
     public class CartDTO
     {
 
+
+
         public int Id { get; set; }
 
         public int Quantity { get; set; }

@@ -74,7 +74,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <img src="images/@item.ImageUrl" class="card-img-top" />
-                    <div class="card-body">
+                    <div class="card-body" data-id=@item.Id>
                         <h5>@item.Name</h5>
                         <h5>$@item.Price</h5>
                         <div class="input-group input-group-sm mb-3">
@@ -83,7 +83,7 @@
                             </div>
                             <input type="text" class="form-control" aria-label="Quantity" aria-describedby="inputGroup-sizing-sm" onkeypress='validate(event)'>
                         </div>
-                        <button class="btn btn-danger" onclick="updateCart(event)">
+                        <button class="btn btn-danger" onclick='updateCart(event)'>
                             <i class="fa fa-cart-plus" aria-hidden="true">
                                 Add to Cart
                             </i>
@@ -409,7 +409,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <img src="images/starsblue.png" class="card-img-top" alt="media" />
-                    <div class="card-body" data-id="78">
+                    <div class="card-body" >
                         <h4>Denim Shirt</h4>
                         <h6>$25.00</h6>
                         <input type="number" min="0" max="100" />

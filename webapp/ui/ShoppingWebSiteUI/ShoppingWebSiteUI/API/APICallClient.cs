@@ -48,7 +48,7 @@ namespace ShoppingWebSiteUI.API
 
         }
         
-        public System.Net.HttpStatusCode AddProductToCart(ProductDTO student)
+        public System.Net.HttpStatusCode AddProductToCart(CartDTO cart)
         {
             using (var client = CreateClient("api", "cart"))
             {
@@ -56,7 +56,7 @@ namespace ShoppingWebSiteUI.API
                 try
                 {
                     //response = client.PostAsJsonAsync(client.BaseAddress, company).Result;
-                    var output = JsonConvert.SerializeObject(student);
+                    var output = JsonConvert.SerializeObject(cart);
                     HttpContent contentPost = new StringContent(output, System.Text.Encoding.UTF8, "application/json");
                     response = client.PostAsync(client.BaseAddress, contentPost).Result;
                 }

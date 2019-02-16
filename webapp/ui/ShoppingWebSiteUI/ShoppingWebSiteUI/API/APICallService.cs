@@ -12,7 +12,7 @@ namespace ShoppingWebSiteUI.API
 
         public APICallService()
         {
-            _client = new APICallClient("http://localhost:3000");
+            _client = new APICallClient("http://localhost:5000");
         }
         /// <summary>
         /// Gets all products.
@@ -36,6 +36,11 @@ namespace ShoppingWebSiteUI.API
             var products = await _client.GetProductsAsync();
             return products;
 
+        }
+
+        public async Task<HttpStatusCode> AddToCart(CartDTO cart)
+        {
+            return _client.AddProductToCart(cart);
         }
 
         /// <summary>
