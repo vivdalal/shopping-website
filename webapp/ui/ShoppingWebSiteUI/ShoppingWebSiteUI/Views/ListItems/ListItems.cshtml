@@ -110,7 +110,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <img src="images/@item.ImageUrl" class="card-img-top" height="280" />
-                    <div class="card-body">
+                    <div class="card-body" data-id=@item.Id>
                         <h5>@item.Name</h5>
                         <h5>$@item.Price</h5>
                         <div class="input-group input-group-sm mb-3">
@@ -148,7 +148,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <img src="images/@item.ImageUrl" class="card-img-top" height="280" />
-                    <div class="card-body">
+                    <div class="card-body" data-id=@item.Id>
                         <h5>@item.Name</h5>
                         <h5>$@item.Price</h5>
                         <div class="input-group input-group-sm mb-3">
@@ -186,7 +186,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <img src="images/@item.ImageUrl" class="card-img-top" height="225" width="225" />
-                    <div class="card-body">
+                    <div class="card-body" data-id=@item.Id>
                         <h5>@item.Name</h5>
                         <h5>$@item.Price</h5>
                         <div class="input-group input-group-sm mb-3">
@@ -222,7 +222,7 @@
                 @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Shirts")){
                     <div class="media mt-5">
                         <img src="images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
-                        <div class="media-body mt-2">
+                        <div class="media-body mt-2" data-id=@item.Id>
                             <h5>@item.Name</h5>
                             <h6>$@item.Price</h6>
                             <div class="input-group input-group-sm mb-3">
@@ -252,7 +252,7 @@
                 @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Trousers")){
                     <div class="media mt-5">
                         <img src = "images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
-                        <div class="media-body mt-2">
+                        <div class="media-body mt-2" data-id=@item.Id>
                             <h5>@item.Name</h5>
                             <h6>$@item.Price</h6>
                             <div class="input-group input-group-sm mb-3">
@@ -282,7 +282,7 @@
                 @foreach (var item in ((List<Product>)@ViewBag.Products).Where(_ => _.Category == "Socks")){
                     <div class="media mt-5">
                         <img src="images/@item.ImageUrl" class="img-fluid mr-3" alt="media-img" />
-                        <div class="media-body mt-2">
+                        <div class="media-body mt-2" data-id=@item.Id>
                             <h5>@item.Name</h5>
                             <h6>$@item.Price</h6>
                             <div class="input-group input-group-sm mb-3">
@@ -305,62 +305,7 @@
 </div>
 
 
-<div class="container mt-5">
-    <div class="row">
-        <h4>From the Blog</h4>
-    </div>
-    <div class="row">
-        <div class="underline"></div>
-    </div>
-</div>
 
-<div class="container pb-5 blog">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="media mt-5">
-                <img src="images/starsblue.png" class="img-fluid mr-3" alt="media1" />
-                <div class="media-body">
-                    <h5>Some Text</h5>
-                    <p>Some text description</p>
-                    <p><i class="fa fa-user" aria-hidden="true"></i> Some more description</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="media mt-5">
-                <img src="images/starsblue.png" class="img-fluid mr-3" alt="media1" />
-                <div class="media-body">
-                    <h5>Some Text</h5>
-                    <p>Some text description</p>
-                    <p><i class="fa fa-user" aria-hidden="true"></i> Some more description</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="media mt-5">
-                <img src="images/starsblue.png" class="img-fluid mr-3" alt="media1" />
-                <div class="media-body">
-                    <h5>Some Text</h5>
-                    <p>Some text description</p>
-                    <p><i class="fa fa-user" aria-hidden="true"></i> Some more description</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="media mt-5">
-                <img src="images/starsblue.png" class="img-fluid mr-3" alt="media1" />
-                <div class="media-body">
-                    <h5>Some Text</h5>
-                    <p>Some text description</p>
-                    <p><i class="fa fa-user" aria-hidden="true"></i> Some more description</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div class="container-fluid pt-5 pb-5 bg-light-gray">
     <div class="container">
@@ -378,7 +323,7 @@
                 <div class="col-md-3">
                     <div class="card">
                         <img src="images/@item.ImageUrl" class="card-img-top" />
-                        <div class="card-body">
+                        <div class="card-body" data-id=@item.Id>
                             <h5>@item.Name</h5>
                             <h5>$@item.Price</h5>
                             <div class="input-group input-group-sm mb-3">
