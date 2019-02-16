@@ -15,5 +15,14 @@ namespace ShoppingWebSiteUI.Controllers
         {
             return Redirect("/Auth/Login");
         }
+
+        /// <summary>
+        /// This crashes the website
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Crash()
+        {
+            throw new Exception();
+        }
     }
 }

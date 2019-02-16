@@ -36,12 +36,12 @@
 
         <div class="container-fluid bg-dark header-top d-none d-md-block">
             <div class="container">
-                <div class="row text-light pt-2 pb-2">
+                <div class="row text-light pt-2 pb-2 pr-md-3">
                     <div class="col-md-5">
                         <i class="fa fa-envelope-o" aria-hidden="true"></i>
                         Welcome <i>@ViewBag.Username</i>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5">
 
                     </div>
                     <div class="col-md-1"><button class="btn  btn-success" onclick='checkoutCart(this)'> My Cart </button></div>
@@ -55,22 +55,24 @@
         </div>
 
         <footer>
-            <div class="footer container-fluid pt-5 bg-dark text-light">
+            <div class="footer container-fluid pt-5 pb-5 bg-dark text-light">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="row">
-                                <h5>Meta</h5>
+                                <h5>Account</h5>
                             </div>
                             <div class="row mb-4">
                                 <div class="underline bg-light" style="width: 50px"></div>
                             </div>
-                            <p><i class="fa fa-chevron-right" aria-hidden="true"></i> Register </p>
-                            <p><i class="fa fa-chevron-right" aria-hidden="true"></i> Login </p>
-                            <p><i class="fa fa-chevron-right" aria-hidden="true"></i> Comments </p>
+                            <a href="/auth/login" class="text-white"><i class="fa fa-chevron-right" aria-hidden="true"></i> Login </a>
+                            <br />
+                            <a href="/auth/register" class="text-white"><i class="fa fa-chevron-right" aria-hidden="true"></i> Register </a>
+                            <br />
+                            <a href="/home/crash" class="text-white"><i class="fa fa-chevron-right" aria-hidden="true"></i> Don't click me </a>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="row">
                                 <h5>Recent Posts</h5>
                             </div>
@@ -81,7 +83,7 @@
                                 <div class="media">
                                     <img src="/images/starsblue.png" class="img-fluid" alt="media-image" />
                                     <div class="media-body ml-2">
-                                        <h6>Some random text again!!!!</h6>
+                                        <h6>New brands are now available. Shop now!</h6>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +98,7 @@
                                 <div class="underline bg-light" style="width: 50px"></div>
                             </div>
                             <div class="row">
-                                <p>Some random paragraph text</p>
+                                <p>Shop with a single click!</p>
                             </div>
                         </div>
 
