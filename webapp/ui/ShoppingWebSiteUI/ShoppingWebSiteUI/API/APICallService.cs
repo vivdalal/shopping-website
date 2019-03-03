@@ -12,7 +12,7 @@ namespace ShoppingWebSiteUI.API
 
         public APICallService()
         {
-            _client = new APICallClient("http://localhost:5000");
+            _client = new APICallClient("http://shoppingwebapi6.azurewebsites.net");
         }
         /// <summary>
         /// Gets all products.
