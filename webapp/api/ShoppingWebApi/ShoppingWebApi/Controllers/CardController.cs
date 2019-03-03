@@ -26,25 +26,26 @@ namespace ShoppingWebApi.Controllers
         {
             _context.Card.Add(card);
             await _context.SaveChangesAsync();
-            return Created("", new { id = card.Id });
+            return Created("", new { card = card });
         }
 
 
         // GET: api/Card/{userId}
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OrderDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("{userId}")]
-        public ActionResult GetCardsForUser(int userId)
+        [HttpGet("{username}")]
+        public ActionResult GetCardsForUser(string username)
         {
             var cards = from c in _context.Card
-                        where c.UserId == userId
+                        where c.Username == username
                        select new CardDTO()
                         {
-                            Id = c.Id,
                             CardNo = c.CardNo,
                             CVV = c.CVV,
-                            UserId = c.UserId,
-                            CreatedAt = c.CreatedAt
+                            Username = c.Username,
+                            CardName = c.CardName,
+                            Expiry = c.Expiry
+
                         };
 
             if (cards == null)

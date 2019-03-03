@@ -17,16 +17,18 @@ namespace ShoppingWebApi.Models
         [Column("cvv")]
         public int CVV { get; set; }
 
-        [Timestamp]
-        [Column("created_at")]
-        public byte[] CreatedAt { get; set; }
+        [Required]
+        [Column("expiry")]
+        public string Expiry { get; set; }
+
+        [Required]
+        [Column("card_name")]
+        public string CardName { get; set; }
 
         // Foreign keys
         [Required]
-        [Column("user_id")]
-        public int UserId { get; set; }
+        [Column("username")]
+        public string Username { get; set; }
 
-        // Navigation
-        public User User { get; set; }
     }
 }
