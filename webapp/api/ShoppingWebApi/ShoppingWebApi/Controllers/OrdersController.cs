@@ -53,7 +53,6 @@ namespace ShoppingWebApi.Controllers
         {
             _context.Order.Add(order);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetOrder", new { id = order.Id }, new { message = "Success" });
         }
     }
