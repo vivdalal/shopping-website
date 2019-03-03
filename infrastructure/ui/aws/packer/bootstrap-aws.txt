@@ -1,0 +1,47 @@
+<powershell> 
+
+Write-Host "Installing OpenSSH for windows"
+Get-WindowsCapability -Online | ? Name -like 'OpenSSH*'
+
+Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+
+Write-Host "Installing IIS service"
+Import-Module ServerManager 
+Install-WindowsFeature -name Web-Server -IncludeManagementTools
+
+Write-Host "Adding public key to ssh from instance's metadata to authorized_keys"
+Write-Host "Public key is oberseved using Amazon's metadata service"
+$keyPath = "~\.ssh\authorized_keys"
+$keyUrl = "http://169.254.169.254/latest/meta-data/public-keys/0/openssh-key"
+New-Item -Type Directory ~\.ssh > $null
+$ErrorActionPreference = 'SilentlyContinue'
+Do {
+	Start-Sleep 1
+	Invoke-WebRequest $keyUrl -UseBasicParsing -OutFile $keyPath
+} While ( -Not (Test-Path $keyPath) )
+$ErrorActionPreference = 'Stop'
+
+Write-Host "Start ssh service and set it to start up automatically"
+Start-Service sshd
+Set-Service -Name sshd -StartupType 'Automatic'
+
+Write-Host "The firewall rule used by ssh"
+Get-NetFirewallRule -Name *ssh*
+
+Write-Host "Make powershell as the default shell"
+New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
+
+Write-Host "Set ssh config to use key pair as authorization approach"
+Set-Content C:\ProgramData\ssh\sshd_config "AuthorizedKeysFile .ssh/authorized_keys"
+Add-Content C:\ProgramData\ssh\sshd_config "`nSubsystem sftp sftp-server.exe"
+Add-Content C:\ProgramData\ssh\sshd_config "`nPubkeyAcceptedKeyTypes ssh-ed25519*,ssh-rsa*,ssh-dss*,ecdsa-sha2*"
+Add-Content C:\ProgramData\ssh\sshd_config "`nPasswordAuthentication no"
+Add-Content C:\ProgramData\ssh\sshd_config "`nUseDNS no"
+
+Write-Host "Create the temp directory for packer to provision file"
+New-Item -ItemType directory -Path C:\temp
+
+Write-Host "Restart computer, otherwise strange errors"
+Restart-Computer -force
+</powershell>
