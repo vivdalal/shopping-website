@@ -9,10 +9,11 @@ namespace ShoppingWebApi.Models
 
         public int CVV { get; set; }
 
-        public byte[] CreatedAt { get; set; }
+        public String Expiry { get; set; }
 
-        public int UserId { get; set; }
+        public String CardName { get; set; }
 
-        public User User { get; set; }
+        public string Username { get; set; }
+
     }
 }
