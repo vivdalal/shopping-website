@@ -21,39 +21,61 @@ namespace ShoppingWebApi.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<ActionResult<Card>> saveCardDetails([FromBody] Card card)
         {
-            _context.Card.Add(card);
-            await _context.SaveChangesAsync();
-            return Created("", new { card = card });
+            try
+            {
+                _context.Card.Add(card);
+                await _context.SaveChangesAsync();
+                return Created("", new { card = card });
+            }catch(Exception e)
+            {
+                Console.WriteLine("Something went wrong. Please check exception trace. " + e.Message);
+                return StatusCode(500);
+            }
+
         }
 
 
         // GET: api/Card/{userId}
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OrderDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{username}")]
         public ActionResult GetCardsForUser(string username)
         {
-            var cards = from c in _context.Card
-                        where c.Username == username
-                       select new CardDTO()
-                        {
-                            CardNo = c.CardNo,
-                            CVV = c.CVV,
-                            Username = c.Username,
-                            CardName = c.CardName,
-                            Expiry = c.Expiry
 
-                        };
-
-            if (cards == null)
+            try
             {
-                return NotFound();
+                var cards = from c in _context.Card
+                            where c.Username == username
+                            select new CardDTO()
+                            {
+                                CardNo = c.CardNo,
+                                CVV = c.CVV,
+                                Username = c.Username,
+                                CardName = c.CardName,
+                                Expiry = c.Expiry
+
+                            };
+
+                if (cards == null)
+                {
+                    Console.WriteLine("No records returned for the username : " + username);
+                    return NotFound();
+                }
+
+                return Ok(cards);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Something went wrong. Please check exception trace. " + e.Message);
+                return StatusCode(500);
             }
 
-            return Ok(cards);
+
         }
     }
 }
