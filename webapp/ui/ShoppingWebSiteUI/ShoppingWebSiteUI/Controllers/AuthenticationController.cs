@@ -4,21 +4,25 @@ using Microsoft.AspNetCore.Http;
 using ShoppingWebSiteUI.Models;
 using ShoppingWebSiteUI.API;
 using System.Net;
+using Microsoft.Extensions.Logging;
 
 namespace ShoppingWebSiteUI.Controllers
 {
     [Route("Auth")]
     public class AuthenticationController : Controller
     {
-        private APICallService _apiCallService;
+        private readonly APICallService _apiCallService;
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:ShoppingWebSiteUI.Controllers.AuthenticationController"/> class.
         /// </summary>
         /// <param name="apiCallService">API call service shared instance.</param>
-        public AuthenticationController(APICallService apiCallService)
+        /// <param name="logger">The logger for logging events</param>
+        public AuthenticationController(APICallService apiCallService, ILogger<AuthenticationController> logger)
         {
             _apiCallService = apiCallService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -33,6 +37,7 @@ namespace ShoppingWebSiteUI.Controllers
 
             if (loggedInUser == null)
             {
+                _logger.LogInformation("User is not authorized. Redirecting to Login page.");
                 ViewBag.ShouldShowError = false;
                 return View("Login", new User());
             }
@@ -63,14 +68,17 @@ namespace ShoppingWebSiteUI.Controllers
         [Route("Login")]
         public IActionResult Login([FromForm] User user)
         {
+            _logger.LogInformation("Authenticating user: {USERNAME}", user.Username);
             HttpStatusCode result = _apiCallService.DoLogin(user).Result;
 
             if (result != HttpStatusCode.OK)
             {
+                _logger.LogInformation("Authentication failed for user: {USERNAME}", user.Username);
                 ViewBag.ShouldShowError = true;
                 return View("Login", user);
             }
 
+            _logger.LogInformation("Authenticated user: {USERNAME}", user.Username);
             HttpContext.Session.SetString("username", user.Username);
             return Redirect("/ListItems");
         }
@@ -96,6 +104,8 @@ namespace ShoppingWebSiteUI.Controllers
 
             if (result == HttpStatusCode.Created)
             {
+                _logger.LogInformation("Created user: {USERNAME}", user.Username);
+                _logger.LogInformation("Authenticated user: {USERNAME}", user.Username);
                 HttpContext.Session.SetString("username", user.Username);
                 return Redirect("/ListItems");                
             }
@@ -108,15 +118,18 @@ namespace ShoppingWebSiteUI.Controllers
         /// Login the specified user.
         /// </summary>
         /// <returns>The login.</returns>
-        /// <param name="user">User.</param>
         [HttpGet]
         [Route("Logout")]
         public IActionResult Logout()
         {
+            string username = HttpContext.Session.GetString("username");
+
             //Setting the username in the session to null
             HttpContext.Session.Remove("username");
             //Take the user to login screen
             ViewBag.ShouldShowError = false;
+
+            _logger.LogInformation("Authenticating user: {USERNAME}", username);
             return View("Login", new User());
         }
 

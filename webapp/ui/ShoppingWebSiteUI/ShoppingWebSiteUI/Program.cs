@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace ShoppingWebSiteUI
 {
@@ -13,6 +14,7 @@ namespace ShoppingWebSiteUI
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseUrls("http://localhost:5050")
+                .ConfigureLogging(logging => logging.ClearProviders())
                 .UseStartup<Startup>();
     }
 }

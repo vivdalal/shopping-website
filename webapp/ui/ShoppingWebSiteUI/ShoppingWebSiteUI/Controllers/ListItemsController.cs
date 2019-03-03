@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ShoppingWebSiteUI.API;
 using ShoppingWebSiteUI.Models;
 
@@ -16,9 +17,12 @@ namespace ShoppingWebSiteUI.Controllers
     {
         private APICallService _aPICallService;
 
-        public ListItemsController(APICallService aPICallService)
+        private ILogger _logger;
+
+        public ListItemsController(APICallService aPICallService, ILogger<ListItemsController> logger)
         {
             _aPICallService = aPICallService;
+            _logger = logger;
         }
         // GET: /<controller>/
         public IActionResult Index()
@@ -34,13 +38,14 @@ namespace ShoppingWebSiteUI.Controllers
         public IActionResult onGet()
         {
             //Get the product catalogue from the API
-
             //Will handle the HTTP status code error and push again.
             IEnumerable<Product> products = _aPICallService.GetAllProducts().Result;
             string username = HttpContext.Session.GetString("username");
             ViewBag.Username = username ?? "User";
-            ViewBag.Products = products; 
-            //var sessionData = HttpContext.Session.GetString("keyname");
+            ViewBag.Products = products;
+
+            _logger.LogInformation("User {USERNAME} visited product list page", username);
+
             return View("ListItems");
         }
 

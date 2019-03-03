@@ -2,10 +2,51 @@
     ViewData["Title"] = "My Shopping Cart";
 }
 
-@using System.Linq
-
-
 <div class="wrapper">
+    <div id="submitOrderModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Place Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/Success">
+                        
+                        <div class="form-group">
+                            <label for="cardNameField">Name on the card</label>
+                            <input type="text" class="form-control" id="cardNameField" name="cardName" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNumberField">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumberField" name="cardNumber" placeholder="" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="monthField">Expiry</label>
+                            <input type="month" class="form-control" id="monthField" name="expiry" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvvField">CVV</label>
+                            <input type="password" class="form-control" id="cvvField" name="cvv" required maxlength="3">
+                        </div>
+                        <div class="form-group">
+                            <label>Accepted Payments</label>
+                            <div>
+                                <i class="fa fa-cc-visa" style="color:navy; font-size: 24px;"></i>
+                                <i class="fa fa-cc-amex" style="color:blue; font-size: 24px;"></i>
+                                <i class="fa fa-cc-mastercard" style="color:red; font-size: 24px;"></i>
+                                <i class="fa fa-cc-discover" style="color:orange; font-size: 24px;"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary float-right ml-2">Place Order</button>
+                        <button type="button" class="btn btn-secondary float-right ml-2" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -16,7 +57,7 @@
             <div class="col-md-12">
                 <div align="right" style="margin-bottom: 30px;">
                     <a href="/ListItems" class="btn">Back to Shopping</a>
-                    <a href="/Success" class="btn btn-success">Checkout</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#submitOrderModal">Checkout</button>
                 </div>
             </div>
             <div class="col-md-12">
@@ -33,21 +74,19 @@
                         @foreach (var item in ((List<Cart>)@ViewBag.CartItems))
                         {
                             <tr>
-                                <td width="80"><img src="images/@item.Product.ImageUrl" height="60"</td>
+                                <td width="80"><img src="images/@item.Product.ImageUrl" height="60" /></td>
                                 <td style="vertical-align: middle;">@item.Product.Name</td>
                                 <td style="vertical-align: middle;">@item.Product.Price</td>
-                                <td
                                 <td style="vertical-align: middle;" width="80">@item.Quantity</td>
                             </tr>
                         }
-
                     </tbody>
                 </table>
             </div>
             <div class="col-md-12">
                 <div align="right" style="margin-bottom: 30px;">
                     <a href="/ListItems" class="btn">Back to Shopping</a>
-                    <a href="/Success" class="btn btn-success">Checkout</a>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#submitOrderModal">Checkout</button>
                 </div>
             </div>
         </div>

@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ShoppingWebSiteUI.API;
 using ShoppingWebSiteUI.Models;
 
@@ -15,12 +16,14 @@ namespace ShoppingWebSiteUI.Controllers
     {
         private readonly APICallService _aPICallService;
 
-        public CartController(APICallService aPICallService)
+        private readonly ILogger _logger;
+
+        public CartController(APICallService aPICallService, ILogger<CartController> logger)
         {
             _aPICallService = aPICallService;
+            _logger = logger;
         }
         
-        // The resulting output will be a JSON string: {"p":"Hello","q":"World"}
         [Route("ShoppingCart")]
         public IActionResult onPost()
         {
@@ -30,6 +33,9 @@ namespace ShoppingWebSiteUI.Controllers
             //IEnumerable<Cart> cartItems = new List<Cart>();
             ViewBag.Username = username ?? "";
             ViewBag.CartItems = cartItems;
+
+            _logger.LogInformation("User {USERNAME} visited cart page.", username);
+
             return View("MyShoppingCart");
         }
 
@@ -38,6 +44,9 @@ namespace ShoppingWebSiteUI.Controllers
         public async Task<HttpStatusCode> onPost([FromBody] CartItem cartItem)
         {
             cartItem.Username = HttpContext.Session.GetString("username");
+
+            // Logging the products
+            _logger.LogInformation("User {USERNAME} added Product ID: {PRODUCT} ({QUANTITY}) to cart", cartItem.Username, cartItem.ProductId, cartItem.Quantity);
 
             return await _aPICallService.AddToCart(cartItem);
 
@@ -66,7 +75,6 @@ namespace ShoppingWebSiteUI.Controllers
         [HttpGet]
         public IActionResult onSuccess()
         {
-
             //Deleting the cart items when the user hits the checkout button
             string username = HttpContext.Session.GetString("username");
             HttpStatusCode status = _aPICallService.DeleteCartItems(username).Result;
@@ -78,9 +86,6 @@ namespace ShoppingWebSiteUI.Controllers
             {
                 return StatusCode(500);
             }
-
-
-
         }
     }
 }
