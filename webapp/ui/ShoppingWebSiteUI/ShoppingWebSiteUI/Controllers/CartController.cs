@@ -30,9 +30,11 @@ namespace ShoppingWebSiteUI.Controllers
             string username = HttpContext.Session.GetString("username");
 
             IEnumerable<Cart> cartItems = _aPICallService.GetCartItems(username).Result;
-            //IEnumerable<Cart> cartItems = new List<Cart>();
+            IEnumerable<Card> cards = _aPICallService.GetCards(username).Result;
+
             ViewBag.Username = username ?? "";
             ViewBag.CartItems = cartItems;
+            ViewBag.Cards = cards;
 
             _logger.LogInformation("User {USERNAME} visited cart page.", username);
 
@@ -72,8 +74,8 @@ namespace ShoppingWebSiteUI.Controllers
 
 
         [Route("Success")]
-        [HttpGet]
-        public IActionResult onSuccess()
+        [HttpPost]
+        public IActionResult onSuccess([FromBody] Card card)
         {
             //Deleting the cart items when the user hits the checkout button
             string username = HttpContext.Session.GetString("username");

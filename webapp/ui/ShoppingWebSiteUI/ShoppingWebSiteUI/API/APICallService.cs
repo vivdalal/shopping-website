@@ -39,6 +39,18 @@ namespace ShoppingWebSiteUI.API
         }
 
         /// <summary>
+        /// Gets all the cards for this user
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>The list of all cards</returns>
+        public async Task<IEnumerable<Card>> GetCards(string username)
+        {
+            var cards = await _client.GetCardsAsync(username);
+            return cards;
+
+        }
+
+        /// <summary>
         /// Adds to cart.
         /// </summary>
         /// <returns>The to cart.</returns>

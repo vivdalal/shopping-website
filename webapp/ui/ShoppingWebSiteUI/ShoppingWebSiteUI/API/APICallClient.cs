@@ -73,6 +73,30 @@ namespace ShoppingWebSiteUI.API
             }
         }
 
+        public async Task<IEnumerable<Card>> GetCardsAsync(string username)
+        {
+            using (var client = CreateClient("api", "card"))
+            {
+                HttpResponseMessage response;
+                Uri uri = new Uri(client.BaseAddress.OriginalString + "/" + username);
+
+                response = client.GetAsync(uri).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var avail = await response.Content.ReadAsStringAsync()
+                        .ContinueWith<IEnumerable<Card>>(postTask =>
+                        {
+                            return JsonConvert.DeserializeObject<IEnumerable<Card>>(postTask.Result);
+                        });
+                    return avail;
+                }
+                else
+                {
+                    return [];
+                }
+            }
+        }
+
         public async Task<HttpStatusCode> DeleteCartItems(string username)
         {
             using (var client = CreateClient("api", "cart"))
@@ -108,6 +132,28 @@ namespace ShoppingWebSiteUI.API
                 {
                     //response = client.PostAsJsonAsync(client.BaseAddress, company).Result;
                     var output = JsonConvert.SerializeObject(cartItem);
+                    HttpContent contentPost = new StringContent(output, System.Text.Encoding.UTF8, "application/json");
+                    response = await client.PostAsync(client.BaseAddress, contentPost);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw new Exception("Something went wrong while validating user credentials");
+                }
+                return response.StatusCode;
+            }
+
+        }
+
+        public async Task<HttpStatusCode> AddCardForTheUser(Card card)
+        {
+            using (var client = CreateClient("api", "card"))
+            {
+                HttpResponseMessage response = null;
+                try
+                {
+                    //response = client.PostAsJsonAsync(client.BaseAddress, company).Result;
+                    var output = JsonConvert.SerializeObject(card);
                     HttpContent contentPost = new StringContent(output, System.Text.Encoding.UTF8, "application/json");
                     response = await client.PostAsync(client.BaseAddress, contentPost);
                 }

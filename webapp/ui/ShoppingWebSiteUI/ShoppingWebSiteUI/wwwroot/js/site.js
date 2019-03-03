@@ -62,3 +62,15 @@ function logout(element) {
         }
     });
 }
+
+function cardSelected(card) {
+    let cardNumber = $('#cardNumberField');
+    let cardName = $('#cardNameField');
+    let expiry = $('#expiryField');
+    let cvv = $('#cvvField');
+
+    cardNumber.val(card.cardNo);
+    cardName.val(card.cardName);
+    expiry.val(card.expiry);
+    cvv.val(card.cvv);
+}
