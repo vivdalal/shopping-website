@@ -9,5 +9,7 @@
         public string Expiry { get; set; }
 
         public string CardName { get; set; }
+
+        public string Username { get; set; }
     }
 }

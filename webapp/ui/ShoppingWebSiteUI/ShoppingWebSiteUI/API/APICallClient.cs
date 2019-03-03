@@ -92,7 +92,7 @@ namespace ShoppingWebSiteUI.API
                 }
                 else
                 {
-                    return [];
+                    return new List<Card>();
                 }
             }
         }

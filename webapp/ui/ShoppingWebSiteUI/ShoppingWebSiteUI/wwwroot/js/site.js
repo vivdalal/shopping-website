@@ -66,7 +66,7 @@ function logout(element) {
 function cardSelected(card) {
     let cardNumber = $('#cardNumberField');
     let cardName = $('#cardNameField');
-    let expiry = $('#expiryField');
+    let expiry = $('#monthField');
     let cvv = $('#cvvField');
 
     cardNumber.val(card.cardNo);

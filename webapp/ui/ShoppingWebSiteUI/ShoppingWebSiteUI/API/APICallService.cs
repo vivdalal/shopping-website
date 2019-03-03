@@ -51,6 +51,16 @@ namespace ShoppingWebSiteUI.API
         }
 
         /// <summary>
+        /// Adds the card for the user
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
+        public async Task<HttpStatusCode> AddToCards(Card card)
+        {
+            return await _client.AddCardForTheUser(card);
+        }
+
+        /// <summary>
         /// Adds to cart.
         /// </summary>
         /// <returns>The to cart.</returns>

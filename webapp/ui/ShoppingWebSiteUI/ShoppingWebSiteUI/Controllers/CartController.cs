@@ -75,10 +75,14 @@ namespace ShoppingWebSiteUI.Controllers
 
         [Route("Success")]
         [HttpPost]
-        public IActionResult onSuccess([FromBody] Card card)
+        public IActionResult onSuccess([FromForm] Card card)
         {
             //Deleting the cart items when the user hits the checkout button
             string username = HttpContext.Session.GetString("username");
+
+            card.Username = username;
+
+            HttpStatusCode savedCardStatus = _aPICallService.AddToCards(card).Result;
             HttpStatusCode status = _aPICallService.DeleteCartItems(username).Result;
             if(status == HttpStatusCode.OK)
             {
