@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ShoppingWebSiteUI.API;
 using ShoppingWebSiteUI.Models;
 
@@ -15,21 +16,28 @@ namespace ShoppingWebSiteUI.Controllers
     {
         private readonly APICallService _aPICallService;
 
-        public CartController(APICallService aPICallService)
+        private readonly ILogger _logger;
+
+        public CartController(APICallService aPICallService, ILogger<CartController> logger)
         {
             _aPICallService = aPICallService;
+            _logger = logger;
         }
         
-        // The resulting output will be a JSON string: {"p":"Hello","q":"World"}
         [Route("ShoppingCart")]
         public IActionResult onPost()
         {
             string username = HttpContext.Session.GetString("username");
 
             IEnumerable<Cart> cartItems = _aPICallService.GetCartItems(username).Result;
-            //IEnumerable<Cart> cartItems = new List<Cart>();
+            IEnumerable<Card> cards = _aPICallService.GetCards(username).Result;
+
             ViewBag.Username = username ?? "";
             ViewBag.CartItems = cartItems;
+            ViewBag.Cards = cards;
+
+            _logger.LogInformation("User {USERNAME} visited cart page.", username);
+
             return View("MyShoppingCart");
         }
 
@@ -38,6 +46,9 @@ namespace ShoppingWebSiteUI.Controllers
         public async Task<HttpStatusCode> onPost([FromBody] CartItem cartItem)
         {
             cartItem.Username = HttpContext.Session.GetString("username");
+
+            // Logging the products
+            _logger.LogInformation("User {USERNAME} added Product ID: {PRODUCT} ({QUANTITY}) to cart", cartItem.Username, cartItem.ProductId, cartItem.Quantity);
 
             return await _aPICallService.AddToCart(cartItem);
 
@@ -63,12 +74,15 @@ namespace ShoppingWebSiteUI.Controllers
 
 
         [Route("Success")]
-        [HttpGet]
-        public IActionResult onSuccess()
+        [HttpPost]
+        public IActionResult onSuccess([FromForm] Card card)
         {
-
             //Deleting the cart items when the user hits the checkout button
             string username = HttpContext.Session.GetString("username");
+
+            card.Username = username;
+
+            HttpStatusCode savedCardStatus = _aPICallService.AddToCards(card).Result;
             HttpStatusCode status = _aPICallService.DeleteCartItems(username).Result;
             if(status == HttpStatusCode.OK)
             {
@@ -78,9 +92,6 @@ namespace ShoppingWebSiteUI.Controllers
             {
                 return StatusCode(500);
             }
-
-
-
         }
     }
 }

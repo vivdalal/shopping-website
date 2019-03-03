@@ -21,16 +21,27 @@ namespace ShoppingWebApi.Controllers
         }
 
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<ActionResult<Card>> saveCardDetails([FromBody] Card card)
         {
             try
             {
-                _context.Card.Add(card);
-                await _context.SaveChangesAsync();
-                return Created("", new { card = card });
-            }catch(Exception e)
+                bool isExistingCard = _context.Card.Any(c => c.CardNo == card.CardNo);
+
+                if (isExistingCard)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    _context.Card.Add(card);
+                    await _context.SaveChangesAsync();
+                    return Created("", new { card = card });
+                }
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Something went wrong. Please check exception trace. " + e.Message);
                 return StatusCode(500);

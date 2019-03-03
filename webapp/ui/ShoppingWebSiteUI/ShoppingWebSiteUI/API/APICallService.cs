@@ -12,7 +12,7 @@ namespace ShoppingWebSiteUI.API
 
         public APICallService()
         {
-            _client = new APICallClient("https://shoppingwebapiservice.azurewebsites.net");
+            _client = new APICallClient("http://localhost:5000");
         }
         /// <summary>
         /// Gets all products.
@@ -36,6 +36,28 @@ namespace ShoppingWebSiteUI.API
             var cartItems = await _client.GetCartItemsAsync(username);
             return cartItems;
 
+        }
+
+        /// <summary>
+        /// Gets all the cards for this user
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>The list of all cards</returns>
+        public async Task<IEnumerable<Card>> GetCards(string username)
+        {
+            var cards = await _client.GetCardsAsync(username);
+            return cards;
+
+        }
+
+        /// <summary>
+        /// Adds the card for the user
+        /// </summary>
+        /// <param name="card"></param>
+        /// <returns></returns>
+        public async Task<HttpStatusCode> AddToCards(Card card)
+        {
+            return await _client.AddCardForTheUser(card);
         }
 
         /// <summary>
