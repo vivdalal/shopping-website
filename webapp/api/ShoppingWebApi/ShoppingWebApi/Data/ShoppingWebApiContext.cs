@@ -17,5 +17,7 @@ namespace ShoppingWebApi.Models
         public DbSet<ShoppingWebApi.Models.Cart> Cart { get; set; }
 
         public DbSet<ShoppingWebApi.Models.Order> Order { get; set; }
+
+        public DbSet<ShoppingWebApi.Models.Card> Card { get; set; }
     }
 }

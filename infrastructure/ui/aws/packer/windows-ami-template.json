@@ -1,0 +1,44 @@
+{
+    "variables": {    
+      "version": "1.0.0",
+      "name": "vivek",
+      "key-name" : ""
+    },
+    "builders": [
+      {
+        "type": "amazon-ebs",    
+        "region": "us-east-1",
+        "source_ami": "ami-0410d3d3bd6d555f4",
+        "instance_type": "t2.micro",
+        "ssh_username": "Administrator",
+        "ssh_keypair_name": "{{user `key-name`}}",
+        "ssh_private_key_file": "{{user `key-name`}}.pem",
+        "ssh_timeout": "30m",
+        "user_data_file": "bootstrap-aws.txt",
+        "ami_name": "my-website AMI-{{user `name`}}-{{timestamp}}"
+      }
+    ],
+    "provisioners": [
+      {
+        "type": "file",
+        "source": "./WebSite.zip",
+        "destination": "c:/Users/Administrator/Documents/WebSite.zip"
+      },
+      {
+        "type": "powershell",
+        "execute_command": "powershell -executionpolicy bypass {{ .Path }}",
+        "inline": [
+          "C:/ProgramData/Amazon/EC2-Windows/Launch/Scripts/InitializeInstance.ps1 -Schedule",
+          "C:/ProgramData/Amazon/EC2-Windows/Launch/Scripts/SysprepInstance.ps1 -NoShutdown"
+        ]
+      },
+      {
+        "type": "powershell",
+        "execute_command": "powershell -executionpolicy bypass {{ .Path }}",
+        "scripts": [
+          "./install-feature.ps1",
+          "./configure-website.ps1"
+        ]
+      }
+    ]
+  }
