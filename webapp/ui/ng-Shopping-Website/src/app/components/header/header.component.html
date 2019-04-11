@@ -1,0 +1,22 @@
+<div class="container-fluid bg-dark header-top d-none d-md-block">
+  <div class="container">
+    <div class="row text-light pt-2 pb-2 pr-md-3">
+      <div class="col-md-5" *ngIf="name as value; else elseBlock">
+        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+        Welcome <i>{{value}}</i>
+      </div>
+      <ng-template #elseBlock>
+        <div class="col-md-5">
+          {{title}}
+        </div>
+      </ng-template>
+      <div class="col-md-5"></div>
+      <div class="col-md-1" *ngIf="name">
+        <button class="btn  btn-success" onclick='showCart()'>Cart</button>
+      </div>
+      <div class="col-md-1" *ngIf="name">
+        <button class="btn btn-danger" onclick='doLogout()'>Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

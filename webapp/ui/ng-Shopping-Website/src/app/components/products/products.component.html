@@ -1,0 +1,20 @@
+<div>
+  <div *ngIf="products && products.length != 0; then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock>
+    <div>
+      No products found
+    </div>
+  </ng-template>
+  <ng-template #elseBlock>
+    <div class="product-list">
+      <app-product-card
+        *ngFor="let product of products"
+        img="{{product.imageUrl}}}"
+        name="{{product.name}}"
+        price="{{product.price}}"
+        id="product-{{product.id}}"
+      >
+      </app-product-card>
+    </div>
+  </ng-template>
+</div>
