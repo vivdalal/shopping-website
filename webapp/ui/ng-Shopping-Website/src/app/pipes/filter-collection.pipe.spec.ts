@@ -1,4 +1,4 @@
-import { FilterCollectionPipe } from './filter-collection.pipe';
+import {FilterCollectionPipe} from './filter-collection.pipe';
 
 describe('FilterCollectionPipe', () => {
   it('create an instance', () => {
