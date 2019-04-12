@@ -1,22 +1,25 @@
 .product-card {
   background-color: white;
   border-radius: 2px;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
   display: inline-block;
-  height: 100%;
   line-height: 18px;
   overflow: hidden;
   padding: 8px;
   position: relative;
   vertical-align: top;
+  margin: 0 12px 12px 0;
+  min-width: 170px;
+  max-width: 170px;
 
   > .thumbnail-section {
     margin-bottom: 12px;
 
     > .thumbnail-container {
       max-width: 250px;
-      padding-bottom: 100%;
-
+      padding-bottom: 213px;
+      margin: auto;
+      position: relative;
+      
       > .thumbnail-holder {
         position: absolute;
         top: 0;
@@ -29,13 +32,20 @@
   }
 
   > .price-section {
-    margin-top: 4px;
+    margin: 4px 0;
     letter-spacing: 0.1px;
+    font-size: 12px;
+    color: #888;
 
     > .price-text {
+      color: #525252;
       font-size: 16px;
       font-weight: bold;
       line-height: 16px;
     }
+  }
+
+  > .cart-action-section {
+    margin: 4px 0;
   }
 }

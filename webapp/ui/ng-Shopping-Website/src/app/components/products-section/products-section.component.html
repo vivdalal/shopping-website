@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="container pt-5">
+    <div class="row">
+      <h3>{{name}}</h3>
+    </div>
+    <div class="underline"></div>
+  </div>
+</div>
+<div *ngIf="products && !products.length; then emptyTemplate else productListTemplate"></div>
+<ng-template #emptyTemplate>
+  <div>
+    No products found
+  </div>
+</ng-template>
+<ng-template #productListTemplate>
+  <div class="product-list">
+    <app-product-card
+      *ngFor="let product of products"
+      img="{{product.imageUrl}}}"
+      name="{{product.name}}"
+      price="{{product.price}}"
+      id="product-{{product.id}}"
+    >
+    </app-product-card>
+  </div>
+</ng-template>
