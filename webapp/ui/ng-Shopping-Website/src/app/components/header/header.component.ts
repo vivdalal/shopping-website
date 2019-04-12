@@ -9,6 +9,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() private name: string;
   @Input() private title: string;
+  @Input() private count: number;
 
   constructor() { }
 
@@ -19,13 +20,6 @@ export class HeaderComponent implements OnInit {
    * Logs out the current user
    */
   doLogout(): void {
-
-  }
-
-  /**
-   * Routes the user to the cart page
-   */
-  showCart(): void {
 
   }
 }

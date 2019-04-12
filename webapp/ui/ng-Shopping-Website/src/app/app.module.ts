@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +30,8 @@ import { FilterCollectionPipe } from './pipes/filter-collection.pipe';
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
-    NgbCarouselModule
+    NgbCarouselModule,
+    NgbDropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
