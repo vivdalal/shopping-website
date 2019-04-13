@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Banner} from '../../models/banner';
+import { Banner } from '../../models/banner';
 
 @Component({
   selector: 'app-images-banner',
@@ -10,7 +10,8 @@ export class ImagesBannerComponent implements OnInit {
 
   private images: Banner[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.images = [

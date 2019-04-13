@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeaturesBannerComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

@@ -2,20 +2,22 @@
   <app-header name="{{user}}" title="Shopping Website"></app-header>
   <app-images-banner></app-images-banner>
   <app-features-banner></app-features-banner>
-  <app-products-section
-    [products]="products | filterCollection: 'category': 'Shirts'"
-    name="Shirts"
-  ></app-products-section>
-  <app-products-section
-    [products]="products | filterCollection: 'category': 'Trousers'"
-    name="Trousers"
-  ></app-products-section>
-  <app-products-section
-    [products]="products | filterCollection: 'category': 'Socks'"
-    name="Socks"
-  ></app-products-section>
-  <app-products-section
-    [products]="products | filterCollection: 'category': 'Shoes'"
-    name="Shoes"
-  ></app-products-section>
+  <div class="products-section-container">
+    <app-products-section
+      [products]="products | filterCollection: 'category': 'Shirts'"
+      name="Shirts"
+    ></app-products-section>
+    <app-products-section
+      [products]="products | filterCollection: 'category': 'Trousers'"
+      name="Trousers"
+    ></app-products-section>
+    <app-products-section
+      [products]="products | filterCollection: 'category': 'Socks'"
+      name="Socks"
+    ></app-products-section>
+    <app-products-section
+      [products]="products | filterCollection: 'category': 'Shoes'"
+      name="Shoes"
+    ></app-products-section>
+  </div>
 </div>

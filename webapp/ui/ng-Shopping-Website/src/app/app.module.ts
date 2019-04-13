@@ -13,6 +13,7 @@ import { FeaturesBannerComponent } from './components/features-banner/features-b
 import { ImagesBannerComponent } from './components/images-banner/images-banner.component';
 import { ProductsSectionComponent } from './components/products-section/products-section.component';
 import { FilterCollectionPipe } from './pipes/filter-collection.pipe';
+import { CartPageComponent } from './components/cart-page/cart-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FilterCollectionPipe } from './pipes/filter-collection.pipe';
     FeaturesBannerComponent,
     ImagesBannerComponent,
     ProductsSectionComponent,
-    FilterCollectionPipe
+    FilterCollectionPipe,
+    CartPageComponent
   ],
   imports: [
     AppRoutingModule,
