@@ -24,7 +24,7 @@
 
       .cart-items-list {
         max-height: 62vh;
-        overflow-y: auto;
+        overflow: hidden auto;
       }
 
       .cart-details-header {

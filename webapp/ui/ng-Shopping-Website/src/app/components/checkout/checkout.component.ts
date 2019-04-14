@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../models/cart-item';
 import { CardService } from '../../services/card.service';
 import { Card } from '../../models/card';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-checkout',
@@ -25,6 +27,9 @@ export class CheckoutComponent implements OnInit {
   private showAddCardSection: boolean;
 
   private newCard: Card;
+  private expiry: Moment;
+
+  private readonly today: Moment = moment();
 
   constructor(
     private router: Router,
@@ -104,6 +109,7 @@ export class CheckoutComponent implements OnInit {
    */
   async doCheckout(): Promise<void> {
     if (this.showAddCardSection && this.shouldSaveCard) {
+      this.newCard.expiry = this.expiry.format('YYYY-MM');
       await this.cardService.addCard(this.newCard).toPromise();
     }
 

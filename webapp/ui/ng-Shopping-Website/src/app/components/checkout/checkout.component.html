@@ -93,7 +93,8 @@
                     [matDatepicker]="picker"
                     name="Expiry date"
                     placeholder="Choose a date"
-                    [(ngModel)]="newCard.expiry"
+                    [(ngModel)]="expiry"
+                    min="{{today}}"
                   >
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
