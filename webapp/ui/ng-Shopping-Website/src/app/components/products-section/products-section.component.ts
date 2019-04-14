@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Product } from '../../models/product';
 
 @Component({
@@ -10,6 +10,9 @@ export class ProductsSectionComponent implements OnInit {
 
   @Input() private products: Product[];
   @Input() private name: string;
+  @Input() private user: string;
+
+  @Output() private cartUpdated = new EventEmitter<string>();
 
   constructor() {
   }

@@ -67,5 +67,7 @@ export class CartPageComponent implements OnInit {
   /**
    * Performs the checkout operation
    */
-  doCheckout(): void {}
+  doCheckout(): void {
+    this.router.navigateByUrl('checkout');
+  }
 }

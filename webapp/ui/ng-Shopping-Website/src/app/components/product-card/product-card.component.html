@@ -2,7 +2,7 @@
   <div class="thumbnail-section">
     <div class="thumbnail-container">
       <div class="thumbnail-holder">
-        <img src="assets/images/{{img}}" alt="{{name}}" height="213" width="150">
+        <img [src]="'assets/images/' + img" alt="{{name}}" height="213" width="150">
       </div>
     </div>
   </div>
@@ -13,9 +13,9 @@
   {{name}}
   <div class="cart-action-section" *ngIf="isActive">
     <div class="input-group">
-      <input type="number" class="form-control" min="1" step="1" value="1" aria-label="Quantity">
+      <input type="number" class="form-control" min="1" step="1" [(ngModel)]="quantity" aria-label="Quantity">
       <div class="input-group-append">
-        <button class="btn btn-outline-primary" type="button">Add</button>
+        <button class="btn btn-outline-primary" type="button" (click)="addToCart()">Add</button>
       </div>
     </div>
   </div>

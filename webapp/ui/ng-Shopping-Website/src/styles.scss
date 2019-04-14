@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 body {
   font-family: Roboto, Arial, sans-serif;
@@ -54,4 +55,50 @@ body {
 .icon {
   width: 32px !important;
   height: 32px !important;
+}
+
+.action-button {
+  display: inline-block;
+  border-radius: 2px;
+  color: #212121;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: box-shadow .2s ease;
+  vertical-align: super;
+  background: #fff;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+  border: 1px solid #e0e0e0;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.inner-action-button {
+    padding: 15px 30px;
+    min-width: 250px;
+    margin-right: 6px;
+    text-transform: uppercase;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.1);
+    font-size: 16px;
+    font-weight: 500;
+
+    &.default {
+      margin-right: 16px;
+      padding: 14px 30px;
+      background-color: #fff;
+      color: #212121;
+    }
+
+    &.action {
+      background: #fb641b;
+      box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+      border: none;
+      color: #fff;
+    }
+  }
 }

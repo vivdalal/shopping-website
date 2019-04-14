@@ -20,7 +20,9 @@
           img="{{product.imageUrl}}"
           name="{{product.name}}"
           price="{{product.price}}"
-          id="product-{{product.id}}"
+          id="{{product.id}}"
+          user="{{user}}"
+          (cartUpdated)="cartUpdated.emit()"
         >
         </app-product-card>
       </div>

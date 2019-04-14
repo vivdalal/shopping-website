@@ -1,0 +1,70 @@
+.checkout-container {
+  height: calc(100vh - 50px);
+  width: 100vw;
+  overflow: auto hidden;
+  background-color: #f1f3f6;
+  margin: 50px 0 0;
+  padding: 24px 0;
+
+  .details-container {
+    display: inline-block;
+    width: 800px;
+    align-items: center;
+
+    .detail-item {
+      width: 800px;
+      margin-bottom: 16px;
+      position: relative;
+      display: inline-block;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
+      border-radius: 2px;
+      background-color: #ffffff;
+
+      .detail-item-header {
+        height: 48px;
+        text-transform: uppercase;
+        color: #878787;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 14px 24px;
+        margin: 0;
+        border-radius: 2px 2px 0 0;
+
+        .item-number {
+          font-size: 12px;
+          color: #2874f0;
+          background-color: #f0f0f0;
+          border-radius: 2px;
+          padding: 3px 7px;
+          vertical-align: baseline;
+          margin-right: 17px;
+        }
+
+        &.active {
+          color: #fff;
+          background-color: #2874f0;
+
+          .item-number {
+            background-color: #fff;
+            position: relative;
+            top: -2px;
+          }
+        }
+      }
+
+      .detail-item-content {
+        padding: 16px 24px;
+        background-color: #ffffff;
+      }
+
+      .previous-cards-list {
+        display: flex;
+        background-color: #ffffff;
+        margin-bottom: 8px;
+        padding: 16px 25px;
+        border-radius: 2px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .08);
+      }
+    }
+  }
+}

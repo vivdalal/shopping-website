@@ -2,7 +2,9 @@
   <div class="container-content">
     <div class="d-sm-none d-md-flex" style="width: 100%; max-width: 125px;"></div>
     <div class="logo-container">
-      <img alt="{{title}}" height=40 src="assets/images/logo-cropped.png">
+      <a routerLink="/products">
+        <img alt="{{title}}" height=40 src="assets/images/logo-cropped.png">
+      </a>
     </div>
     <div class="cart-container" *ngIf="showCartIcon">
       <a class="cart-link" routerLink="/cart">

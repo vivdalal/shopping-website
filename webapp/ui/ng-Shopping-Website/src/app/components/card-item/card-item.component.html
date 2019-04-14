@@ -1,0 +1,5 @@
+<mat-radio-button [value]="card.cardNo" class="col-12 mt-2" checked="{{selected}}">
+  <span class="ml-5">{{card.cardName}}</span>
+  <span class="ml-5 text-secondary">Exp: {{card.expiry}}</span>
+  <span class="text-muted ml-5">{{'xxxx xxxx xxxx ' + card.cardNo % 10000}}</span>
+</mat-radio-button>

@@ -1,23 +1,14 @@
 <div class="products-page">
-  <app-header name="{{user}}" title="Shopping Website" [showCartIcon]="true"></app-header>
+  <app-header [name]="user" title="Shopping Website" [count]="cartItemsCount" [showCartIcon]="true"></app-header>
   <app-images-banner></app-images-banner>
   <app-features-banner></app-features-banner>
   <div class="products-section-container">
     <app-products-section
-      [products]="products | filterCollection: 'category': 'Shirts'"
-      name="Shirts"
-    ></app-products-section>
-    <app-products-section
-      [products]="products | filterCollection: 'category': 'Trousers'"
-      name="Trousers"
-    ></app-products-section>
-    <app-products-section
-      [products]="products | filterCollection: 'category': 'Socks'"
-      name="Socks"
-    ></app-products-section>
-    <app-products-section
-      [products]="products | filterCollection: 'category': 'Shoes'"
-      name="Shoes"
+      [products]="products | filterCollection: 'category': category"
+      [name]="category"
+      [user]="user"
+      (cartUpdated)="updateCartCount()"
+      *ngFor="let category of ['Shirts', 'Trousers', 'Socks', 'Shoes']"
     ></app-products-section>
   </div>
 </div>

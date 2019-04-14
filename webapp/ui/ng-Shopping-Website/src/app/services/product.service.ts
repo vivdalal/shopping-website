@@ -3,15 +3,17 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 import {Product} from '../models/product';
+import { AppConstants } from '../app.constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  private static readonly URL = 'http://localhost:5000';
-
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private config: AppConstants
+  ) {
   }
 
   /**
@@ -19,6 +21,6 @@ export class ProductService {
    * @return The collection of the products as an observable
    */
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${ProductService.URL}/api/products`);
+    return this.http.get<Product[]>(`${this.config.API_ROOT}/products`);
   }
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -12,10 +13,12 @@ import { ProductService } from '../../services/product.service';
 export class ProductsComponent implements OnInit {
 
   private products: Product[] = [];
+  private cartItemsCount: number;
   private user: string;
 
   constructor(
     private productService: ProductService,
+    private cartService: CartService,
     private router: Router
   ) {
   }
@@ -29,6 +32,15 @@ export class ProductsComponent implements OnInit {
 
     this.user = currentUser;
     this.fetchProducts();
+    this.updateCartCount();
+  }
+
+  /**
+   * Fetches the cart count from the server and updates it
+   */
+  private updateCartCount(): void {
+    this.cartService.getCartItems(this.user)
+      .subscribe(cart => this.cartItemsCount = cart.length);
   }
 
   /**

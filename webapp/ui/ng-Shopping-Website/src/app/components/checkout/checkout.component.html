@@ -1,0 +1,128 @@
+<app-header
+  name="{{user}}"
+  title="Shopping Website"
+  ></app-header>
+<div class="checkout-container d-flex justify-content-center">
+  <div class="details-container">
+    <div class="detail-item">
+      <h3 class="detail-item-header" [ngClass]="activeStep === 0 && 'active'">
+        <span class="item-number">1</span>
+        <span class="item-text">Delivery Address</span>
+      </h3>
+      <div class="detail-item-content" *ngIf="activeStep === 0">
+        <form ngForm #addressForm>
+          <div class="row">
+            <mat-form-field class="col">
+              <input matInput required placeholder="First Name">
+            </mat-form-field>
+            <mat-form-field class="col">
+              <input matInput required placeholder="Last Name">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="col-6">
+              <input matInput required placeholder="Street Address">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <input matInput placeholder="Apt">
+            </mat-form-field>
+            <mat-form-field class="col-4">
+              <input matInput required placeholder="City">
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="col-2">
+              <input matInput required placeholder="State">
+            </mat-form-field>
+            <mat-form-field class="col-3">
+              <input matInput required placeholder="Zip Code">
+            </mat-form-field>
+          </div>
+        </form>
+        <button class="action-button inner-action-button action" (click)="addressForm.reportValidity() && goToNextStep()">
+          <span>Deliver Here</span>
+        </button>
+      </div>
+    </div>
+    <div class="detail-item">
+      <h3 class="detail-item-header" [ngClass]="activeStep === 1 && 'active'">
+        <span class="item-number">2</span>
+        <span class="item-text">Payment Options</span>
+      </h3>
+      <div style="background-color: #f1f3f6;" *ngIf="activeStep == 1">
+        <mat-radio-group
+          class="previous-cards-list d-flex flex-column"
+          *ngIf="cards && cards.length > 0"
+          (change)="cardSelectionChanged()"
+          [(ngModel)]="selectedCard">
+          <app-card-item
+            *ngFor="let card of cards"
+            [selected]="card.cardNo === selectedCard"
+            [card]="card"></app-card-item>
+        </mat-radio-group>
+        <div class="detail-item-content">
+          <mat-radio-button class="col-12 mb-2" (change)="addNewCard()" [checked]="showAddCardSection">
+            <span class="ml-5">Add New Card</span>
+          </mat-radio-button>
+          <div class="new-card-container" [hidden]="!showAddCardSection">
+            <form ngForm #cardDetailsForm>
+              <div class="row">
+                <mat-form-field class="col-7">
+                  <input
+                    matInput
+                    required
+                    name="Card number"
+                    placeholder="Card Number" [(ngModel)]="newCard.cardNo" [value]="''+(newCard.cardNo || '')">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field class="col-7">
+                  <input
+                    matInput
+                    required
+                    name="Card holder name"
+                    placeholder="Name On The Card"
+                    [(ngModel)]="newCard.cardName" [value]="newCard.cardName">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <mat-form-field class="col-4">
+                  <input
+                    matInput
+                    required
+                    [matDatepicker]="picker"
+                    name="Expiry date"
+                    placeholder="Choose a date"
+                    [(ngModel)]="newCard.expiry"
+                  >
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                  <input
+                    matInput
+                    required
+                    placeholder="CVV"
+                    type="password"
+                    maxlength="3"
+                    name="CVV"
+                    [(ngModel)]="newCard.cvv" [value]="''+(newCard.cvv || '')">
+                </mat-form-field>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <mat-checkbox name="Save Card" [(ngModel)]="shouldSaveCard">Save card for future purchases.</mat-checkbox>
+                </div>
+              </div>
+            </form>
+          </div>
+          <button
+            class="action-button inner-action-button action"
+            (click)="(!showAddCardSection || cardDetailsForm.reportValidity()) && doCheckout()">
+            <span>Pay ${{amount}}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

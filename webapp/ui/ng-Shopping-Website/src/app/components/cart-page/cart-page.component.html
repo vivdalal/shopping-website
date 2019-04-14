@@ -18,10 +18,13 @@
         </div>
       </ng-template>
       <div class="cart-action-container">
-        <button class="action-button cart-action-button default" (click)="goBackToShopping()">
+        <button class="action-button inner-action-button default" (click)="goBackToShopping()">
           <span>< Continue Shopping</span>
         </button>
-        <button class="action-button cart-action-button action" (click)="doCheckout()">
+        <button
+          *ngIf="cart.length > 0"
+          class="action-button inner-action-button action"
+          (click)="doCheckout()">
           <span>Place Order</span>
         </button>
       </div>
