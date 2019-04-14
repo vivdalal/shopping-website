@@ -4,7 +4,7 @@
     <div class="logo-container">
       <img alt="{{title}}" height=40 src="assets/images/logo-cropped.png">
     </div>
-    <div class="cart-container">
+    <div class="cart-container" *ngIf="showCartIcon">
       <a class="cart-link" routerLink="/cart">
         <svg class="cart-icon" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg">
           <path class="_2JpNOH"
@@ -15,7 +15,7 @@
         <span>Cart</span>
       </a>
     </div>
-    <div class="profile-container">
+    <div class="profile-container" [ngClass]="!showCartIcon && 'ml-auto'">
       <div class="d-inline-block" ngbDropdown>
         <button class="btn profile-name" id="profileMenu" ngbDropdownToggle>
           {{name.charAt(0).toUpperCase() + name.substr(1).toLowerCase()}}

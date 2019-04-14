@@ -57,4 +57,15 @@ export class CartPageComponent implements OnInit {
     this.cartService.getCartItems(this.user).subscribe(this.updateCartDetails.bind(this));
   }
 
+  /**
+   * Navigates back to the product list page
+   */
+  goBackToShopping(): void {
+    this.router.navigateByUrl('products');
+  }
+
+  /**
+   * Performs the checkout operation
+   */
+  doCheckout(): void {}
 }

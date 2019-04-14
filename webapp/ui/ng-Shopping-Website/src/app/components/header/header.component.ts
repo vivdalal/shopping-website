@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,9 @@ export class HeaderComponent implements OnInit {
   @Input() private name: string;
   @Input() private title: string;
   @Input() private count: number;
+  @Input() private showCartIcon: boolean;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
@@ -21,6 +23,7 @@ export class HeaderComponent implements OnInit {
    * Logs out the current user
    */
   doLogout(): void {
-
+    window.sessionStorage.removeItem('username');
+    this.router.navigateByUrl('login');
   }
 }

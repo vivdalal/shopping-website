@@ -18,10 +18,10 @@
         </div>
       </ng-template>
       <div class="cart-action-container">
-        <button class="action-button cart-action-button default">
+        <button class="action-button cart-action-button default" (click)="goBackToShopping()">
           <span>< Continue Shopping</span>
         </button>
-        <button class="action-button cart-action-button action">
+        <button class="action-button cart-action-button action" (click)="doCheckout()">
           <span>Place Order</span>
         </button>
       </div>
