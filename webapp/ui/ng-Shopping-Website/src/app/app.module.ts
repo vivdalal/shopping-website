@@ -14,6 +14,7 @@ import { ImagesBannerComponent } from './components/images-banner/images-banner.
 import { ProductsSectionComponent } from './components/products-section/products-section.component';
 import { FilterCollectionPipe } from './pipes/filter-collection.pipe';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
+import { CartItemComponent } from './components/cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CartPageComponent } from './components/cart-page/cart-page.component';
     ImagesBannerComponent,
     ProductsSectionComponent,
     FilterCollectionPipe,
-    CartPageComponent
+    CartPageComponent,
+    CartItemComponent
   ],
   imports: [
     AppRoutingModule,

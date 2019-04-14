@@ -1,0 +1,29 @@
+<div class="cart-item">
+  <div class="item-details">
+    <div class="item-picture">
+      <img [src]="'assets/images/' + cartItem.product.imageUrl" [alt]="cartItem.product.name" height="100" width="72">
+    </div>
+    <div class="item-description">
+      <div class="item-name">
+        <span class="item-name-text">{{cartItem.product.name}}</span>
+      </div>
+      <div class="item-category">{{cartItem.product.category}}</div>
+      <div class="item-description-text">
+        <span>{{cartItem.product.description}}</span>
+      </div>
+      <span class="item-price">${{cartItem.price}}</span>
+    </div>
+    <div class="item-delivery-details">
+      <ul class="mb-5">
+        <li class="mb-5">
+          <div class="delivery-text">
+            Delivery in 4 - 6 days
+            &nbsp;|&nbsp;
+            <span class="text-success mr-5" *ngIf="!hasDeliveryCharges">Free</span>
+            <span class="mr-5" [ngClass]="hasDeliveryCharges ? '' : 'strikethrough'">${{deliveryCharges}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

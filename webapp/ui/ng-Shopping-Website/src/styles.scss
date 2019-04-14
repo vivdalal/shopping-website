@@ -1,4 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  color: #212121;
+}
+
 .bg-black {
   background-color: rgba(14, 14, 14, 1.00)
 }
@@ -16,6 +23,10 @@
   background-color: orangered;
 }
 
+.strikethrough {
+  text-decoration: line-through;
+}
+
 .bg-light-gray {
   background-color: rgba(111, 111, 111, 0.09)
 }
@@ -26,6 +37,18 @@
 
 .no-padding {
   padding: 0 !important;
+}
+
+.b-t-1 {
+  border-top: 1px solid #ffffff;
+}
+
+.b-b-1 {
+  border-bottom: 1px solid #ffffff;
+}
+
+.border-light {
+  border-color: #f0f0f0 !important;
 }
 
 .icon {
