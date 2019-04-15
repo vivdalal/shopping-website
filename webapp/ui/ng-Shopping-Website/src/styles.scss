@@ -2,6 +2,17 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
+@import "~animate.css/animate.min.css";
+@import "~font-awesome/css/font-awesome.min.css";
+@import "sass/variables";
+@import "sass/base";
+@import "sass/modal";
+@import "sass/grid";
+@import "sass/players";
+@import "sass/sprites/sprites";
+@import "sass/state-message";
+@import "sass/state-info";
+
 body {
   font-family: Roboto, Arial, sans-serif;
   color: #212121;

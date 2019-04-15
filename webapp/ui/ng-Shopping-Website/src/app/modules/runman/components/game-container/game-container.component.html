@@ -1,0 +1,9 @@
+<grid [height]="height * game.tileSize"
+      [state]="state"
+      [width]="width * game.tileSize"
+      class="no-select"
+></grid>
+<state-message [state]="state" class="no-select"></state-message>
+<modal *ngIf="state.state !== 'PLAYING' && state.state !== 'ABOUT'" >
+  <result [score]="state.score" [state]="state.state"></result>
+</modal>

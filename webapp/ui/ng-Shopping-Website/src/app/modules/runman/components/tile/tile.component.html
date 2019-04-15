@@ -1,0 +1,5 @@
+<div (click)="game.moveHero(index)" [class]="type" [ngStyle]="getStyles()">
+  <div *ngIf="sprite" [style.backgroundImage]="'url(' + sprite + ')'" class="sprite">
+  </div>
+  <div class="click-effect"></div>
+</div>

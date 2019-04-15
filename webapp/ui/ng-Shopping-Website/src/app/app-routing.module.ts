@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import {LoginComponent} from './components/login/login.component';
+import { RunmanComponent } from './modules/runman/runman.component';
 
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'cart', component: CartPageComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'game', component: RunmanComponent },
   { path: '*', component: AppComponent }
 ];
 

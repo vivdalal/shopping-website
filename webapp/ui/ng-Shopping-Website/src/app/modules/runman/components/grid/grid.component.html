@@ -1,0 +1,30 @@
+<state-info [state]="state"></state-info>
+
+<div class="grid-container">
+  <div [style.height.px]="height" [style.width.px]="width" class="grid">
+
+    <div *ngFor="let row of state.grid">
+      <tile *ngFor="let tile of row" [index]="tile.index"
+            [sprite]="tile.sprite"
+            [styles]="tile.styles"
+            [type]="tile.type"
+            class="grid-tile"
+      ></tile>
+    </div>
+
+    <player *ngFor="let player of state.players"
+            [action]="player.action"
+            [blood]="player.blood"
+            [color]="player.color"
+            [direction]="player.direction"
+            [index]="player.index"
+            [route]="player.route"
+            [sprite]="player.sprite"
+            [state]="player.state"
+            [styles]="player.styles"
+            [type]="player.type"
+    ></player>
+
+  </div>
+</div>
+

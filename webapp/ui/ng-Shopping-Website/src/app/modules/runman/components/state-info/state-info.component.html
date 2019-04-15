@@ -1,0 +1,14 @@
+<div class="state-info">
+  <div class="score">
+    <i aria-hidden="true" class="fa fa-star"></i>
+    {{state.score}}
+  </div>
+  <div class="timer">
+    <i (click)="game.pauseGame()" class="btn"><i aria-hidden="true" class="fa fa-pause"></i></i>
+    {{state.time | date: "mm:ss"}}
+  </div>
+  <div *ngIf="state.hero" class="lives">
+    <i *ngFor="let life of heroLives()"
+       [class]="(life) ? 'fa fa-heart' : 'fa fa-heart-o'" [style.color]="!life" aria-hidden="true"></i>
+  </div>
+</div>

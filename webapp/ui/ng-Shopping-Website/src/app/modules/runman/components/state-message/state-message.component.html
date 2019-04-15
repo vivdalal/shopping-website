@@ -1,0 +1,12 @@
+<div class="state-message">
+  <div class="message-container">
+    <div (click)="game.addBot()" class="btn"><i aria-hidden="true" class="fa fa-users"></i></div>
+    <div *ngIf="state.guard?.action === 'ATTACKING'" class="message">
+      <p>Grim reaper is coming... RUN!</p>
+      <img [src]="state.guard?.avatar" class="animated slideInUp">
+    </div>
+    <div *ngIf="state.guard?.action !== 'ATTACKING'" class="message">
+      <p>Go to the flag, keep distance from guard area!</p>
+    </div>
+  </div>
+</div>
