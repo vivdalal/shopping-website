@@ -31,6 +31,7 @@ import { CardItemComponent } from './components/card-item/card-item.component';
 import {LoginComponent} from './components/login/login.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { RunmanModule } from './modules/runman/runman.module';
+import { RegisterComponent } from './components/register/register.component';
 
 export const MONTH_YEAR_DATE_FORMAT = {
   parse: {
@@ -59,7 +60,8 @@ export const MONTH_YEAR_DATE_FORMAT = {
     CheckoutComponent,
     CardItemComponent,
     LoginComponent,
-    AlertComponent
+    AlertComponent,
+    RegisterComponent
   ],
   imports: [
     AppRoutingModule,
