@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CartService } from '../../services/cart.service';
 import { OrderItem } from '../../models/order-item';
+import {AlertService} from '../../services/alert.service';
 
 @Component({
   selector: 'app-product-card',
@@ -39,7 +40,8 @@ export class ProductCardComponent implements OnInit {
   private isActive = false;
   private quantity: number;
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService,
+              private alertService: AlertService) {
   }
 
   onHover() {
@@ -66,5 +68,8 @@ export class ProductCardComponent implements OnInit {
 
     this.cartService.addToCart(orderItem)
       .subscribe(() => this.cartUpdated.emit());
+
+    console.log('Add to cart alert');
+    this.alertService.success('Added to cart successfully.');
   }
 }

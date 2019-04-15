@@ -28,6 +28,8 @@ import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CardItemComponent } from './components/card-item/card-item.component';
+import {LoginComponent} from './components/login/login.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 export const MONTH_YEAR_DATE_FORMAT = {
   parse: {
@@ -54,7 +56,9 @@ export const MONTH_YEAR_DATE_FORMAT = {
     CartPageComponent,
     CartItemComponent,
     CheckoutComponent,
-    CardItemComponent
+    CardItemComponent,
+    LoginComponent,
+    AlertComponent
   ],
   imports: [
     AppRoutingModule,

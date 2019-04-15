@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {AuthenticationService} from '../../services/authentication.services';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,11 @@ export class HeaderComponent implements OnInit {
   @Input() private count: number;
   @Input() private showCartIcon: boolean;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {
+
   }
 
   ngOnInit(): void {
@@ -23,7 +28,8 @@ export class HeaderComponent implements OnInit {
    * Logs out the current user
    */
   doLogout(): void {
-    window.sessionStorage.removeItem('username');
-    this.router.navigateByUrl('login');
+    console.log('do logout called');
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
   }
 }
