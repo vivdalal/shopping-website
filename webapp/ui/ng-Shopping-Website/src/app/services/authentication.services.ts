@@ -2,7 +2,6 @@ import {User} from '../models/user';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {CartItem} from '../models/cart-item';
 import {AppConstants} from '../app.constants';
 
 @Injectable({
