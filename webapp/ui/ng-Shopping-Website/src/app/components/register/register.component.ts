@@ -49,17 +49,25 @@ export class RegisterComponent implements OnInit {
     }
 
     this.loading = true;
-    console.log('Inside on submit');
     this.userService.register(this.registerForm.value)
       .pipe(first())
       .subscribe(
         data => {
           this.alertService.success('Registration successful', true);
+          // Should we add a alert or a pause
           this.router.navigate(['/login']);
         },
         error => {
-          this.alertService.error(error);
-          this.loading = false;
+          if(error.status === 409){
+            this.alertService.error('Username already exists!!');
+            this.loading = false;
+          } else if (error.status === 400){
+            this.alertService.error('Username/Password not entered correclty');
+            this.loading = false;
+          } else {
+            this.alertService.error('Something went wrong! Please try after sometime.');
+            this.loading = false;
+          }
         });
   }
 }
