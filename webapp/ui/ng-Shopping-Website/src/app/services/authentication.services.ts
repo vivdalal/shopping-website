@@ -12,7 +12,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient,
               private config: AppConstants) {
-    this.currentUser = sessionStorage.getItem('username');
+    this.currentUser = localStorage.getItem('username');
   }
 
   public get currentUserValue(): string {
@@ -27,7 +27,7 @@ export class AuthenticationService {
 
   logout() {
     // remove user from session storage to log user out
-    sessionStorage.removeItem('username');
+    localStorage.removeItem('username');
     this.currentUser = null;
   }
 }

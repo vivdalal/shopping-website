@@ -13,6 +13,7 @@ import { IGame } from './game.interface';
 import { PathFinder } from '../algorithm/pathfinder';
 import { Guard, Hero, Player, Tile } from '../models';
 import { GameMode, GameSettings, GameStore, PlayerActions, PlayerSprites, PlayerStates } from '../store/game.const';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class GameService implements IGame {
@@ -45,7 +46,11 @@ export class GameService implements IGame {
   /** For attacking actions */
   attacking$: Subject<any>;
 
-  constructor(private store: Store<GameState>, private http: HttpClient, public audio: AudioService) {
+  constructor(
+    private store: Store<GameState>,
+    private http: HttpClient,
+    public audio: AudioService,
+    private router: Router) {
     /** Pauser should be initialized in the constructor  */
   }
 
@@ -174,9 +179,14 @@ export class GameService implements IGame {
       this.audio.music.pause();
     };
 
-    const gameOver = () => {
+    const gameOver = (hasWon: boolean = false) => {
       this.gameOver$.next();
-      this.audio.gameOver.play();
+      if (hasWon) {
+        this.audio.win.play();
+      } else {
+        this.audio.gameOver.play();
+      }
+      setTimeout(() => this.router.navigateByUrl(`products?win=${this.score >= 1000}`), 3000);
     };
 
     switch (mode) {
@@ -188,8 +198,7 @@ export class GameService implements IGame {
         break;
       case GameMode.WON:
         pause();
-        this.gameOver$.next();
-        this.audio.win.play();
+        gameOver();
         break;
       case GameMode.LOST:
         pause();

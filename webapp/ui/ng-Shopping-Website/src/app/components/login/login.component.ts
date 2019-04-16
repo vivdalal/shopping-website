@@ -33,7 +33,7 @@ export class LoginComponent implements AfterViewInit {
       .subscribe(
         response => {
           this.authenticationService.currentUser = this.email;
-          sessionStorage.setItem('username', this.email);
+          localStorage.setItem('username', this.email);
           this.router.navigate(['/products']);
         },
         error => {

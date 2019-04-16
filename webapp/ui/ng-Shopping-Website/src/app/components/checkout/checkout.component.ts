@@ -116,7 +116,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.cartService.placeOrder(this.user)
-      .subscribe(() => this.router.navigateByUrl('products'));
+      .subscribe(() => this.router.navigateByUrl('game'));
   }
 
 }
