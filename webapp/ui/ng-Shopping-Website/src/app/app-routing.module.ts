@@ -16,7 +16,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'game', component: RunmanComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '*', component: AppComponent }
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: '**', redirectTo: 'products' }
 ];
 
 @NgModule({

@@ -6,7 +6,6 @@
         <img alt="{{title}}" height=40 src="assets/images/logo-cropped.png">
       </a>
     </div>
-    <app-alert></app-alert>
     <div class="cart-container" *ngIf="showCartIcon">
       <a class="cart-link" routerLink="/cart">
         <svg class="cart-icon" height="14" viewBox="0 0 16 16" width="14" xmlns="http://www.w3.org/2000/svg">
@@ -18,10 +17,10 @@
         <span>Cart</span>
       </a>
     </div>
-    <div class="profile-container" [ngClass]="!showCartIcon && 'ml-auto'">
+    <div class="profile-container" [ngClass]="!showCartIcon && 'ml-auto'" *ngIf="name as value">
       <div class="d-inline-block" ngbDropdown>
         <button class="btn profile-name" id="profileMenu" ngbDropdownToggle>
-          {{name.charAt(0).toUpperCase() + name.substr(1).toLowerCase()}}
+          {{value.charAt(0).toUpperCase() + value.substr(1).toLowerCase()}}
         </button>
         <div aria-labelledby="profileMenu" ngbDropdownMenu>
           <button (click)="doLogout()" ngbDropdownItem>Logout</button>

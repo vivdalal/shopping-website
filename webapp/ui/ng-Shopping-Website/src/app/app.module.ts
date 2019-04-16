@@ -3,7 +3,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import {
-  DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE,
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  MatButtonModule,
   MatCheckboxModule,
   MatDatepickerModule,
   MatInputModule,
@@ -28,7 +31,7 @@ import { CartPageComponent } from './components/cart-page/cart-page.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { CardItemComponent } from './components/card-item/card-item.component';
-import {LoginComponent} from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { RunmanModule } from './modules/runman/runman.module';
 import { RegisterComponent } from './components/register/register.component';
@@ -78,7 +81,8 @@ export const MONTH_YEAR_DATE_FORMAT = {
     ReactiveFormsModule,
     MatTooltipModule,
     MatCheckboxModule,
-    RunmanModule
+    RunmanModule,
+    MatButtonModule
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

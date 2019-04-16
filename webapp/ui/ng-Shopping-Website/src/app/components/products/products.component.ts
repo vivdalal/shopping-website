@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
+import { AuthenticationService } from '../../services/authentication.services';
 
 @Component({
   selector: 'app-products',
@@ -19,12 +20,13 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private auth: AuthenticationService
   ) {
   }
 
   ngOnInit() {
-    const currentUser: string = window.sessionStorage.getItem('username');
+    const currentUser: string = this.auth.currentUser;
     if (!currentUser) {
       this.router.navigate(['/login']);
       return;

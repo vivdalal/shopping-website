@@ -8,31 +8,27 @@ import {AppConstants} from '../app.constants';
   providedIn: 'root'
 })
 export class AuthenticationService {
-
-  private currentUserSubject: string;
   public currentUser: string;
 
   constructor(private http: HttpClient,
               private config: AppConstants) {
-    this.currentUserSubject = sessionStorage.getItem('username');
-    this.currentUser = this.currentUserSubject;
+    this.currentUser = sessionStorage.getItem('username');
   }
-
 
   public get currentUserValue(): string {
-    return this.currentUserSubject;
+    return this.currentUser;
   }
 
-  login(username: string, password: string) {
+  login(username: string, password: string): Observable<object> {
     const user = new User(username, password);
     // make the api call
     return this.http.post(`${this.config.API_ROOT}/login`, user,  { observe: 'response' });
-
   }
 
   logout() {
     // remove user from session storage to log user out
     sessionStorage.removeItem('username');
+    this.currentUser = null;
   }
 }
 

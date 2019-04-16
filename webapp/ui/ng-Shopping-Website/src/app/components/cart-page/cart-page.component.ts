@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { CartItem } from '../../models/cart-item';
 import { CartService } from '../../services/cart.service';
+import { AuthenticationService } from '../../services/authentication.services';
 
 @Component({
   selector: 'app-cart-page',
@@ -23,11 +24,12 @@ export class CartPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private cartService: CartService) {
+    private cartService: CartService,
+    private auth: AuthenticationService) {
   }
 
   ngOnInit() {
-    const currentUser: string = window.sessionStorage.getItem('username');
+    const currentUser: string = this.auth.currentUser;
     if (!currentUser) {
       this.router.navigate(['/login']);
       return;
