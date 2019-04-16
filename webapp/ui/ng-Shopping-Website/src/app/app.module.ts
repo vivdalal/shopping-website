@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import {
-  DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE,
+  DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatButtonModule,
   MatCheckboxModule,
   MatDatepickerModule,
   MatInputModule,
@@ -76,7 +76,8 @@ export const MONTH_YEAR_DATE_FORMAT = {
     FormsModule,
     ReactiveFormsModule,
     MatTooltipModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatButtonModule
   ],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },

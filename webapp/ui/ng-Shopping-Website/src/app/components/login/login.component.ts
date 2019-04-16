@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {AuthenticationService} from '../../services/authentication.services';
-import {Router} from '@angular/router';
-import {AlertService} from '../../services/alert.service';
+import { AfterViewInit, Component } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { AlertService } from '../../services/alert.service';
+import { AuthenticationService } from '../../services/authentication.services';
 
+import '../../../assets/js/login-animation';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
   email: string;
   password: string;
 
   constructor(private authenticationService: AuthenticationService,
               private router: Router,
-              private alertService: AlertService){
+              private alertService: AlertService) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/products']);
@@ -29,11 +29,10 @@ export class LoginComponent {
   }
 
   login() {
-    console.log(`email: ${this.email} password: ${this.password}`);
-    // alert(`Email: ${this.email} Password: ${this.password}`);
     const user = this.authenticationService.login(this.email, this.password)
       .subscribe(
         response => {
+          this.authenticationService.currentUser = this.email;
           sessionStorage.setItem('username', this.email);
           this.router.navigate(['/products']);
         },
@@ -45,10 +44,6 @@ export class LoginComponent {
           } else {
             this.alertService.error('Something went wrong. Please try again.');
           }
-
         });
-
-    return;
-
   }
 }

@@ -7,6 +7,7 @@ import { CartItem } from '../../models/cart-item';
 import { CardService } from '../../services/card.service';
 import { Card } from '../../models/card';
 import { Moment } from 'moment';
+import { AuthenticationService } from '../../services/authentication.services';
 
 @Component({
   selector: 'app-checkout',
@@ -34,12 +35,13 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private router: Router,
     private cartService: CartService,
-    private cardService: CardService
+    private cardService: CardService,
+    private auth: AuthenticationService
   ) {
   }
 
   ngOnInit() {
-    const currentUser: string = window.sessionStorage.getItem('username');
+    const currentUser: string = this.auth.currentUser;
     if (!currentUser) {
       this.router.navigate(['/login']);
       return;
