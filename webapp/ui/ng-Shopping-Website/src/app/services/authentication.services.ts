@@ -9,17 +9,18 @@ import {AppConstants} from '../app.constants';
 })
 export class AuthenticationService {
 
-  private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  private currentUserSubject: string;
+  public currentUser: string;
 
   constructor(private http: HttpClient,
               private config: AppConstants) {
-    this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(sessionStorage.getItem('username')));
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentUserSubject = sessionStorage.getItem('username');
+    this.currentUser = this.currentUserSubject;
   }
 
-  public get currentUserValue(): User {
-    return this.currentUserSubject.value;
+
+  public get currentUserValue(): string {
+    return this.currentUserSubject;
   }
 
   login(username: string, password: string) {
@@ -27,17 +28,11 @@ export class AuthenticationService {
     // make the api call
     return this.http.post(`${this.config.API_ROOT}/login`, user,  { observe: 'response' });
 
-    // check whether the api returns 200. If yes, login the user, else show error
-    // console.log('username: ' + username + ' and password: ' + password);
-
-
-    // return user;
   }
 
   logout() {
     // remove user from session storage to log user out
     sessionStorage.removeItem('username');
-    this.currentUserSubject.next(null);
   }
 }
 
