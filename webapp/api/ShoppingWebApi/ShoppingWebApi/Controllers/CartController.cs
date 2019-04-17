@@ -38,7 +38,7 @@ namespace ShoppingWebApi.Controllers
 
 
             var cartItems = from i in _context.Cart
-                            where i.UserId == user.Id
+                            where i.UserId == user.Id && !i.isOrdered 
                             select new CartDTO()
                             {
                                 Id = i.Id,
@@ -212,7 +212,9 @@ namespace ShoppingWebApi.Controllers
                     return NotFound();
 
                 }
-                _context.Cart.Remove(cart);
+
+                cart.isOrdered = true;
+                _context.Cart.Update(cart);
                 await _context.SaveChangesAsync();
 
             }

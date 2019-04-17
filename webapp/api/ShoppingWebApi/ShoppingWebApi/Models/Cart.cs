@@ -25,6 +25,10 @@ namespace ShoppingWebApi.Models
         [Column("product_id")]
         public int ProductId { get; set; }
 
+
+        [Column("isOrdered")]
+        public bool isOrdered { get; set; }
+
         // Navigation
         public User User { get; set; }
 
