@@ -5,6 +5,7 @@ import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { CartService } from '../../services/cart.service';
 import { AuthenticationService } from '../../services/authentication.services';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-products',
@@ -18,13 +19,15 @@ export class ProductsComponent implements OnInit {
   private user: string;
 
   private hasWon: boolean;
+  private orderState: string;
 
   constructor(
     private productService: ProductService,
     private cartService: CartService,
     private router: Router,
     private route: ActivatedRoute,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private snackBar: MatSnackBar
   ) {
   }
 
@@ -36,7 +39,13 @@ export class ProductsComponent implements OnInit {
     }
 
     this.route.queryParamMap
-      .subscribe(params => this.hasWon = params.get('win') && params.get('win') === 'true');
+      .subscribe((params) => {
+        this.hasWon = params.get('win') && params.get('win') === 'true';
+
+        if (params.get('order') === 'success') {
+          this.snackBar.open('Order successfully placed!', null, { duration: 2000 });
+        }
+      });
 
     this.user = currentUser;
     this.fetchProducts();

@@ -188,7 +188,7 @@ export class GameService implements IGame {
       }
       setTimeout(() => this.router.navigate(['products'],
         {
-          queryParams: { win: this.score >= 1000 }
+          queryParams: { win: hasWon && this.score >= 1000, order: 'success' }
         }), 3000);
     };
 

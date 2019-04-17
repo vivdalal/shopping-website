@@ -46,7 +46,7 @@ export class CartPageComponent implements OnInit {
   updateCartDetails(cart: CartItem[]) {
     this.cart = cart;
     this.count = cart.length;
-    this.amount = cart.reduce((sum, item) => sum + (item.price || 0), 0);
+    this.amount = (cart.reduce((sum, item) => sum + (item.price || 0), 0));
 
     this.hasDeliveryCharges = this.amount <= 30;
     this.totalDeliveryCharges = this.amount <= 30 ? this.DELIVERY_CHARGES * cart.length : 0;
