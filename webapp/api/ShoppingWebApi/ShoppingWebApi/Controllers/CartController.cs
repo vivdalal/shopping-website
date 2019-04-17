@@ -57,11 +57,6 @@ namespace ShoppingWebApi.Controllers
                                 }
                             };
             return cartItems;
-
-
-
-
-
         }
 
         // GET: api/Cart/5
@@ -100,7 +95,7 @@ namespace ShoppingWebApi.Controllers
         }
 
 
-        // GET: api/Cart/RecentProducts/{username}
+        // GET: api/Cart/RecentProducts?username={username}&count={count}
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ProductDTO>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Route("RecentProducts")]
@@ -152,8 +147,6 @@ namespace ShoppingWebApi.Controllers
                 {
                     break;
                 }
-
-
                 var cart = await _context.Cart.FindAsync(c.Id);
 
                 if(!recentProducts.Any(_ => _.Id == cart.ProductId))
@@ -168,14 +161,9 @@ namespace ShoppingWebApi.Controllers
                     p.Price = c.Product.Price;
                     recentProducts.Add(p);
                     prodCount++;
-
                 }
-
-               
             }
-
             return recentProducts;
-
         }
 
         // PUT: api/Carts/5
@@ -340,15 +328,8 @@ namespace ShoppingWebApi.Controllers
                 await _context.SaveChangesAsync();
 
             }
-
-
-
-
             return NoContent();
         }
-
-
-
 
 
         /// <summary>
@@ -360,8 +341,6 @@ namespace ShoppingWebApi.Controllers
         {
             return _context.Cart.Any(e => e.Id == id);
         }
-
-
 
     }
 }
