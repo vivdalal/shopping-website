@@ -60,7 +60,7 @@ namespace ShoppingWebApi.Controllers
         }
 
         // GET: api/Cart/5
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductDTO))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CartDTO))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public ActionResult<CartDTO> GetCart(int id)
@@ -94,6 +94,40 @@ namespace ShoppingWebApi.Controllers
             return Ok(cartItem);
         }
 
+
+        // GET: api/cart
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CartDTO))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [Route("All")]
+        public ActionResult<CartDTO> GetAllCart()
+        {
+            var cartItem = from i in _context.Cart
+                           select new CartDTO()
+                           {
+                               Id = i.Id,
+                               Quantity = i.Quantity,
+                               Price = i.Price,
+                               CreatedAt = i.CreatedAt,
+                               Product = new ProductDTO()
+                               {
+                                   Id = i.Product.Id,
+                                   Name = i.Product.Name,
+                                   Description = i.Product.Description,
+                                   Price = i.Product.Price,
+                                   IsInStock = i.Product.Quantity != 0,
+                                   Category = i.Product.Category,
+                                   ImageUrl = i.Product.ImageUrl
+                               }
+                           };
+
+            if (cartItem == null)
+            {
+                // Send 404 if not such cart item is found
+                return NotFound();
+            }
+
+            return Ok(cartItem);
+        }
 
         // GET: api/Cart/RecentProducts?username={username}&count={count}
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ProductDTO>))]
