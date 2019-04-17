@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./add-product-form.component.scss']
 })
 export class AddProductFormComponent implements OnInit {
+
+  @ViewChild('formElement') formElement: ElementRef;
 
   private formGroup = new FormGroup({
     name: new FormControl('', [
@@ -38,6 +40,17 @@ export class AddProductFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Clears the form
+   */
+  clearForm() {
+    this.formGroup.reset();
+    (this.formElement.nativeElement as HTMLFormElement).reset();
+  }
+
+  /**
+   * Emits an event to add the product
+   */
   addProduct() {
     if (this.formGroup.invalid) {
       return;

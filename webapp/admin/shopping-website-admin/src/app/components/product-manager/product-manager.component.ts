@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
 
 import { ProductService } from '../../services/product.service';
 import { MatSnackBar } from '@angular/material';
+import { AddProductFormComponent } from '../add-product-form/add-product-form.component';
 
 @Component({
   selector: 'app-product-manager',
@@ -10,6 +11,8 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./product-manager.component.scss']
 })
 export class ProductManagerComponent implements OnInit {
+
+  @ViewChild(AddProductFormComponent) private readonly  addProductForm: AddProductFormComponent;
 
   private products: Product[];
   private categories: { [category: string]: Product[] };
@@ -50,6 +53,7 @@ export class ProductManagerComponent implements OnInit {
     this.productService.addProduct(product)
       .subscribe(() => {
           this.selectedTabIndex = 0;
+          this.addProductForm.clearForm();
           this.fetchProducts();
           this.snackBar.open('Added product!', null, {
             duration: 2000
