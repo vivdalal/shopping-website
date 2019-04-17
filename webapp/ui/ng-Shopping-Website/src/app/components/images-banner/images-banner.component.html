@@ -1,7 +1,7 @@
 <ngb-carousel *ngIf="images" class="banner-section">
   <ng-template *ngFor="let image of images" ngbSlide>
-    <img [src]="image.src" alt="Banner Image">
-    <div class="carousel-caption" style="color: #000;">
+    <img [src]="image.src" alt="Banner Image" height="500">
+    <div class="carousel-caption">
       <h3>{{image.caption}}</h3>
       <p>{{image.text}}</p>
     </div>

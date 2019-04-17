@@ -1,10 +1,16 @@
 .banner-section {
-  height: 60vh;
+  height: 500px;
+
+  .carousel-caption {
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #ffffff;
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  }
 
   img {
-    height: auto;
-    width: auto;
-    max-height: 40vh;
-    max-width: 100%;
+    width: 100%;
   }
 }

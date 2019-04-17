@@ -16,12 +16,12 @@ export class ImagesBannerComponent implements OnInit {
   ngOnInit() {
     this.images = [
       {
-        src: 'assets/images/banner-1.png',
+        src: 'assets/images/shirt-banner.jpg',
         caption: 'Shirts',
-        text: 'Winter Collection'
+        text: 'Summer Collection'
       },
       {
-        src: 'assets/images/banner-2.jpg',
+        src: 'assets/images/trouser-banner.jpg',
         caption: 'Bottoms',
         text: 'Uber Cool Styles'
       }
