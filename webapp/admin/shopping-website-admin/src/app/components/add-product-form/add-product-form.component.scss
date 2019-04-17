@@ -1,0 +1,14 @@
+.add-form-container {
+  min-width: 100px;
+  max-width: 500px;
+  margin: 10px auto;
+
+  .form-field {
+    width: 100%;
+    margin-bottom: 8px;
+
+    textarea {
+      min-height: 75px;
+    }
+  }
+}

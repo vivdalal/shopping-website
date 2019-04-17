@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatButtonToggleGroup } from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  private readonly MENU_OPTIONS = {
+    PRODUCTS: 'products',
+    ANALYTICS: 'analytics'
+  };
+  private selectedOption: string = this.MENU_OPTIONS.PRODUCTS;
+
+  @ViewChild(MatButtonToggleGroup) menuOptions: MatButtonToggleGroup;
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 }

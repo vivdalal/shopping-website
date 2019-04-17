@@ -1,0 +1,22 @@
+<mat-tab-group class="product-manager-container" [selectedIndex]="selectedTabIndex">
+  <mat-tab label="All Products">
+    <mat-toolbar color="accent">
+      <mat-toolbar-row>
+        <span>List of Products</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div>
+      <mat-expansion-panel *ngFor="let category of categories | keyvalue; let index = index;" [expanded]="index === 0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{category.key}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-product-list [products]="category.value"></app-product-list>
+      </mat-expansion-panel>
+    </div>
+  </mat-tab>
+  <mat-tab label="Manage">
+    <app-add-product-form (createProduct)="addProduct($event)"></app-add-product-form>
+  </mat-tab>
+</mat-tab-group>

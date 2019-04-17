@@ -1,19 +1,18 @@
-<mat-sidenav-container autosize class="dashboard-container">
+<mat-sidenav-container class="dashboard-container">
   <mat-sidenav mode="side" opened>
-    <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        <span>Products</span>
-      </mat-toolbar-row>
-    </mat-toolbar>
+    <div class="menu-items-container">
+      <mat-toolbar color="primary">
+        <mat-toolbar-row style="justify-content: center;">
+          <span>Admin Panel</span>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-button-toggle-group class="options-container" [(value)]="selectedOption" vertical>
+        <mat-button-toggle class="toolbar-button" value="{{MENU_OPTIONS.PRODUCTS}}" checked>Products</mat-button-toggle>
+        <mat-button-toggle class="toolbar-button" value="{{MENU_OPTIONS.ANALYTICS}}">Analytics</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-tab-group>
-      <mat-tab label="View">
-
-      </mat-tab>
-      <mat-tab label="Manage">
-
-      </mat-tab>
-    </mat-tab-group>
+  <mat-sidenav-content class="content-container">
+    <app-product-manager *ngIf="selectedOption === MENU_OPTIONS.PRODUCTS"></app-product-manager>
   </mat-sidenav-content>
 </mat-sidenav-container>

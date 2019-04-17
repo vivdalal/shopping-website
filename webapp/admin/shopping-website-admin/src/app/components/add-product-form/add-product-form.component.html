@@ -1,0 +1,73 @@
+<mat-card class="add-form-container">
+  <mat-card-header>
+    <mat-card-title>
+      Add New Product
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="formGroup">
+      <mat-form-field class="form-field" appearance="legacy">
+        <mat-label>Product Name</mat-label>
+        <input matInput placeholder="Enter the product name"
+               name="name"
+               formControlName="name"
+               required>
+        <mat-hint>Min 5 and Max 20 characters</mat-hint>
+        <mat-error *ngIf="name.touched && name.errors?.required">Name Required</mat-error>
+        <mat-error *ngIf="name.touched && name.errors?.minlength">Min 5 characters</mat-error>
+        <mat-error *ngIf="name.touched && name.errors?.maxlength">Max 20 characters</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="legacy">
+        <mat-label>Product Description</mat-label>
+        <textarea
+          #descriptionText matInput
+          placeholder="Describe the product"
+          formControlName="description"
+          name="description"></textarea>
+        <mat-hint align="start">Max 100 characters</mat-hint>
+        <mat-hint align="end">{{descriptionText.value.length}} / 100</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="legacy">
+        <mat-label>Product Image URL</mat-label>
+        <input matInput placeholder="URL for the product image"
+               name="url"
+               formControlName="url"
+               required>
+        <mat-hint>Example https://www.example.com/image.jpeg</mat-hint>
+        <mat-error *ngIf="url.touched && url.errors?.required">Image URL Required</mat-error>
+        <mat-error *ngIf="url.touched && url.errors?.pattern">Not a valid URL</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="legacy">
+        <mat-select formControlName="category" placeholder="Category" required>
+          <mat-option value="Shirts">Shirts</mat-option>
+          <mat-option value="Trousers">Trousers</mat-option>
+          <mat-option value="Shoes">Shoes</mat-option>
+          <mat-option value="Socks">Socks</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="legacy">
+        <mat-label>Price</mat-label>
+        <span matPrefix>$ &nbsp;</span>
+        <input matInput placeholder="Price of the product"
+               name="price"
+               formControlName="price"
+               required>
+        <mat-error *ngIf="price.touched && price.errors?.required">Price is required</mat-error>
+        <mat-error *ngIf="price.touched && price.errors?.pattern">Not a valid price</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="legacy">
+        <mat-label>Quantity</mat-label>
+        <input matInput placeholder="Quantity"
+               type="number"
+               min="1"
+               name="quantity"
+               formControlName="quantity"
+               required>
+        <mat-error *ngIf="quantity.touched && quantity.errors?.required">Quantity is required</mat-error>
+      </mat-form-field>
+      <div class="form-submit-area">
+        <button mat-raised-button color="primary" (click)="addProduct()">Add</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

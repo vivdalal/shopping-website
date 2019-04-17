@@ -1,0 +1,20 @@
+<div class="product-card">
+  <div class="thumbnail-section">
+    <div class="thumbnail-container">
+      <div class="thumbnail-holder">
+        <img [src]="img" alt="{{name}}" height="213" width="150">
+      </div>
+    </div>
+  </div>
+  <div class="price-section">
+    <span class="price-text">${{price}}</span>
+  </div>
+  {{name}}
+  <div *ngIf="isInStock then inStock else outOfStock"></div>
+  <ng-template #inStock>
+    <span style="color: #4F8A10;">In Stock</span>
+  </ng-template>
+  <ng-template #outOfStock>
+    <span style="color: #D8000C;">Out of Stock</span>
+  </ng-template>
+</div>

@@ -1,0 +1,21 @@
+<div>
+  <div *ngIf="products && !products.length; then emptyTemplate else productListTemplate"></div>
+  <ng-template #emptyTemplate>
+    <div>
+      No products found
+    </div>
+  </ng-template>
+  <ng-template #productListTemplate>
+    <div class="product-list">
+      <app-product-card
+        *ngFor="let product of products"
+        img="https://picsum.photos/200?random"
+        name="{{product.name}}"
+        price="{{product.price}}"
+        description="{{product.description}}"
+        isInStock="{{product.isInStock}}"
+      >
+      </app-product-card>
+    </div>
+  </ng-template>
+</div>

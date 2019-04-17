@@ -1,4 +1,23 @@
 .dashboard-container {
   display: flex;
   height: 100vh;
+
+  .menu-items-container {
+    min-width: 250px;
+    overflow: hidden;
+
+    .options-container {
+      width: 100%;
+    }
+
+    .toolbar-button {
+      display: flex;
+      height: 64px;
+      font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif;
+    }
+  }
+
+  .content-container {
+    width: 100%;
+  }
 }
