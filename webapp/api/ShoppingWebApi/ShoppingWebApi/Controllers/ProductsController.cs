@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingWebApi.Models;
@@ -72,6 +73,29 @@ namespace ShoppingWebApi.Controllers
         private bool ProductExists(int id)
         {
             return _context.Product.Any(e => e.Id == id);
+        }
+
+        /// <summary>
+        /// Posts the product.
+        /// </summary>
+        /// <returns>The product.</returns>
+        /// <param name="productItem">Product item.</param>
+        // POST: api/Products
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpPost]
+        public async Task<ActionResult<Product>> PostProduct([FromBody] Product productItem)
+        {
+
+            if (productItem == null)
+            {
+                return BadRequest(new { message = "Invalid product. Please check" });
+            }
+
+            _context.Product.Add(productItem);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("PostProduct", new { id = productItem.Id }, new { message = "Success. " + "Product ID: " + productItem.Id });
         }
     }
 }
