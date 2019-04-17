@@ -1,4 +1,4 @@
-<mat-tab-group class="product-manager-container" [selectedIndex]="selectedTabIndex">
+<mat-tab-group class="product-manager-container" [selectedIndex]="selectedTabIndex" (selectedIndexChange)="selectedTabIndex = $event">
   <mat-tab label="All Products">
     <mat-toolbar color="accent">
       <mat-toolbar-row>
