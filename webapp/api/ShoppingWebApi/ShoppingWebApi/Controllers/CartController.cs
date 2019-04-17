@@ -133,6 +133,7 @@ namespace ShoppingWebApi.Controllers
         }
 
         // POST: api/Carts
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
@@ -152,16 +153,57 @@ namespace ShoppingWebApi.Controllers
                 return BadRequest(new { message = "Invalid username" });
             }
 
-            Cart cart = new Cart();
-            cart.Product = product;
-            cart.Quantity = cartItem.Quantity;
-            cart.User = user;
-            cart.Price = cartItem.Quantity * product.Price;
+            //Check whether the user ordering the same product again
+            var prevCartItem = from i in _context.Cart
+                           where i.UserId == user.Id && i.ProductId == product.Id && !i.isOrdered
+                           select new CartDTO()
+                           {
+                               Id = i.Id,
+                               Quantity = i.Quantity,
+                               Price = i.Price,
+                               CreatedAt = i.CreatedAt,
+                               Product = new ProductDTO()
+                               {
+                                   Id = i.Product.Id,
+                                   Name = i.Product.Name,
+                                   Description = i.Product.Description,
+                                   Price = i.Product.Price,
+                                   IsInStock = i.Product.Quantity != 0,
+                                   Category = i.Product.Category,
+                                   ImageUrl = i.Product.ImageUrl
+                               }
+                           };
 
-            _context.Cart.Add(cart);
-            await _context.SaveChangesAsync();
+            if (prevCartItem.FirstOrDefault() == null)
+            {
+                Cart cart = new Cart();
+                cart.Product = product;
+                cart.Quantity = cartItem.Quantity;
+                cart.User = user;
+                cart.Price = cartItem.Quantity * product.Price;
 
-            return CreatedAtAction("GetCart", new { id = cart.Id }, new { message = "Success" });
+                _context.Cart.Add(cart);
+                await _context.SaveChangesAsync();
+                return CreatedAtAction("PostCart", new { id = cart.Id }, new { message = "Success" });
+            }
+            else
+            {
+                //There is an existing entry for this product and user combiation.
+                //Updating the quanity
+                var cart = await _context.Cart.FindAsync(prevCartItem.First().Id);
+                if (cart == null)
+                {
+                    return NotFound();
+
+                }
+                cart.Quantity += cartItem.Quantity;
+                cart.Price = cart.Product.Price * cart.Quantity;
+                _context.Cart.Update(cart);           
+                await _context.SaveChangesAsync();
+                return Ok(cart);
+      
+            }
+
         }
 
         // DELETE: api/Carts/5
@@ -202,6 +244,7 @@ namespace ShoppingWebApi.Controllers
                                     ImageUrl = i.Product.ImageUrl
                                 }
                             };
+
 
             //Deleting all entries for the user
             foreach (var c in cartItems)
