@@ -13,7 +13,8 @@ export class UserService {
   ) { }
 
 
-  register(user: User) {
+  register(username: string, password: string) {
+    const user = new User(username, password);
     return this.http.post(`${this.config.API_ROOT}/register`, user);
   }
 
