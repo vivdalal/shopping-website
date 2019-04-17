@@ -9,7 +9,7 @@
     <div class="product-list">
       <app-product-card
         *ngFor="let product of products"
-        img="https://picsum.photos/200?random"
+        img="{{product.imageUrl}}"
         name="{{product.name}}"
         price="{{product.price}}"
         description="{{product.description}}"
