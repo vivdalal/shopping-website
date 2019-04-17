@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CartService } from '../../services/cart.service';
 import { OrderItem } from '../../models/order-item';
-import {AlertService} from '../../services/alert.service';
 import { MatSnackBar } from '@angular/material';
 
 @Component({
