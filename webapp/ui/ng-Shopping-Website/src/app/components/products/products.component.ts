@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
@@ -17,10 +17,13 @@ export class ProductsComponent implements OnInit {
   private cartItemsCount: number;
   private user: string;
 
+  private hasWon: boolean;
+
   constructor(
     private productService: ProductService,
     private cartService: CartService,
     private router: Router,
+    private route: ActivatedRoute,
     private auth: AuthenticationService
   ) {
   }
@@ -31,6 +34,9 @@ export class ProductsComponent implements OnInit {
       this.router.navigate(['/login']);
       return;
     }
+
+    this.route.queryParamMap
+      .subscribe(params => this.hasWon = params.get('win') && params.get('win') === 'true');
 
     this.user = currentUser;
     this.fetchProducts();

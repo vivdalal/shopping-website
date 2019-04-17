@@ -186,7 +186,10 @@ export class GameService implements IGame {
       } else {
         this.audio.gameOver.play();
       }
-      setTimeout(() => this.router.navigateByUrl(`products?win=${this.score >= 1000}`), 3000);
+      setTimeout(() => this.router.navigate(['products'],
+        {
+          queryParams: { win: this.score >= 1000 }
+        }), 3000);
     };
 
     switch (mode) {

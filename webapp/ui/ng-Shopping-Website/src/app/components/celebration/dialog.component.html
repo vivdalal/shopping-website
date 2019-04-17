@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Congratulations, {{data.user}}!</h1>
+<div mat-dialog-content>
+  <strong>You have won a surprise gift!</strong>
+  <p>It will be sent along with your previous order.</p>
+  <div style="margin: 20px 0;">
+    <img src="assets/img/gift.png" alt="Gift" height="100" width="100" style="display: block; margin: 0 auto;">
+  </div>
+</div>
+<div mat-dialog-actions style="padding: 10px; display: flex; align-items: center; justify-content: center;">
+  <button mat-raised-button (click)="close()" color="primary" style="min-width: 100px; min-height: 30px;">OK</button>
+</div>

@@ -11,4 +11,5 @@
       *ngFor="let category of ['Shirts', 'Trousers', 'Socks', 'Shoes']"
     ></app-products-section>
   </div>
+  <app-celebration [user]="user" (closed)="hasWon = false" *ngIf="hasWon"></app-celebration>
 </div>

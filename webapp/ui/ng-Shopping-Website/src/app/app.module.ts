@@ -8,10 +8,10 @@ import {
   MAT_DATE_LOCALE,
   MatButtonModule,
   MatCheckboxModule,
-  MatDatepickerModule,
+  MatDatepickerModule, MatDialogModule,
   MatInputModule,
   MatNativeDateModule,
-  MatRadioModule,
+  MatRadioModule, MatSnackBarModule,
   MatTooltipModule
 } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
@@ -35,6 +35,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { RunmanModule } from './modules/runman/runman.module';
 import { RegisterComponent } from './components/register/register.component';
+import { CelebrationComponent, DialogueComponent } from './components/celebration/celebration.component';
 
 export const MONTH_YEAR_DATE_FORMAT = {
   parse: {
@@ -64,7 +65,9 @@ export const MONTH_YEAR_DATE_FORMAT = {
     CardItemComponent,
     LoginComponent,
     AlertComponent,
-    RegisterComponent
+    RegisterComponent,
+    CelebrationComponent,
+    DialogueComponent
   ],
   imports: [
     AppRoutingModule,
@@ -75,11 +78,12 @@ export const MONTH_YEAR_DATE_FORMAT = {
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSnackBarModule,
+    MatDialogModule,
     NgbCarouselModule,
     NgbDropdownModule,
     FormsModule,
     ReactiveFormsModule,
-    MatTooltipModule,
     MatCheckboxModule,
     RunmanModule,
     MatButtonModule
@@ -87,6 +91,9 @@ export const MONTH_YEAR_DATE_FORMAT = {
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: MONTH_YEAR_DATE_FORMAT }
+  ],
+  entryComponents: [
+    DialogueComponent
   ],
   bootstrap: [AppComponent]
 })
