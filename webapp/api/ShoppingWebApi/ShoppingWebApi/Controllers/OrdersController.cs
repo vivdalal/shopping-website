@@ -20,40 +20,43 @@ namespace ShoppingWebApi.Controllers
             _context = context;
         }
 
-        // GET: api/Orders/5
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OrderDTO))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("{id}")]
-        public ActionResult GetOrder(int id)
+        // GET: api/orders
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IQueryable<OrderDTO>))]
+        [HttpGet]
+        public IQueryable<OrderDTO> GetCart(string username)
         {
-            var order = from o in _context.Order
-                        where o.Id == id
-                        select new OrderDTO()
-                        {
-                            Id = o.Id,
-                            ProductName = o.Product.Name,
-                            ProductDescription = o.Product.Description,
-                            Quantity = o.Quantity,
-                            Price = o.Price,
-                            CreatedAt = o.CreatedAt
-                        };
 
-            if (order == null)
-            {
-                return NotFound();
-            }
+            var userIds = from i in _context.User
+                          where username == i.Username
+                          select new UserDTO
+                          {
+                              Id = i.Id,
+                              Username = i.Username
+                          };
 
-            return Ok(order);
-        }
+            var user = userIds.First();
 
-        // POST: api/Orders
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
-        {
-            _context.Order.Add(order);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("GetOrder", new { id = order.Id }, new { message = "Success" });
+
+            var orders = from i in _context.Cart
+                            where i.UserId == user.Id && i.isOrdered
+                            select new OrderDTO()
+                            {
+                                Id = i.Id,
+                                Quantity = i.Quantity,
+                                Price = i.Price,
+                                CreatedAt = i.CreatedAt,
+                                Product = new ProductDTO()
+                                {
+                                    Id = i.Product.Id,
+                                    Name = i.Product.Name,
+                                    Description = i.Product.Description,
+                                    Price = i.Product.Price,
+                                    IsInStock = i.Product.Quantity != 0,
+                                    Category = i.Product.Category,
+                                    ImageUrl = i.Product.ImageUrl
+                                }
+                            };
+            return orders;
         }
     }
 }

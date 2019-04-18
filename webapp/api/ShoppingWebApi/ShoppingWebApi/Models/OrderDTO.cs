@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ShoppingWebApi.Models
+﻿namespace ShoppingWebApi.Models
 {
     public class OrderDTO
     {
@@ -9,12 +6,12 @@ namespace ShoppingWebApi.Models
 
         public int Quantity { get; set; }
 
-        public float Price { get; set; }
+        public double Price { get; set; }
 
         public byte[] CreatedAt { get; set; }
 
-        public string ProductName { get; set; }
+        public ProductDTO Product { get; set; }
 
-        public string ProductDescription { get; set; }
+        public string User { get; set; }
     }
 }
