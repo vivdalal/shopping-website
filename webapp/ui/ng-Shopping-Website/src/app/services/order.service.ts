@@ -20,6 +20,6 @@ export class OrderService {
    * @returns The observable that resolves to the orders
    */
   getOrders(user: string): Observable<CartItem[]> {
-    return this.http.get<CartItem[]>(`${this.config.API_ROOT}/cart?username=${user}`);
+    return this.http.get<CartItem[]>(`${this.config.API_ROOT}/orders?username=${user}`);
   }
 }

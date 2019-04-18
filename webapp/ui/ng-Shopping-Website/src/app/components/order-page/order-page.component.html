@@ -8,7 +8,7 @@
       <app-cart-item
         *ngFor="let item of orders"
         [cartItem]="item"
-        condensed
+        [condensed]="true"
       ></app-cart-item>
     </div>
     <ng-template #emptyOrderMessage>
