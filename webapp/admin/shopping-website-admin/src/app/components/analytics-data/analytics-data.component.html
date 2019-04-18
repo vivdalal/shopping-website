@@ -17,7 +17,7 @@
              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <span class="total-purchases-header">
             Total Purchases Amount:&nbsp;
-            <span>${{element.totalMoney}}</span>
+            <span>${{element.totalMoney.toFixed(2)}}</span>
           </span>
           <div class="products-container">
             <span class="purchased-products-header">Purchased Products</span>
