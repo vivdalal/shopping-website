@@ -17,10 +17,14 @@ interface CartItem {
   product: Product;
   user?: string;
 }
+interface User {
+  username: string;
+  password: string;
+}
 
 interface AnalyticsElement {
   username: string;
-  quantity: number;
+  purchases: number;
   totalMoney: number;
   products: Product[];
 }

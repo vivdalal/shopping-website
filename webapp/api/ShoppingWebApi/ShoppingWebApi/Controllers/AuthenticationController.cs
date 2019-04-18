@@ -37,6 +37,26 @@ namespace ShoppingWebApi.Controllers
             return Unauthorized();
         }
 
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Route("login/admin")]
+        [HttpPost]
+        public ActionResult AuthenticateAdmin([FromBody] User user)
+        {
+            if (string.IsNullOrEmpty(user.Username) || string.IsNullOrEmpty(user.Password))
+            {
+                return BadRequest();
+            }
+
+            if (ValidateAdmin(user))
+            {
+                return Ok();
+            }
+
+            return Unauthorized();
+        }
+
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -78,6 +98,16 @@ namespace ShoppingWebApi.Controllers
         private bool ValidateUser(User user)
         {
             return _context.User.Any(e => (e.Username == user.Username && e.Password == user.Password));
+        }
+
+        /// <summary>
+        /// Validates the username and password combination for admin access
+        /// </summary>
+        /// <param name="user">The credentials of the user</param>
+        /// <returns>true if the combination is valid, false otherwise</returns>
+        private bool ValidateAdmin(User user)
+        {
+            return _context.User.Any(e => (e.Username == user.Username && e.Password == user.Password && e.Role == "admin"));
         }
     }
 }

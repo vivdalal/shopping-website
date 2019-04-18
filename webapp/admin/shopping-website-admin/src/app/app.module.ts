@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import {
   MatButtonModule,
   MatButtonToggleModule, MatCardModule,
-  MatExpansionModule, MatInputModule, MatSelectModule,
-  MatSidenavModule, MatSnackBarModule,
+  MatExpansionModule, MatInputModule, MatListModule, MatSelectModule,
+  MatSidenavModule, MatSnackBarModule, MatTableModule,
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
@@ -21,6 +21,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { AddProductFormComponent } from './components/add-product-form/add-product-form.component';
 import { AnalyticsManagerComponent } from './components/analytics-manager/analytics-manager.component';
 import { AnalyticsDataComponent } from './components/analytics-data/analytics-data.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AnalyticsDataComponent } from './components/analytics-data/analytics-da
     ProductListComponent,
     AddProductFormComponent,
     AnalyticsManagerComponent,
-    AnalyticsDataComponent
+    AnalyticsDataComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,9 @@ import { AnalyticsDataComponent } from './components/analytics-data/analytics-da
     MatSnackBarModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

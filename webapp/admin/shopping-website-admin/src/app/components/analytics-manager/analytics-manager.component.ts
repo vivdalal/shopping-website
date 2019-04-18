@@ -10,7 +10,6 @@ import { CartService } from '../../services/cart.service';
 })
 export class AnalyticsManagerComponent implements OnInit {
 
-  private cartItems: CartItem[];
   private data: AnalyticsElement[];
 
   constructor(
@@ -19,19 +18,18 @@ export class AnalyticsManagerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cartItems = [];
     this.data = [];
     this.fetchCartItems();
   }
 
-  processData() {
-    const cartItemsGroupedByUser: Dictionary<CartItem[]> = _.groupBy<CartItem>(this.cartItems, item => item.user);
+  processData(data: CartItem[]) {
+    const cartItemsGroupedByUser: Dictionary<CartItem[]> = _.groupBy<CartItem>(data, item => item.user);
     const newData: AnalyticsElement[] = [];
 
     for (const user of Object.keys(cartItemsGroupedByUser)) {
       newData.push({
         username: user,
-        quantity: _.reduce(cartItemsGroupedByUser[user],
+        purchases: _.reduce(cartItemsGroupedByUser[user],
           (acc: number, item: CartItem) => acc + item.quantity,
           0),
         totalMoney: _.reduce(cartItemsGroupedByUser[user],
@@ -49,14 +47,11 @@ export class AnalyticsManagerComponent implements OnInit {
       });
     }
 
-    this.data = newData;
+    this.data = Object.assign([], newData);
   }
 
   fetchCartItems() {
     this.cartService.getAllOrders()
-      .subscribe((cartItems) => {
-        this.cartItems = cartItems || [];
-        this.processData();
-      });
+      .subscribe((cartItems = []) => this.processData(cartItems));
   }
 }

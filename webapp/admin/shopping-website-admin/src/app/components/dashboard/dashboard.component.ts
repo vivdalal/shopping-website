@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonToggleGroup } from '@angular/material';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,9 +18,17 @@ export class DashboardComponent implements OnInit {
 
   @ViewChild(MatButtonToggleGroup) menuOptions: MatButtonToggleGroup;
 
-  constructor() {
+  constructor(
+    private auth: AuthenticationService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
+    const currentUser: string = this.auth.currentUser;
+    if (!currentUser) {
+      this.router.navigate(['/login']);
+      return;
+    }
   }
 }

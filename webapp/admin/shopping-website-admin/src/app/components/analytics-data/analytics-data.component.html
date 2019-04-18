@@ -1,3 +1,43 @@
-<p>
-  analytics-data works!
-</p>
+<div class="analytics-data-container">
+  <div class="heading">
+    User Analytics
+  </div>
+  <table mat-table
+         [dataSource]="data" multiTemplateDataRows
+         class="mat-elevation-z8">
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnNames">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnNames.length">
+        <div class="element-detail"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <span class="total-purchases-header">
+            Total Purchases Amount:&nbsp;
+            <span>${{element.totalMoney}}</span>
+          </span>
+          <div class="products-container">
+            <span class="purchased-products-header">Purchased Products</span>
+            <mat-list class="product-list">
+              <ng-template ngFor let-product [ngForOf]="element.products" let-i="index">
+                <mat-divider *ngIf="i > 0"></mat-divider>
+                <mat-list-item role="listitem">{{product.name}}</mat-list-item>
+              </ng-template>
+            </mat-list>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnNames"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnNames;"
+        class="element-row"
+        [class.expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+  </table>
+</div>

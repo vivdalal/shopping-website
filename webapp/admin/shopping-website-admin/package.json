@@ -23,6 +23,7 @@
     "@angular/router": "~7.2.0",
     "@types/lodash": "^4.14.123",
     "core-js": "^2.5.4",
+    "gsap": "^2.1.0",
     "lodash": "^4.17.11",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
