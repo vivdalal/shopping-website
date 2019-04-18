@@ -1,4 +1,6 @@
-<div [@hoverStateChange]="isActive ? 'hoverOn' : 'hoverOff'" class="product-card" (mouseenter)="onHover()" (mouseleave)="offHover()">
+<div [@hoverStateChange]="isActive ? 'hoverOn' : 'hoverOff'"
+     class="product-card" [ngClass]="!isActive && 'extra-margin'"
+     (mouseenter)="onHover()" (mouseleave)="offHover()">
   <div class="thumbnail-section">
     <div class="thumbnail-container">
       <div class="thumbnail-holder">
