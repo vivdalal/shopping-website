@@ -4,5 +4,5 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AppConstants {
-  public readonly API_ROOT = 'http://localhost:5000/api';
+  public readonly API_ROOT = 'https://shoppingwebapi6.azurewebsites.net/api';
 }
