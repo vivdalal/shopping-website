@@ -15,11 +15,11 @@ import { MatSnackBar } from '@angular/material';
 export class ProductsComponent implements OnInit {
 
   private products: Product[] = [];
+  private frequentlyBoughtProducts: Product[] = [];
   private cartItemsCount: number;
   private user: string;
 
   private hasWon: boolean;
-  private orderState: string;
 
   constructor(
     private productService: ProductService,
@@ -66,5 +66,7 @@ export class ProductsComponent implements OnInit {
   private fetchProducts(): void {
     this.productService.getProducts()
       .subscribe(products => this.products = products);
+    this.productService.getRecentlyBoughtProducts(this.user, 5)
+      .subscribe(products => this.frequentlyBoughtProducts = products);
   }
 }

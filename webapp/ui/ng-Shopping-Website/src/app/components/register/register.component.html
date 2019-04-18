@@ -121,9 +121,9 @@
     </div>
   </div>
   <div class="inputGroup inputGroup1">
-    <label for="email">Email</label>
+    <label for="email">Username</label>
     <input type="text" id="email" name="email" [(ngModel)]="email" class="email" maxlength="256" required/>
-    <p class="helper helper1">email@domain.com</p>
+    <p class="helper helper1">Enter your username</p>
     <span class="indicator"></span>
   </div>
   <div class="inputGroup inputGroup2">
@@ -133,6 +133,8 @@
   <div class="inputGroup inputGroup3">
     <button mat-raised-button color="primary" id="login" type="submit" [disabled]="!loginForm.checkValidity()">Register</button>
   </div>
-  Already have an account with us? Login
-  <a routerLink="/login" class="no-padding">here.</a>
+  <span style="margin-top: 10px;" class="d-block">
+    Already have an account with us? Login
+    <a routerLink="/login" class="no-padding">here.</a>
+  </span>
 </form>

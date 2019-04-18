@@ -201,7 +201,7 @@ export class GameService implements IGame {
         break;
       case GameMode.WON:
         pause();
-        gameOver();
+        gameOver(true);
         break;
       case GameMode.LOST:
         pause();

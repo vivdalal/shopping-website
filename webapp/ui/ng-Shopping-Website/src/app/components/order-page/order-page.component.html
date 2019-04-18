@@ -1,0 +1,25 @@
+<div class="order-page-container">
+  <app-header [name]="user" title="Shopping Website" [count]="cartItemsCount" [showCartIcon]="true"></app-header>
+  <div class="order-details-container">
+    <div class="order-details-header">
+      <span class="order-details-header-text">My Orders ({{orders.length}})</span>
+    </div>
+    <div class="order-items-list" *ngIf="orders.length > 0; else emptyOrderMessage">
+      <app-cart-item
+        *ngFor="let item of orders"
+        [cartItem]="item"
+        condensed
+      ></app-cart-item>
+    </div>
+    <ng-template #emptyOrderMessage>
+      <div class="empty-orders">
+        <span>Your order list is empty!</span>
+      </div>
+    </ng-template>
+    <div class="order-action-container">
+      <button class="action-button inner-action-button default" (click)="router.navigateByUrl('products')">
+        <span>< Continue Shopping</span>
+      </button>
+    </div>
+  </div>
+</div>

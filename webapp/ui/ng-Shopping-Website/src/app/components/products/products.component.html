@@ -4,6 +4,12 @@
   <app-features-banner></app-features-banner>
   <div class="products-section-container">
     <app-products-section
+      [products]="frequentlyBoughtProducts"
+      name="Recently bought"
+      [user]="user"
+      (cartUpdated)="updateCartCount()"
+    ></app-products-section>
+    <app-products-section
       [products]="products | filterCollection: 'category': category"
       [name]="category"
       [user]="user"

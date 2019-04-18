@@ -8,10 +8,12 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import {LoginComponent} from './components/login/login.component';
 import { RunmanComponent } from './modules/runman/runman.component';
 import {RegisterComponent} from './components/register/register.component';
+import { OrderPageComponent } from './components/order-page/order-page.component';
 
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'cart', component: CartPageComponent },
+  { path: 'orders', component: OrderPageComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'game', component: RunmanComponent },

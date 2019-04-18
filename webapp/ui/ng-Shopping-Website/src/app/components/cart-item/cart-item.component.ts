@@ -11,6 +11,7 @@ export class CartItemComponent implements OnInit {
   @Input() private cartItem: CartItem;
   @Input() private hasDeliveryCharges: boolean;
   @Input() private deliveryCharges: number;
+  @Input() private condensed = false;
 
   constructor() { }
 

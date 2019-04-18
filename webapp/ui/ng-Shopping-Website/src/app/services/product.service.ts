@@ -23,4 +23,14 @@ export class ProductService {
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.config.API_ROOT}/products`);
   }
+
+  /**
+   * Fetches the recently bought products
+   * @param user The user whose list has to be fetched
+   * @param count The count of the products to be fetched
+   * @return The collection of products
+   */
+  getRecentlyBoughtProducts(user: string, count: number): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.config.API_ROOT}/Cart/RecentProducts?username=${user}&count=${count}`);
+  }
 }

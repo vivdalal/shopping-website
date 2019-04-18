@@ -23,6 +23,7 @@
           {{value.charAt(0).toUpperCase() + value.substr(1).toLowerCase()}}
         </button>
         <div aria-labelledby="profileMenu" ngbDropdownMenu>
+          <button routerLink="/orders" ngbDropdownItem>My Orders</button>
           <button (click)="doLogout()" ngbDropdownItem>Logout</button>
         </div>
       </div>

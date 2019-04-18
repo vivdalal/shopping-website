@@ -36,6 +36,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { RunmanModule } from './modules/runman/runman.module';
 import { RegisterComponent } from './components/register/register.component';
 import { CelebrationComponent, DialogueComponent } from './components/celebration/celebration.component';
+import { OrderPageComponent } from './components/order-page/order-page.component';
 
 export const MONTH_YEAR_DATE_FORMAT = {
   parse: {
@@ -67,7 +68,8 @@ export const MONTH_YEAR_DATE_FORMAT = {
     AlertComponent,
     RegisterComponent,
     CelebrationComponent,
-    DialogueComponent
+    DialogueComponent,
+    OrderPageComponent
   ],
   imports: [
     AppRoutingModule,

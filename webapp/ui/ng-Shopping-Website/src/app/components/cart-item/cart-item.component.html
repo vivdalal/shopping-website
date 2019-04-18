@@ -13,7 +13,7 @@
       </div>
       <span class="item-price">${{cartItem.price}}</span>
     </div>
-    <div class="item-delivery-details">
+    <div class="item-delivery-details" *ngIf="!condensed">
       <ul class="mb-5">
         <li class="mb-5">
           <div class="delivery-text">

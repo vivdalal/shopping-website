@@ -119,7 +119,8 @@
           </div>
           <button
             class="action-button inner-action-button action"
-            (click)="(!showAddCardSection || cardDetailsForm.reportValidity()) && doCheckout()">
+            (click)="doCheckout()"
+            [disabled]="!((!showAddCardSection && selectedCard) || (showAddCardSection && cardDetailsForm.reportValidity()))">
             <span>Pay ${{amount}}</span>
           </button>
         </div>
