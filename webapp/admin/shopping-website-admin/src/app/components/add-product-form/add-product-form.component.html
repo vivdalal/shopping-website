@@ -12,10 +12,10 @@
                name="name"
                formControlName="name"
                required>
-        <mat-hint>Min 5 and Max 20 characters</mat-hint>
+        <mat-hint>Min 5 and Max 100 characters</mat-hint>
         <mat-error *ngIf="name.touched && name.errors?.required">Name Required</mat-error>
         <mat-error *ngIf="name.touched && name.errors?.minlength">Min 5 characters</mat-error>
-        <mat-error *ngIf="name.touched && name.errors?.maxlength">Max 20 characters</mat-error>
+        <mat-error *ngIf="name.touched && name.errors?.maxlength">Max 100 characters</mat-error>
       </mat-form-field>
       <mat-form-field class="form-field" appearance="legacy">
         <mat-label>Product Description</mat-label>
@@ -64,6 +64,7 @@
                formControlName="quantity"
                required>
         <mat-error *ngIf="quantity.touched && quantity.errors?.required">Quantity is required</mat-error>
+        <mat-error *ngIf="quantity.touched && quantity.errors?.min">Invalid value</mat-error>
       </mat-form-field>
       <div class="form-submit-area">
         <button mat-raised-button color="primary" (click)="addProduct()">Add</button>

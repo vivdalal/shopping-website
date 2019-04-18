@@ -14,7 +14,7 @@ export class AddProductFormComponent implements OnInit {
     name: new FormControl('', [
       Validators.required,
       Validators.minLength(5),
-      Validators.maxLength(20)
+      Validators.maxLength(100)
     ]),
     description: new FormControl('', []),
     url: new FormControl('', [
@@ -29,7 +29,8 @@ export class AddProductFormComponent implements OnInit {
       Validators.required
     ]),
     quantity: new FormControl('', [
-      Validators.required
+      Validators.required,
+      Validators.min(1)
     ])
   });
 
@@ -60,7 +61,7 @@ export class AddProductFormComponent implements OnInit {
       description: this.description.value,
       imageUrl: this.url.value,
       category: this.category.value,
-      price: Number.parseInt(this.price.value, 10),
+      price: Number.parseFloat(this.price.value),
       quantity: Number.parseInt(this.quantity.value, 10)
     };
     this.createProduct.emit(product);
