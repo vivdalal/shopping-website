@@ -34,6 +34,7 @@ export class ProductCardComponent implements OnInit {
   @Input() private img: string;
   @Input() private price: number;
   @Input() private id: number;
+  @Input() private isInStock: boolean;
   @Input() private user: string;
 
   @Output() private cartUpdated = new EventEmitter<string>();

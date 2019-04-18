@@ -22,6 +22,7 @@
           price="{{product.price}}"
           id="{{product.id}}"
           user="{{user}}"
+          [isInStock]="product.isInStock"
           (cartUpdated)="cartUpdated.emit()"
         >
         </app-product-card>

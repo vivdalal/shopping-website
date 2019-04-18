@@ -14,11 +14,12 @@
   </div>
   {{name}}
   <div class="cart-action-section" *ngIf="isActive">
-    <div class="input-group">
+    <div class="input-group" *ngIf="isInStock">
       <input type="number" class="form-control" min="1" step="1" [(ngModel)]="quantity" aria-label="Quantity">
       <div class="input-group-append">
         <button class="btn btn-outline-primary" type="button" (click)="addToCart()">Add</button>
       </div>
     </div>
+    <span style="display: block; color: #D8000C;" *ngIf="!isInStock">Out of Stock</span>
   </div>
 </div>
