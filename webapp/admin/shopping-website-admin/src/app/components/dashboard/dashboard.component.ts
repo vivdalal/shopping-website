@@ -31,4 +31,12 @@ export class DashboardComponent implements OnInit {
       return;
     }
   }
+
+  /**
+   * logs the user out
+   */
+  doLogout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 }

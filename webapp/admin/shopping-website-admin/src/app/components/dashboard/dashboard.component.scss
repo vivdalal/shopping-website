@@ -20,4 +20,13 @@
   .content-container {
     width: 100%;
   }
+
+  .footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

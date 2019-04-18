@@ -11,6 +11,9 @@
         <mat-button-toggle class="toolbar-button" value="{{MENU_OPTIONS.ANALYTICS}}">Analytics</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
+    <div class="footer">
+      <button mat-raised-button color="primary" (click)="doLogout()">Logout</button>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content class="content-container">
     <app-product-manager *ngIf="selectedOption === MENU_OPTIONS.PRODUCTS"></app-product-manager>
