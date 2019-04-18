@@ -102,6 +102,7 @@ namespace ShoppingWebApi.Controllers
         public ActionResult<CartDTO> GetAllCart()
         {
             var cartItem = from i in _context.Cart
+                           where i.isOrdered == true
                            select new CartDTO()
                            {
                                Id = i.Id,
@@ -117,7 +118,8 @@ namespace ShoppingWebApi.Controllers
                                    IsInStock = i.Product.Quantity != 0,
                                    Category = i.Product.Category,
                                    ImageUrl = i.Product.ImageUrl
-                               }
+                               },
+                               User = i.User.Username
                            };
 
             if (cartItem == null)

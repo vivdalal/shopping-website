@@ -11,5 +11,7 @@
         public byte[] CreatedAt { get; set; }
 
         public ProductDTO Product { get; set; }
+
+        public string User { get; set; }
     }
 }

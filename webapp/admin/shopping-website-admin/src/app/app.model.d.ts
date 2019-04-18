@@ -15,9 +15,16 @@ interface CartItem {
   price: number;
   createdAt: string;
   product: Product;
+  user?: string;
 }
 
-interface User {
+interface AnalyticsElement {
   username: string;
-  password: string;
+  quantity: number;
+  totalMoney: number;
+  products: Product[];
+}
+
+interface Dictionary<T> {
+  [index: string]: T;
 }

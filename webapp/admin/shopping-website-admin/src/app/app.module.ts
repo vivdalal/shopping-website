@@ -19,6 +19,8 @@ import { ProductManagerComponent } from './components/product-manager/product-ma
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { AddProductFormComponent } from './components/add-product-form/add-product-form.component';
+import { AnalyticsManagerComponent } from './components/analytics-manager/analytics-manager.component';
+import { AnalyticsDataComponent } from './components/analytics-data/analytics-data.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { AddProductFormComponent } from './components/add-product-form/add-produ
     ProductCardComponent,
     ProductManagerComponent,
     ProductListComponent,
-    AddProductFormComponent
+    AddProductFormComponent,
+    AnalyticsManagerComponent,
+    AnalyticsDataComponent
   ],
   imports: [
     BrowserModule,

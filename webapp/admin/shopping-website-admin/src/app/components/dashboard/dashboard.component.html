@@ -14,5 +14,6 @@
   </mat-sidenav>
   <mat-sidenav-content class="content-container">
     <app-product-manager *ngIf="selectedOption === MENU_OPTIONS.PRODUCTS"></app-product-manager>
+    <app-analytics-manager *ngIf="selectedOption === MENU_OPTIONS.ANALYTICS"></app-analytics-manager>
   </mat-sidenav-content>
 </mat-sidenav-container>
