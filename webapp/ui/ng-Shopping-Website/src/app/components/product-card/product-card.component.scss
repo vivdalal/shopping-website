@@ -28,6 +28,10 @@
         bottom: 0;
         left: 0;
         text-align: center;
+
+        img {
+          object-fit: contain;
+        }
       }
     }
   }
