@@ -46,6 +46,13 @@
     }
   }
 
+  .product-name {
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
   > .cart-action-section {
     margin: 4px 0;
   }

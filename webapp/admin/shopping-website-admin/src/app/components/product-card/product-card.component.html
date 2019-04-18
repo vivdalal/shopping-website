@@ -9,12 +9,14 @@
   <div class="price-section">
     <span class="price-text">${{price}}</span>
   </div>
-  {{name}}
+  <span class="product-name">
+    {{name}}
+  </span>
   <div *ngIf="isInStock then inStock else outOfStock"></div>
   <ng-template #inStock>
-    <span style="color: #4F8A10;">In Stock</span>
+    <span style="display: block; color: #4F8A10;">In Stock</span>
   </ng-template>
   <ng-template #outOfStock>
-    <span style="color: #D8000C;">Out of Stock</span>
+    <span style="display: block; color: #D8000C;">Out of Stock</span>
   </ng-template>
 </div>
