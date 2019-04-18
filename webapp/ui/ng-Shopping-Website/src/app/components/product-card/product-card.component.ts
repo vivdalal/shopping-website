@@ -12,7 +12,8 @@ import { MatSnackBar } from '@angular/material';
     trigger('hoverStateChange', [
       state('hoverOn', style({
         boxShadow: '5px 5px 15px rgba(0, 0, 0, 0.3)',
-        transform: 'scale(1.1)'
+        transform: 'scale(1.1)',
+        zIndex: 1000
       })),
       state('hoverOff', style({
         boxShadow: '1px 1px 2px rgba(0, 0, 0, 0.15)',

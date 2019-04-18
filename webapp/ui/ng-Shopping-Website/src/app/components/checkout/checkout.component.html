@@ -120,7 +120,7 @@
           <button
             class="action-button inner-action-button action"
             (click)="doCheckout()"
-            [disabled]="!((!showAddCardSection && selectedCard) || (showAddCardSection && cardDetailsForm.reportValidity()))">
+            [disabled]="!((!showAddCardSection && selectedCard) || (showAddCardSection && cardDetailsForm.checkValidity()))">
             <span>Pay ${{amount}}</span>
           </button>
         </div>
