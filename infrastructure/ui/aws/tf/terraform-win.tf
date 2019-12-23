@@ -73,11 +73,3 @@ resource "aws_instance" "vault-example" {
   }
   
 }
-
-
-
-# resource "aws_key_pair" "my_key" {
-#   key_name = "terraform_ec2_key"
-#   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYKP8PWmU9/OIWmdO1xa1IB831VsRyu6IwIet1SPk3z/otoqSYUUWs27ChLYehtc19IA2nR5fKbAUs0F1TJFDDwznkGnGOUqoMyNtTzW/J3T1JIHdWedNNDHjbiqkWMZpf5FJbw/B/oHVQOHqfqbHd1AkVqrmLJPRvuN/ACp5zKSCz2RG2LRvXTG+Jpcoz2j2g3TznjRSaQDOipGmZ3/fOUhRtE6mVILKyMf7fRI4yrQrsHP5mS/mAcmzhbDqzkyjUuK/yyroJGVET0/dHgIPfaitpOl/ZxARLwJp+HBkke7INPP/NhpOmai1KoO7CwyL/MUBy5m3JYsjNhrFdY0Vf dino@BERLIOZ"
-#   # public_key = "${file("terraform_ec2_key.pub")}"
-# }
