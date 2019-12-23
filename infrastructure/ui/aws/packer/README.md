@@ -1,4 +1,6 @@
-Instructions to run the packer build
+### Instructions to run the packer build
 
-#Command to run
+### Command to run
+``` bash
 packer build -var 'key-name=your-key-name' ./windows-ami-template.json
+```
